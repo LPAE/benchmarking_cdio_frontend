@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './Main.css';
+import './Main.sass';
 
 const MainForm = (props) => (
       <div className='MainForm'>
         <form>
           <p>{props.text}:</p>
-          <input type='text' name='name'></input>
+          <input type='text'></input>
           <input type="submit" value={props.button}></input>
         </form>
       </div>
