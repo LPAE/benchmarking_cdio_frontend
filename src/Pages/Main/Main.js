@@ -1,4 +1,6 @@
 import React from 'react';
+import api from '../../Services/api';
+
 import './Main.sass';
 
 const IdForm = (props) => (
@@ -17,14 +19,14 @@ export default class Main extends React.Component {
     acessarValue: '',
   }
 
-  criarTurma = (e) => {
+  criarTurma = async (e) => {
     e.preventDefault();
-    console.log('asd')
+    await api.post('/id', { id: this.state.criarValue });
   }
 
-  acessarTurma = (e) => {
+  acessarTurma = async (e) => {
     e.preventDefault();
-    console.log('asd')
+    const response = await api.get(`/id/${this.state.acessarValue}`);
   }
 
   handleCriarInputChange = (e) => {
