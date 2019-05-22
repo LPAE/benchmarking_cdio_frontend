@@ -26,7 +26,8 @@ export default class Main extends React.Component {
 
   acessarTurma = async (e) => {
     e.preventDefault();
-    const response = await api.get(`/id/${this.state.acessarValue}`);
+    const response = await api.get(`/id/${this.state.acessarValue}`, () => (console.log('a')));
+    this.props.history.push(`/turma/${response.data.id}`)
   }
 
   handleCriarInputChange = (e) => {
