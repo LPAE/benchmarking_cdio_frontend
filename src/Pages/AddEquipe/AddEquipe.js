@@ -31,11 +31,11 @@ const Area = props => (
         props.area.item.map(item => (
           <div key={item.indicador}>
             {item.indicador}:
-            <input type="radio" name={item.indicador} value="1" onChange={props.onChange} />
-            <input type="radio" name={item.indicador} value="2" onChange={props.onChange} />
-            <input type="radio" name={item.indicador} value="3" onChange={props.onChange} />
-            <input type="radio" name={item.indicador} value="4" onChange={props.onChange} />
-            <input type="radio" name={item.indicador} value="5" onChange={props.onChange} />
+            <input type="radio" name={item.indicador} value="1" onChange={e => props.onChange(props.state,e)} />
+            <input type="radio" name={item.indicador} value="2" onChange={e => props.onChange(props.state,e)} />
+            <input type="radio" name={item.indicador} value="3" onChange={e => props.onChange(props.state,e)} />
+            <input type="radio" name={item.indicador} value="4" onChange={e => props.onChange(props.state,e)} />
+            <input type="radio" name={item.indicador} value="5" onChange={e => props.onChange(props.state,e)} />
           </div>
         ))}
     </form>
@@ -46,20 +46,30 @@ const Area = props => (
 export default class AddEquipe extends React.Component {
   state = {
     turma: {},
-    concepcaoState: {}
+    nomeDaEquipe: '',
+    concepcaoState: {},
+    designState: {},
+    implementacaoState: {},
+    operacaoState: {},
   };
 
   async componentDidMount() {}
 
-  handleAreaChange = e => {
+  handleAreaChange = (state, e) => {
     const { name, value } = e.target;
 
     this.setState({
-      [name]: value
+      [state]: {...this.state.concepcaoState, [name]: value }
     });
   };
 
-  buttonClickTest = e => {
+  handleNomeDaEquipeChange = e => {
+    this.setState({
+      nomeDaEquipe: e.target.value
+    });
+  };
+
+  buttonClickTest = async e => {
     console.log(this.state);
   };
 
@@ -74,7 +84,14 @@ export default class AddEquipe extends React.Component {
         </div>
 
         <div className="AddEquipeForm">
-          <Area area={areaConcepcao} onChange={this.handleAreaChange} />
+          <span className="">Nome da Equipe:</span>
+          <input
+            type="text"
+            value={this.state.nomeDaEquipe}
+            onChange={this.handleNomeDaEquipeChange}
+          />
+
+          <Area area={areaConcepcao} onChange={this.handleAreaChange} state='concepcaoState'/>
         </div>
 
         <button onClick={this.buttonClickTest}>test</button>
