@@ -3,25 +3,7 @@ import React from 'react';
 import './AddEquipe.sass';
 import api from '../../Services/api';
 
-const areaConcepcao = {
-  titulo: 'Concepção',
-  item: [
-    {
-      indicador: 'Contextualizar',
-      textoIndicador: 'Consiste na ação de Contextualizar...',
-      descricao1: 'desc11',
-      descricao2: 'desc21',
-      descricao3: 'desc31'
-    },
-    {
-      indicador: 'Problematizar',
-      textoIndicador: 'Consiste na ação de Problematizar...',
-      descricao1: 'desc12',
-      descricao2: 'desc22',
-      descricao3: 'desc32'
-    }
-  ]
-};
+import { areaConcepcao, areaDesign, areaImplementacao, areaOperacao } from '../CDIO_Texts';
 
 const Area = props => (
   <div className="Area">
@@ -31,11 +13,36 @@ const Area = props => (
         props.area.item.map(item => (
           <div key={item.indicador}>
             {item.indicador}:
-            <input type="radio" name={item.indicador} value="1" onChange={e => props.onChange(props.state,e)} />
-            <input type="radio" name={item.indicador} value="2" onChange={e => props.onChange(props.state,e)} />
-            <input type="radio" name={item.indicador} value="3" onChange={e => props.onChange(props.state,e)} />
-            <input type="radio" name={item.indicador} value="4" onChange={e => props.onChange(props.state,e)} />
-            <input type="radio" name={item.indicador} value="5" onChange={e => props.onChange(props.state,e)} />
+            <input
+              type="radio"
+              name={item.indicador}
+              value="1"
+              onChange={e => props.onChange(props.state, e)}
+            />
+            <input
+              type="radio"
+              name={item.indicador}
+              value="2"
+              onChange={e => props.onChange(props.state, e)}
+            />
+            <input
+              type="radio"
+              name={item.indicador}
+              value="3"
+              onChange={e => props.onChange(props.state, e)}
+            />
+            <input
+              type="radio"
+              name={item.indicador}
+              value="4"
+              onChange={e => props.onChange(props.state, e)}
+            />
+            <input
+              type="radio"
+              name={item.indicador}
+              value="5"
+              onChange={e => props.onChange(props.state, e)}
+            />
           </div>
         ))}
     </form>
@@ -45,12 +52,11 @@ const Area = props => (
 
 export default class AddEquipe extends React.Component {
   state = {
-    turma: {},
     nomeDaEquipe: '',
     concepcaoState: {},
     designState: {},
     implementacaoState: {},
-    operacaoState: {},
+    operacaoState: {}
   };
 
   async componentDidMount() {}
@@ -59,7 +65,7 @@ export default class AddEquipe extends React.Component {
     const { name, value } = e.target;
 
     this.setState({
-      [state]: {...this.state.concepcaoState, [name]: value }
+      [state]: { ...this.state[state], [name]: value }
     });
   };
 
@@ -70,7 +76,17 @@ export default class AddEquipe extends React.Component {
   };
 
   buttonClickTest = async e => {
-    console.log(this.state);
+    console.log(`/id/equipe/${this.props.match.params.id}`);
+    const dataToSend = {
+      nome: this.nomeDaEquipe,
+      concepcao: this.state.concepcaoState,
+      design: this.state.designState,
+      implementacao: this.state.implementacaoState,
+      operacao: this.state.operacaoState
+    };
+    api.post(`/id/equipe/${this.props.match.params.id}`, dataToSend, err => {
+      if (err) console.log('Erro ao mandar nova Equipe');
+    });
   };
 
   render() {
@@ -91,7 +107,8 @@ export default class AddEquipe extends React.Component {
             onChange={this.handleNomeDaEquipeChange}
           />
 
-          <Area area={areaConcepcao} onChange={this.handleAreaChange} state='concepcaoState'/>
+          <Area area={areaConcepcao} onChange={this.handleAreaChange} state="concepcaoState" />
+          <Area area={areaDesign} onChange={this.handleAreaChange} state="designState" />
         </div>
 
         <button onClick={this.buttonClickTest}>test</button>
