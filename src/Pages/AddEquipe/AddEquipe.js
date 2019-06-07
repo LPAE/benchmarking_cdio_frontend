@@ -3,52 +3,11 @@ import React from 'react';
 import './AddEquipe.sass';
 import api from '../../Services/api';
 
+import AreaForm from '../Components/AreaForm'
+
 import { areaConcepcao, areaDesign, areaImplementacao, areaOperacao } from '../CDIO_Texts';
 
-const Area = props => (
-  <div className="Area">
-    <span className="AreaTitle">Área: {props.area.titulo}</span>
-    <form action="submit">
-      {props.area.item &&
-        props.area.item.map(item => (
-          <div key={item.indicador}>
-            {item.indicador}:
-            <input
-              type="radio"
-              name={item.indicador}
-              value="1"
-              onChange={e => props.onChange(props.state, e)}
-            />
-            <input
-              type="radio"
-              name={item.indicador}
-              value="2"
-              onChange={e => props.onChange(props.state, e)}
-            />
-            <input
-              type="radio"
-              name={item.indicador}
-              value="3"
-              onChange={e => props.onChange(props.state, e)}
-            />
-            <input
-              type="radio"
-              name={item.indicador}
-              value="4"
-              onChange={e => props.onChange(props.state, e)}
-            />
-            <input
-              type="radio"
-              name={item.indicador}
-              value="5"
-              onChange={e => props.onChange(props.state, e)}
-            />
-          </div>
-        ))}
-    </form>
-    <div className="AreaForm" />
-  </div>
-);
+
 
 export default class AddEquipe extends React.Component {
   state = {
@@ -89,26 +48,26 @@ export default class AddEquipe extends React.Component {
     });
   };
 
+  buttonVoltar = e => {
+    this.props.history.go(-1);
+  };
+
   render() {
     return (
       <div className="AddEquipe">
         <div className="AddEquipeHeader">
           <div className="VoltarButton">
-            <button>Voltar</button>
+            <button onClick={this.buttonVoltar}>Voltar</button>
           </div>
           <div className="Titulo">Adicionar Equipe</div>
         </div>
 
         <div className="AddEquipeForm">
           <span className="">Nome da Equipe:</span>
-          <input
-            type="text"
-            value={this.state.nomeDaEquipe}
-            onChange={this.handleNomeDaEquipeChange}
-          />
+          <input type="text" value={this.state.nomeDaEquipe} onChange={this.handleNomeDaEquipeChange} />
 
-          <Area area={areaConcepcao} onChange={this.handleAreaChange} state="concepcaoState" />
-          <Area area={areaDesign} onChange={this.handleAreaChange} state="designState" />
+          <AreaForm area={areaConcepcao} onChange={this.handleAreaChange} state="concepcaoState" />
+          <AreaForm area={areaDesign} onChange={this.handleAreaChange} state="designState" />
         </div>
 
         <button onClick={this.buttonClickTest}>test</button>

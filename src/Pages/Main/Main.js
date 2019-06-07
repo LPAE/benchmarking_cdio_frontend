@@ -3,40 +3,24 @@ import api from '../../Services/api';
 
 import './Main.sass';
 
-const IdForm = props => (
-  <div className="IdForm">
-    <form onSubmit={props.onSubmit}>
-      <p>{props.text}:</p>
-      <input type="text" value={props.textValue} onChange={props.textOnChange} />
-      <input type="submit" value={props.buttonText} />
-    </form>
+const AccessButton = props => (
+  <div className="accessButton">
+    <button onClick={props.onClick} type="text">{props.text}</button>
   </div>
 );
 
 export default class Main extends React.Component {
-  state = {
-    criarValue: '',
-    acessarValue: ''
-  };
 
-  criarTurma = async e => {
+  acessarFerramenta = e => {
     e.preventDefault();
-    await api.post('/id', { id: this.state.criarValue });
+    this.props.history.push(`/access`);
   };
 
-  acessarTurma = async e => {
+  preencherFerramenta = async e => {
     e.preventDefault();
-    const response = await api.get(`/id/${this.state.acessarValue}`, () => console.log('a'));
-    this.props.history.push(`/turma/${response.data.id}`);
+    this.props.history.push(`/config`);
   };
 
-  handleCriarInputChange = e => {
-    this.setState({ criarValue: e.target.value });
-  };
-
-  handleAcessarInputChange = e => {
-    this.setState({ acessarValue: e.target.value });
-  };
 
   render() {
     return (
@@ -45,22 +29,9 @@ export default class Main extends React.Component {
           <h1>Benchmarking CDIO</h1>
         </div>
 
-        <div className="IdForms">
-          <IdForm
-            text="Criar Turma"
-            buttonText="Criar"
-            onSubmit={this.criarTurma}
-            textValue={this.state.criarValue}
-            textOnChange={this.handleCriarInputChange}
-          />
-
-          <IdForm
-            text="Acessar Turma"
-            buttonText="Acessar"
-            onSubmit={this.acessarTurma}
-            textValue={this.state.acessarValue}
-            textOnChange={this.handleAcessarInputChange}
-          />
+        <div className="Buttons">
+          <AccessButton text="Acessar Ferramenta" onClick={this.acessarFerramenta} />
+          <AccessButton text="Preencher Ferramenta" onClick={this.preencherFerramenta} />
         </div>
       </div>
     );
