@@ -18,7 +18,10 @@ export default class Turma extends React.Component {
   }
 
   addEquipe = () => {
-    this.props.history.push(`/turma/${this.state.turma.id}/add`);
+    const curso = this.props.match.params.curso;
+    const projeto = this.props.match.params.projeto;
+    const semestre = this.props.match.params.semestre;
+    this.props.history.push(`/turma/${curso}/${projeto}/${semestre}/add`);
   };
 
   render() {
@@ -28,7 +31,7 @@ export default class Turma extends React.Component {
           <div className="VoltarButton">
             <button>Inicio</button>
           </div>
-          <div className="Titulo">Turma: {this.state.turma.id}</div>
+          <div className="Titulo">Turma: {this.state.turma.nome}</div>
         </div>
 
         <div className="EquipesPanel">

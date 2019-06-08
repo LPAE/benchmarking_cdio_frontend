@@ -35,15 +35,21 @@ export default class AddEquipe extends React.Component {
   };
 
   buttonClickTest = async e => {
-    console.log(`/id/equipe/${this.props.match.params.id}`);
     const dataToSend = {
-      nome: this.nomeDaEquipe,
-      concepcao: this.state.concepcaoState,
-      design: this.state.designState,
-      implementacao: this.state.implementacaoState,
-      operacao: this.state.operacaoState
+      curso: this.props.match.params.curso,
+      projeto: this.props.match.params.projeto,
+      semestre: this.props.match.params.semestre,
+      equipe: {
+      nome: this.state.nomeDaEquipe,
+      area:{
+        concepcao: this.state.concepcaoState,
+        design: this.state.designState,
+        implementacao: this.state.implementacaoState,
+        operacao: this.state.operacaoState
+      }
+    }
     };
-    api.post(`/id/equipe/${this.props.match.params.id}`, dataToSend, err => {
+    api.post(`/turma/equipe`, dataToSend, err => {
       if (err) console.log('Erro ao mandar nova Equipe');
     });
   };

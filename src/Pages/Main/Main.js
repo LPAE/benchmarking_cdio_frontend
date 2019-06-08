@@ -5,12 +5,13 @@ import './Main.sass';
 
 const AccessButton = props => (
   <div className="accessButton">
-    <button onClick={props.onClick} type="text">{props.text}</button>
+    <button onClick={props.onClick} type="text">
+      {props.text}
+    </button>
   </div>
 );
 
 export default class Main extends React.Component {
-
   acessarFerramenta = e => {
     e.preventDefault();
     this.props.history.push(`/access`);
@@ -20,7 +21,6 @@ export default class Main extends React.Component {
     e.preventDefault();
     this.props.history.push(`/config`);
   };
-
 
   render() {
     return (
