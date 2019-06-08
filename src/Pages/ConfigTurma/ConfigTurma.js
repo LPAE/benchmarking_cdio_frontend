@@ -1,21 +1,46 @@
 import React from 'react';
+import api from '../../Services/api';
 
 import AreaForm from '../Components/AreaForm';
-
 import { areaConcepcao, areaDesign, areaImplementacao, areaOperacao } from '../CDIO_Texts';
 
 export default class ConfigTurma extends React.Component {
   state = {
-    projeto: 'None',
-    numero: 0,
     curso: 'None',
-    semestre: '19/1',
+    projeto: 'None',
+    semestre: '19-1',
 
     concepcaoState: {},
     designState: {},
     implementacaoState: {},
     operacaoState: {}
   };
+
+  buttonClick = async (e) => {
+    e.preventDefault();
+
+    let areas = {};
+    if(Object.keys(this.state.concepcaoState).length !== 0){
+      areas = {...areas, concepcao: this.state.concepcaoState}
+    }
+    if(Object.keys(this.state.designState).length !== 0){
+      areas = {...areas, concepcao: this.state.designState}
+    }
+    if(Object.keys(this.state.implementacaoState).length !== 0){
+      areas = {...areas, concepcao: this.state.implementacaoState}
+    }
+    if(Object.keys(this.state.operacaoState).length !== 0){
+      areas = {...areas, concepcao: this.state.operacaoState}
+    }
+    const turma = {
+      curso: this.state.curso,
+      projeto: this.state.projeto,
+      semestre: this.state.semestre,
+      expectativa: {...areas}
+    }
+    await api.post('/turma',turma)
+    this.props.history.push(`/turma/${this.state.curso}/${this.state.projeto}/${this.state.semestre}`);
+  }
 
   handleAreaChange = (state, e) => {
     const { name, value } = e.target;
@@ -29,27 +54,6 @@ export default class ConfigTurma extends React.Component {
     return (
       <div className="ConfigTurma">
         <form>
-          <p>Projeto:</p>
-          <select name="projeto" value={this.state.projeto} onChange={e => this.setState({ projeto: e.target.value })}>
-            <option disabled value="None">
-              {' -- Escolha uma Opção -- '}
-            </option>
-            <option value="Projeto Integrador">Projeto Integrador</option>
-            <option value="Trabalho de Conclusão de Curso">Trabalho de Conclusão de Curso</option>
-            <option value="Outro">Outro</option>
-          </select>
-
-          {this.state.projeto === 'Projeto Integrador' && (
-            <>
-              <p>Número:</p>
-              <select name="numero">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
-            </>
-          )}
-
           <p>Curso:</p>
           <select name="curso" value={this.state.curso} onChange={e => this.setState({ curso: e.target.value })}>
             <option disabled value="None">
@@ -61,9 +65,25 @@ export default class ConfigTurma extends React.Component {
             <option value="Especialização">Especialização</option>
           </select>
 
+          <p>Projeto:</p>
+          <select name="projeto" value={this.state.projeto} onChange={e => this.setState({ projeto: e.target.value })}>
+            <option disabled value="None">
+              {' -- Escolha uma Opção -- '}
+            </option>
+            <option value="Projeto Integrador 1">Projeto Integrador 1</option>
+            <option value="Projeto Integrador 2">Projeto Integrador 2</option>
+          {this.state.curso === 'Engenharia' && (
+            <>
+              <option value="Projeto Integrador 3">Projeto Integrador 3</option>
+            </>
+          )}
+            <option value="Trabalho de Conclusão de Curso">Trabalho de Conclusão de Curso</option>
+            <option value="Outro">Outro</option>
+          </select>
+
           {/* TODO: DEIXAR DATA DINÂMICA */}
           <p>Semestre:</p>
-          <select name="semestre">
+          <select name="semestre" value={this.state.semestre} onChange={e => this.setState({ semestre: e.target.value })}>
             <option value="18-2">18/2</option>
             <option value="19-1">19/1</option>
             <option value="19-2">19/2</option>
@@ -72,7 +92,7 @@ export default class ConfigTurma extends React.Component {
 
           <AreaForm area={areaConcepcao} onChange={this.handleAreaChange} state="concepcaoState" />
 
-          <button type="submit">Confirmar</button>
+          <button type="submit" onClick={this.buttonClick}>Confirmar</button>
         </form>
       </div>
     );

@@ -5,8 +5,8 @@ export default class AreaForm extends React.Component {
     return (
       <div className="AreaForm">
         <span className="AreaTitle">Área: {this.props.area.titulo}</span>
-        <form action="submit">
           <table>
+          <tbody>
             <tr>
               <th></th>
               <th>1</th>
@@ -36,8 +36,8 @@ export default class AreaForm extends React.Component {
                   </td>
                 </tr>
               ))}
+              </tbody>
           </table>
-        </form>
       </div>
     );
   }

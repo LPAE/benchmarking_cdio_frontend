@@ -11,8 +11,8 @@ const Routes = () => (
     <Switch>
       <Route exact path="/" component={Main} />
       <Route path="/config" component={ConfigTurma} />
-      <Route path="/turma/:id/add" component={AddEquipe} />
-      <Route path="/turma/:id" component={Turma} />
+      <Route path="/turma/:curso/:projeto/:semestre/add" component={AddEquipe} />
+      <Route path="/turma/:curso/:projeto/:semestre" component={Turma} />
     </Switch>
   </BrowserRouter>
 );

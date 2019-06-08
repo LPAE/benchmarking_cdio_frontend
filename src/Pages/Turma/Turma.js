@@ -9,8 +9,11 @@ export default class Turma extends React.Component {
   };
 
   async componentDidMount() {
-    const id = this.props.match.params.id;
-    const turma = await api.get(`/id/${id}`);
+    const curso = this.props.match.params.curso;
+    const projeto = this.props.match.params.projeto;
+    const semestre = this.props.match.params.semestre;
+    console.log(`/turma/${curso}/${projeto}/${semestre}`)
+    const turma = await api.get(`/turma/${curso}/${projeto}/${semestre}`);
     this.setState({ turma: turma.data });
   }
 
