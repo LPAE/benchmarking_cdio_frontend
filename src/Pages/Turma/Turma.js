@@ -12,38 +12,44 @@ export default class Turma extends React.Component {
     const curso = this.props.match.params.curso;
     const projeto = this.props.match.params.projeto;
     const semestre = this.props.match.params.semestre;
-    console.log(`/turma/${curso}/${projeto}/${semestre}`)
     const turma = await api.get(`/turma/${curso}/${projeto}/${semestre}`);
     this.setState({ turma: turma.data });
   }
 
-  addEquipe = () => {
-    const curso = this.props.match.params.curso;
-    const projeto = this.props.match.params.projeto;
-    const semestre = this.props.match.params.semestre;
-    this.props.history.push(`/turma/${curso}/${projeto}/${semestre}/add`);
+  enterEquipeButton = e => {
+    this.props.history.push(`/turma/${this.state.turma.curso}/${this.state.turma.projeto}/${this.state.turma.semestre}/${e.target.name}`);
+  };
+
+  addEquipeButton = () => {
+    this.props.history.push(`/turma/${this.state.turma.curso}/${this.state.turma.projeto}/${this.state.turma.semestre}/add`);
   };
 
   render() {
     return (
       <div className="Turma">
-        <div className="TurmaHeader">
+        <header>
           <div className="VoltarButton">
-            <button>Inicio</button>
+            <button onClick={e => this.props.history.push('/')}>Inicio</button>
           </div>
-          <div className="Titulo">Turma: {this.state.turma.nome}</div>
-        </div>
+          <div>
+            <h1 className="Curso">Curso: {this.state.turma.curso}</h1>
+            <h1 className="Curso">Projeto: {this.state.turma.projeto}</h1>
+            <h1 className="Curso">Semestre: {this.state.turma.semestre}</h1>
+          </div>
+        </header>
 
         <div className="EquipesPanel">
           <ul>
             {this.state.turma.equipes &&
-              this.state.turma.equipes.map(equipe => (
-                <li key={equipe._id}>
-                  <button>{equipe.nome}</button>
+              this.state.turma.equipes.map((equipe, index) => (
+                <li key={index}>
+                  <button name={equipe.nome} onClick={this.enterEquipeButton}>
+                    {equipe.nome}
+                  </button>
                 </li>
               ))}
             <li key="0">
-              <button onClick={this.addEquipe}>Adicionar Equipe</button>
+              <button onClick={this.addEquipeButton}>Adicionar Equipe</button>
             </li>
           </ul>
         </div>

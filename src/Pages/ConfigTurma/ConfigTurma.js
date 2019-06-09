@@ -16,7 +16,7 @@ export default class ConfigTurma extends React.Component {
     operacaoState: {}
   };
 
-  buttonClick = async e => {
+  buttonSubmit = async e => {
     e.preventDefault();
 
     let areas = {};
@@ -33,7 +33,7 @@ export default class ConfigTurma extends React.Component {
       areas = { ...areas, operacao: this.state.operacaoState };
     }
 
-    if( Object.keys(areas).length !== 0 ){
+    if (Object.keys(areas).length !== 0) {
       const turma = {
         curso: this.state.curso,
         projeto: this.state.projeto,
@@ -43,10 +43,8 @@ export default class ConfigTurma extends React.Component {
       await api.post('/turma', turma);
       this.props.history.push(`/turma/${this.state.curso}/${this.state.projeto}/${this.state.semestre}`);
     } else {
-      alert('Preencha Todos os Itens de Pelo Menos Uma Área');
+      alert('Preencha todos os itens de pelo menos uma Área');
     }
-
-    
   };
 
   handleAreaChange = (state, e) => {
@@ -88,7 +86,7 @@ export default class ConfigTurma extends React.Component {
             <option value="Outro">Outro</option>
           </select>
 
-          {/* TODO: DEIXAR DATA DINÂMICA */}
+          {/* TODO: TENTAR DEIXAR DATA DINÂMICA */}
           <p>Semestre:</p>
           <select name="semestre" value={this.state.semestre} onChange={e => this.setState({ semestre: e.target.value })}>
             <option value="18-2">18/2</option>
@@ -97,9 +95,9 @@ export default class ConfigTurma extends React.Component {
             <option value="20-1">20/1</option>
           </select>
 
-          <AreaForm area={areaConcepcao} onChange={this.handleAreaChange} state="concepcaoState" mostrarDescricao="1"/>
+          <AreaForm area={areaConcepcao} onChange={this.handleAreaChange} state="concepcaoState" mostrarDescricao="0" />
 
-          <button type="submit" onClick={this.buttonClick}>
+          <button type="submit" onClick={this.buttonSubmit}>
             Confirmar
           </button>
         </form>
