@@ -5,10 +5,11 @@ export default class AreaForm extends React.Component {
     actualIndex: 0
   };
 
+  // TODO: ARUUMAR CALLBACK PARA ORDEM RUIM
   radioCallback = e => {
     {
       this.state.actualIndex < this.props.area.item.length &&
-        e.target.name === this.props.area.item[this.state.actualIndex].indicador &&
+        e.target.name.split('_')[1] === this.props.area.item[this.state.actualIndex].indicador &&
         this.setState({ actualIndex: this.state.actualIndex + 1 });
     }
 
@@ -35,19 +36,19 @@ export default class AreaForm extends React.Component {
                   <tr key={item.indicador}>
                     <td>{item.indicador}:</td>
                     <td>
-                      <input type="radio" name={item.indicador} value="1" onChange={this.radioCallback} />
+                      <input type="radio" name={`${this.props.state}_${item.indicador}`} value="1" onChange={this.radioCallback} />
                     </td>
                     <td>
-                      <input type="radio" name={item.indicador} value="2" onChange={this.radioCallback} />
+                      <input type="radio" name={`${this.props.state}_${item.indicador}`} value="2" onChange={this.radioCallback} />
                     </td>
                     <td>
-                      <input type="radio" name={item.indicador} value="3" onChange={this.radioCallback} />
+                      <input type="radio" name={`${this.props.state}_${item.indicador}`} value="3" onChange={this.radioCallback} />
                     </td>
                     <td>
-                      <input type="radio" name={item.indicador} value="4" onChange={this.radioCallback} />
+                      <input type="radio" name={`${this.props.state}_${item.indicador}`} value="4" onChange={this.radioCallback} />
                     </td>
                     <td>
-                      <input type="radio" name={item.indicador} value="5" onChange={this.radioCallback} />
+                      <input type="radio" name={`${this.props.state}_${item.indicador}`} value="5" onChange={this.radioCallback} />
                     </td>
                   </tr>
                   {this.props.mostrarDescricao === '1' && index === this.state.actualIndex && (

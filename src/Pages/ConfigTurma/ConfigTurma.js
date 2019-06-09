@@ -51,9 +51,11 @@ export default class ConfigTurma extends React.Component {
     const { name, value } = e.target;
 
     this.setState({
-      [state]: { ...this.state[state], [name]: value }
+      [state]: { ...this.state[state], [name.split('_')[1]]: value }
     });
   };
+
+  // TODO: TENTAR DEIXAR DATA DINÂMICA
 
   render() {
     return (
@@ -86,7 +88,6 @@ export default class ConfigTurma extends React.Component {
             <option value="Outro">Outro</option>
           </select>
 
-          {/* TODO: TENTAR DEIXAR DATA DINÂMICA */}
           <p>Semestre:</p>
           <select name="semestre" value={this.state.semestre} onChange={e => this.setState({ semestre: e.target.value })}>
             <option value="18-2">18/2</option>
@@ -96,6 +97,7 @@ export default class ConfigTurma extends React.Component {
           </select>
 
           <AreaForm area={areaConcepcao} onChange={this.handleAreaChange} state="concepcaoState" mostrarDescricao="0" />
+          <AreaForm area={areaDesign} onChange={this.handleAreaChange} state="designState" mostrarDescricao="0" />
 
           <button type="submit" onClick={this.buttonSubmit}>
             Confirmar

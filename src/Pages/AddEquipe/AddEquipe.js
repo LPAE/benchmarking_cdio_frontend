@@ -22,7 +22,7 @@ export default class AddEquipe extends React.Component {
     const { name, value } = e.target;
 
     this.setState({
-      [state]: { ...this.state[state], [name]: value }
+      [state]: { ...this.state[state], [name.split('_')[1]]: value }
     });
   };
 
@@ -55,7 +55,9 @@ export default class AddEquipe extends React.Component {
       await api.post('/turma/equipe', dataToSend, err => {
         if (err) console.log('Erro ao mandar nova Equipe');
       });
-      this.props.history.push(`/turma/${this.props.match.params.curso}/${this.props.match.params.projeto}/${this.props.match.params.semestre}`);
+      this.props.history.push(
+        `/turma/${this.props.match.params.curso}/${this.props.match.params.projeto}/${this.props.match.params.semestre}`
+      );
     } else {
       alert('Preencha todos os itens de pelo menos uma Área');
     }
