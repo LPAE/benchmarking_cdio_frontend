@@ -34,14 +34,18 @@ export default class ConfigTurma extends React.Component {
     }
 
     if (Object.keys(areas).length !== 0) {
-      const turma = {
-        curso: this.state.curso,
-        projeto: this.state.projeto,
-        semestre: this.state.semestre,
-        expectativa: { ...areas }
-      };
-      await api.post('/turma', turma);
-      this.props.history.push(`/turma/${this.state.curso}/${this.state.projeto}/${this.state.semestre}`);
+      if (this.state.curso !== 'None' && this.state.curso !== 'None') {
+        const turma = {
+          curso: this.state.curso,
+          projeto: this.state.projeto,
+          semestre: this.state.semestre,
+          expectativa: { ...areas }
+        };
+        await api.post('/turma', turma);
+        this.props.history.push(`/turma/${this.state.curso}/${this.state.projeto}/${this.state.semestre}`);
+      } else {
+        alert('Preencha todos os campos primeiro');
+      }
     } else {
       alert('Preencha todos os itens de pelo menos uma Área');
     }

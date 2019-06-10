@@ -46,18 +46,22 @@ export default class AddEquipe extends React.Component {
     }
 
     if (Object.keys(areas).length !== 0) {
-      const dataToSend = {
-        curso: this.props.match.params.curso,
-        projeto: this.props.match.params.projeto,
-        semestre: this.props.match.params.semestre,
-        equipe: { nome: this.state.nomeDaEquipe, area: { ...areas } }
-      };
-      await api.post('/turma/equipe', dataToSend, err => {
-        if (err) console.log('Erro ao mandar nova Equipe');
-      });
-      this.props.history.push(
-        `/turma/${this.props.match.params.curso}/${this.props.match.params.projeto}/${this.props.match.params.semestre}`
-      );
+      if (this.state.nomeDaEquipe !== '') {
+        const dataToSend = {
+          curso: this.props.match.params.curso,
+          projeto: this.props.match.params.projeto,
+          semestre: this.props.match.params.semestre,
+          equipe: { nome: this.state.nomeDaEquipe, area: { ...areas } }
+        };
+        await api.post('/turma/equipe', dataToSend, err => {
+          if (err) console.log('Erro ao mandar nova Equipe');
+        });
+        this.props.history.push(
+          `/turma/${this.props.match.params.curso}/${this.props.match.params.projeto}/${this.props.match.params.semestre}`
+        );
+      } else {
+        alert('Preencha todos os campos primeiro');
+      }
     } else {
       alert('Preencha todos os itens de pelo menos uma Área');
     }

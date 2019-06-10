@@ -18,16 +18,13 @@ var options = {
     gridLines: {
       lineWidth: 2,
       tickMarkLength: 30
-    },
-    scaleLabel: {
-      display: false
     }
   }
 };
 
 export default class GraficosAreas extends React.Component {
   // TODO: FORÇAR ORDEM DAS LABELS
-
+  // TODO: TROCAR COR PARA CADA ÁREA
   mountAreaChartData = (equipeName, area, expectativa) => {
     const labels = Object.keys(area);
     const areaData = Object.values(area);
@@ -60,17 +57,37 @@ export default class GraficosAreas extends React.Component {
   };
 
   render() {
+    const nomeEquipe = this.props.equipe.nome;
+    const expectativa = this.props.expectativa;
+    const dataConcepcao = this.props.equipe.area.concepcao;
+    const dataDesign = this.props.equipe.area.design;
+    const dataImplementacao = this.props.equipe.area.implementacao;
+    const dataOperacao = this.props.equipe.area.operacao;
     return (
-      <div>
-        <Radar
-          data={this.mountAreaChartData(this.props.equipe.nome, this.props.equipe.area.concepcao, this.props.expectativa.concepcao)}
-          options={options}
-        />
-        {this.props.equipe.area.design && this.props.expectativa.design && (
-          <Radar
-            data={this.mountAreaChartData(this.props.equipe.nome, this.props.equipe.area.design, this.props.expectativa.design)}
-            options={options}
-          />
+      <div className="GraficosAreas">
+        {dataConcepcao && expectativa.concepcao && (
+          <>
+            <h2>Concepção</h2>
+            <Radar data={this.mountAreaChartData(nomeEquipe, dataConcepcao, expectativa.concepcao)} options={options} />
+          </>
+        )}
+        {dataDesign && expectativa.design && (
+          <>
+            <h2>Design</h2>
+            <Radar data={this.mountAreaChartData(nomeEquipe, dataDesign, expectativa.design)} options={options} />
+          </>
+        )}
+        {dataImplementacao && expectativa.implementacao && (
+          <>
+            <h2>Implementação</h2>
+            <Radar data={this.mountAreaChartData(nomeEquipe, dataImplementacao, expectativa.implementacao)} options={options} />
+          </>
+        )}
+        {dataOperacao && expectativa.operacao && (
+          <>
+            <h2>Operação</h2>
+            <Radar data={this.mountAreaChartData(nomeEquipe, dataOperacao, expectativa.operacao)} options={options} />
+          </>
         )}
       </div>
     );

@@ -22,16 +22,13 @@ export default class Equipe extends React.Component {
 
   render() {
     return (
-      <div className="Turma">
+      <div className="Equipe">
         <div className="VoltarButton">
           <button onClick={e => this.props.history.go(-1)}>Voltar</button>
         </div>
-        <div>
-          <h2>Radar Example</h2>
           {this.state.turma.equipes && (
             <GraficosAreas equipe={this.state.turma.equipes[this.state.equipeIndex]} expectativa={this.state.turma.expectativa} />
           )}
-        </div>
       </div>
     );
   }

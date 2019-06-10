@@ -6,6 +6,7 @@ export default class AreaForm extends React.Component {
   };
 
   // TODO: ARUUMAR CALLBACK PARA ORDEM RUIM
+  // TODO: ADICIONAR DESCRIÇÃO PARA ITEM
   radioCallback = e => {
     {
       this.state.actualIndex < this.props.area.item.length &&
