@@ -1,4 +1,12 @@
 import React from 'react';
+import Popup from 'reactjs-popup'
+
+const PopupIndicador =  (props) => (
+  <Popup trigger={<button>{props.indicador}</button>} position="right center" on='hover'>
+    <div>{props.textoIndicador}</div>
+  </Popup>
+);
+
 
 export default class AreaForm extends React.Component {
   state = {
@@ -35,7 +43,7 @@ export default class AreaForm extends React.Component {
               this.props.area.item.map((item, index) => (
                 <>
                   <tr key={item.indicador}>
-                    <td>{item.indicador}:</td>
+                    <td><PopupIndicador indicador={item.indicador} textoIndicador={item.textoIndicador} />:</td>
                     <td>
                       <input type="radio" name={`${this.props.state}_${item.indicador}`} value="1" onChange={this.radioCallback} />
                     </td>
