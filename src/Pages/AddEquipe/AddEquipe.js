@@ -83,6 +83,8 @@ export default class AddEquipe extends React.Component {
 
           <AreaForm area={areaConcepcao} onChange={this.handleAreaChange} state="concepcaoState" mostrarDescricao="1" />
           <AreaForm area={areaDesign} onChange={this.handleAreaChange} state="designState" mostrarDescricao="1" />
+          <AreaForm area={areaImplementacao} onChange={this.handleAreaChange} state="implementacaoState" mostrarDescricao="1" />
+          <AreaForm area={areaOperacao} onChange={this.handleAreaChange} state="operacaoState" mostrarDescricao="1" />
         </div>
 
         <button onClick={this.buttonSubmit}>Confirmar</button>

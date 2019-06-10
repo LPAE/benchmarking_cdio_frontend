@@ -151,12 +151,61 @@ export const areaImplementacao = {
   titulo: 'Implementação',
   item: [
     {
-      indicador: 'Contextualizar',
-      textoIndicador: 'textoIndicador',
-      descricao1: 'desc11',
-      descricao2: 'desc21',
-      descricao3: 'desc31'
-    }
+      indicador: 'Comprometimento',
+      textoIndicador: 'texto',
+      descricao1: 'desc1',
+      descricao2: 'desc2',
+      descricao3: 'desc3'
+    },
+    {
+      indicador: 'Implementar Ideias',
+      textoIndicador: 'texto',
+      descricao1: 'desc1',
+      descricao2: 'desc2',
+      descricao3: 'desc3'
+    },
+    {
+      indicador: 'Testar e Verificar',
+      textoIndicador: 'texto',
+      descricao1: 'desc1',
+      descricao2: 'desc2',
+      descricao3: 'desc3'
+    },
+    {
+      indicador: 'Solucionar e Recomendar',
+      textoIndicador: 'texto',
+      descricao1: 'desc1',
+      descricao2: 'desc2',
+      descricao3: 'desc3'
+    },
+    {
+      indicador: 'Integrar Recursos',
+      textoIndicador: 'texto',
+      descricao1: 'desc1',
+      descricao2: 'desc2',
+      descricao3: 'desc3'
+    },
+    {
+      indicador: 'Desenvoltura',
+      textoIndicador: 'texto',
+      descricao1: 'desc1',
+      descricao2: 'desc2',
+      descricao3: 'desc3'
+    },
+    {
+      indicador: 'Capacidade de Síntese',
+      textoIndicador: 'texto',
+      descricao1: 'desc1',
+      descricao2: 'desc2',
+      descricao3: 'desc3'
+    },
+    {
+      indicador: 'Entusiasmo',
+      textoIndicador: 'texto',
+      descricao1: 'desc1',
+      descricao2: 'desc2',
+      descricao3: 'desc3'
+    },
   ]
 };
 
@@ -164,11 +213,53 @@ export const areaOperacao = {
   titulo: 'Operação',
   item: [
     {
-      indicador: 'Contextualizar',
-      textoIndicador: 'textoIndicador',
-      descricao1: 'desc11',
-      descricao2: 'desc21',
-      descricao3: 'desc31'
+      indicador: 'Apresentação Oral e Comunicação',
+      textoIndicador: 'texto',
+      descricao1: 'desc1',
+      descricao2: 'desc2',
+      descricao3: 'desc3'
+    },
+    {
+      indicador: 'Operação de Processos',
+      textoIndicador: 'texto',
+      descricao1: 'desc1',
+      descricao2: 'desc2',
+      descricao3: 'desc3'
+    },
+    {
+      indicador: 'Controle de Performance',
+      textoIndicador: 'texto',
+      descricao1: 'desc1',
+      descricao2: 'desc2',
+      descricao3: 'desc3'
+    },
+    {
+      indicador: 'Teste de Aceite',
+      textoIndicador: 'texto',
+      descricao1: 'desc1',
+      descricao2: 'desc2',
+      descricao3: 'desc3'
+    },
+    {
+      indicador: 'Reflexão Sobre Projeto',
+      textoIndicador: 'texto',
+      descricao1: 'desc1',
+      descricao2: 'desc2',
+      descricao3: 'desc3'
+    },
+    {
+      indicador: 'Documento Sobre Projeto',
+      textoIndicador: 'texto',
+      descricao1: 'desc1',
+      descricao2: 'desc2',
+      descricao3: 'desc3'
+    },
+    {
+      indicador: 'Conhecimento Novo',
+      textoIndicador: 'texto',
+      descricao1: 'desc1',
+      descricao2: 'desc2',
+      descricao3: 'desc3'
     }
   ]
 };

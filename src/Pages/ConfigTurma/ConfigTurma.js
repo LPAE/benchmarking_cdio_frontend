@@ -102,6 +102,8 @@ export default class ConfigTurma extends React.Component {
 
           <AreaForm area={areaConcepcao} onChange={this.handleAreaChange} state="concepcaoState" mostrarDescricao="0" />
           <AreaForm area={areaDesign} onChange={this.handleAreaChange} state="designState" mostrarDescricao="0" />
+          <AreaForm area={areaImplementacao} onChange={this.handleAreaChange} state="implementacaoState" mostrarDescricao="0" />
+          <AreaForm area={areaOperacao} onChange={this.handleAreaChange} state="operacaoState" mostrarDescricao="0" />
 
           <button type="submit" onClick={this.buttonSubmit}>
             Confirmar
