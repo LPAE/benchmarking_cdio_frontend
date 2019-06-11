@@ -7,6 +7,26 @@ const PopupIndicador = props => (
   </Popup>
 );
 
+const RadioGroup = props => (
+  <>
+    <td>
+      <input type="radio" name={props.name} checked={props.checked === '1'} value="1" onChange={props.onChange} />
+    </td>
+    <td>
+      <input type="radio" name={props.name} checked={props.checked === '2'} value="2" onChange={props.onChange} />
+    </td>
+    <td>
+      <input type="radio" name={props.name} checked={props.checked === '3'} value="3" onChange={props.onChange} />
+    </td>
+    <td>
+      <input type="radio" name={props.name} checked={props.checked === '4'} value="4" onChange={props.onChange} />
+    </td>
+    <td>
+      <input type="radio" name={props.name} checked={props.checked === '5'} value="5" onChange={props.onChange} />
+    </td>
+  </>
+);
+
 export default class AreaForm extends React.Component {
   state = {
     actualIndex: 0,
@@ -27,7 +47,8 @@ export default class AreaForm extends React.Component {
 
     clicked.push(name);
     this.setState({ ...this.state, actualIndex, clicked });
-    this.props.onChange(this.props.state, e);
+    this.props.onChange(this.props.stateName, e);
+    console.log(this.props.state);
   };
 
   render() {
@@ -51,21 +72,11 @@ export default class AreaForm extends React.Component {
                     <td>
                       <PopupIndicador indicador={item.indicador} textoIndicador={item.textoIndicador} />:
                     </td>
-                    <td>
-                      <input type="radio" name={`${this.props.state}_${item.indicador}`} value="1" onChange={this.radioCallback} />
-                    </td>
-                    <td>
-                      <input type="radio" name={`${this.props.state}_${item.indicador}`} value="2" onChange={this.radioCallback} />
-                    </td>
-                    <td>
-                      <input type="radio" name={`${this.props.state}_${item.indicador}`} value="3" onChange={this.radioCallback} />
-                    </td>
-                    <td>
-                      <input type="radio" name={`${this.props.state}_${item.indicador}`} value="4" onChange={this.radioCallback} />
-                    </td>
-                    <td>
-                      <input type="radio" name={`${this.props.state}_${item.indicador}`} value="5" onChange={this.radioCallback} />
-                    </td>
+                    <RadioGroup
+                      name={`${this.props.stateName}_${item.indicador}`}
+                      checked={this.props.state[item.indicador]}
+                      onChange={this.radioCallback}
+                    />
                   </tr>
                   {this.props.mostrarDescricao === '1' && index === this.state.actualIndex && (
                     <tr>

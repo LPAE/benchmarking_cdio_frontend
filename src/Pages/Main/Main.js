@@ -1,5 +1,4 @@
 import React from 'react';
-import api from '../../Services/api';
 
 import './Main.sass';
 

@@ -53,7 +53,9 @@ export default class Turma extends React.Component {
             </li>
           </ul>
         </div>
-
+        <div className="EditarExpectativaButton">
+          <button>Editar Expectativa</button>
+        </div>
         <div className="GerarGraficosButton">
           <button>Gerar Graficos</button>
         </div>

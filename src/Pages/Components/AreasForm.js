@@ -4,8 +4,9 @@ import AreaForm from './AreaForm';
 import { areaConcepcao, areaDesign, areaImplementacao, areaOperacao } from '../CDIO_Texts';
 
 export default class AreasForm extends React.Component {
+  state = { concepcaoState: {}, designState: {}, implementacaoState: {}, operacaoState: {} };
   componentDidMount() {
-    var state = { concepcaoState: {}, designState: {}, implementacaoState: {}, operacaoState: {} };
+    var state = this.state;
     areaConcepcao.item.map(item => (state.concepcaoState[item.indicador] = '0'));
     areaDesign.item.map(item => (state.designState[item.indicador] = '0'));
     areaImplementacao.item.map(item => (state.implementacaoState[item.indicador] = '0'));
@@ -60,20 +61,29 @@ export default class AreasForm extends React.Component {
         <AreaForm
           area={areaConcepcao}
           onChange={this.handleAreaChange}
-          state="concepcaoState"
+          state={this.state.concepcaoState}
+          stateName="concepcaoState"
           mostrarDescricao={this.props.mostrarDescricao}
         />
-        <AreaForm area={areaDesign} onChange={this.handleAreaChange} state="designState" mostrarDescricao={this.props.mostrarDescricao} />
+        <AreaForm
+          area={areaDesign}
+          onChange={this.handleAreaChange}
+          state={this.state.designState}
+          stateName="designState"
+          mostrarDescricao={this.props.mostrarDescricao}
+        />
         <AreaForm
           area={areaImplementacao}
           onChange={this.handleAreaChange}
-          state="implementacaoState"
+          state={this.state.implementacaoState}
+          stateName="implementacaoState"
           mostrarDescricao={this.props.mostrarDescricao}
         />
         <AreaForm
           area={areaOperacao}
           onChange={this.handleAreaChange}
-          state="operacaoState"
+          state={this.state.operacaoState}
+          stateName="operacaoState"
           mostrarDescricao={this.props.mostrarDescricao}
         />
 
