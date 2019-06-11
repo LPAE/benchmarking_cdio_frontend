@@ -1,7 +1,7 @@
 import React from 'react';
 import api from '../../Services/api';
 
-import AreaForm from '../Components/AreaForm';
+import AreasForm from '../Components/AreasForm';
 import { areaConcepcao, areaDesign, areaImplementacao, areaOperacao } from '../CDIO_Texts';
 
 export default class ConfigTurma extends React.Component {
@@ -10,16 +10,11 @@ export default class ConfigTurma extends React.Component {
     projeto: 'None',
     semestre: '19-1',
 
-    concepcaoState: {},
-    designState: {},
-    implementacaoState: {},
-    operacaoState: {}
+    areas: {}
   };
 
-  buttonSubmit = async e => {
-    e.preventDefault();
-
-    let areas = {};
+  fillArea = () => {
+    var areas = {};
     if (Object.keys(this.state.concepcaoState).length === areaConcepcao.item.length) {
       areas = { ...areas, concepcao: this.state.concepcaoState };
     }
@@ -32,33 +27,28 @@ export default class ConfigTurma extends React.Component {
     if (Object.keys(this.state.operacaoState).length === areaOperacao.item.length) {
       areas = { ...areas, operacao: this.state.operacaoState };
     }
+    return areas;
+  };
 
-    if (Object.keys(areas).length !== 0) {
-      if (this.state.curso !== 'None' && this.state.curso !== 'None') {
-        const turma = {
-          curso: this.state.curso,
-          projeto: this.state.projeto,
-          semestre: this.state.semestre,
-          expectativa: { ...areas }
-        };
-        await api.post('/turma', turma);
-        this.props.history.push(`/turma/${this.state.curso}/${this.state.projeto}/${this.state.semestre}`);
-      } else {
-        alert('Preencha todos os campos primeiro');
-      }
+  submitAreasFormCallback = async areas => {
+    if (this.state.curso !== 'None' && this.state.curso !== 'None') {
+      const turma = {
+        curso: this.state.curso,
+        projeto: this.state.projeto,
+        semestre: this.state.semestre,
+        expectativa: { ...areas }
+      };
+      //await api.post('/turma', turma);
+      //this.props.history.push(`/turma/${this.state.curso}/${this.state.projeto}/${this.state.semestre}`);
+      console.log('submit');
     } else {
-      alert('Preencha todos os itens de pelo menos uma Área');
+      alert('Preencha todos os campos primeiro');
     }
   };
 
-  handleAreaChange = (state, e) => {
-    const { name, value } = e.target;
-
-    this.setState({
-      [state]: { ...this.state[state], [name.split('_')[1]]: value }
-    });
+  submitAreasForm = area => {
+    console.log(area);
   };
-
   // TODO: TENTAR DEIXAR DATA DINÂMICA
 
   render() {
@@ -100,14 +90,7 @@ export default class ConfigTurma extends React.Component {
             <option value="20-1">20/1</option>
           </select>
 
-          <AreaForm area={areaConcepcao} onChange={this.handleAreaChange} state="concepcaoState" mostrarDescricao="0" />
-          <AreaForm area={areaDesign} onChange={this.handleAreaChange} state="designState" mostrarDescricao="0" />
-          <AreaForm area={areaImplementacao} onChange={this.handleAreaChange} state="implementacaoState" mostrarDescricao="0" />
-          <AreaForm area={areaOperacao} onChange={this.handleAreaChange} state="operacaoState" mostrarDescricao="0" />
-
-          <button type="submit" onClick={this.buttonSubmit}>
-            Confirmar
-          </button>
+          <AreasForm area={areaConcepcao} callback={this.submitAreasFormCallback} mostrarDescricao="0" />
         </form>
       </div>
     );
