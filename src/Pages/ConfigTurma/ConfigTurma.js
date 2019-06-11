@@ -1,33 +1,12 @@
 import React from 'react';
 import api from '../../Services/api';
-
 import AreasForm from '../Components/AreasForm';
-import { areaConcepcao, areaDesign, areaImplementacao, areaOperacao } from '../CDIO_Texts';
 
 export default class ConfigTurma extends React.Component {
   state = {
     curso: 'None',
     projeto: 'None',
     semestre: '19-1',
-
-    areas: {}
-  };
-
-  fillArea = () => {
-    var areas = {};
-    if (Object.keys(this.state.concepcaoState).length === areaConcepcao.item.length) {
-      areas = { ...areas, concepcao: this.state.concepcaoState };
-    }
-    if (Object.keys(this.state.designState).length === areaDesign.item.length) {
-      areas = { ...areas, design: this.state.designState };
-    }
-    if (Object.keys(this.state.implementacaoState).length === areaImplementacao.item.length) {
-      areas = { ...areas, implementacao: this.state.implementacaoState };
-    }
-    if (Object.keys(this.state.operacaoState).length === areaOperacao.item.length) {
-      areas = { ...areas, operacao: this.state.operacaoState };
-    }
-    return areas;
   };
 
   submitAreasFormCallback = async areas => {
@@ -46,15 +25,14 @@ export default class ConfigTurma extends React.Component {
     }
   };
 
-  submitAreasForm = area => {
-    console.log(area);
-  };
+
   // TODO: TENTAR DEIXAR DATA DINÂMICA
 
   render() {
     return (
       <div className="ConfigTurma">
         <form>
+        <AreasForm callback={this.submitAreasFormCallback} mostrarDescricao="0">
           <p>Curso:</p>
           <select name="curso" value={this.state.curso} onChange={e => this.setState({ curso: e.target.value })}>
             <option disabled value="None">
@@ -89,8 +67,7 @@ export default class ConfigTurma extends React.Component {
             <option value="19-2">19/2</option>
             <option value="20-1">20/1</option>
           </select>
-
-          <AreasForm area={areaConcepcao} callback={this.submitAreasFormCallback} mostrarDescricao="0" />
+          </AreasForm>
         </form>
       </div>
     );

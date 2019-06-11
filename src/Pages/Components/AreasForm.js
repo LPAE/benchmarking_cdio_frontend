@@ -5,30 +5,16 @@ import { areaConcepcao, areaDesign, areaImplementacao, areaOperacao } from '../C
 
 export default class AreasForm extends React.Component {
   componentDidMount() {
-    this.state = {
-      concepcaoState: {},
-      designState: {},
-      implementacaoState: {},
-      operacaoState: {}
-    };
-    areaConcepcao.item.map(item => {
-      this.state.concepcaoState[item.indicador] = '0';
-    });
-    areaDesign.item.map(item => {
-      this.state.designState[item.indicador] = '0';
-    });
-    areaImplementacao.item.map(item => {
-      this.state.implementacaoState[item.indicador] = '0';
-    });
-    areaOperacao.item.map(item => {
-      this.state.operacaoState[item.indicador] = '0';
-    });
-    console.log(this.state);
+    var state = { concepcaoState: {}, designState: {}, implementacaoState: {}, operacaoState: {} };
+    areaConcepcao.item.map(item => (state.concepcaoState[item.indicador] = '0'));
+    areaDesign.item.map(item => (state.designState[item.indicador] = '0'));
+    areaImplementacao.item.map(item => (state.implementacaoState[item.indicador] = '0'));
+    areaOperacao.item.map(item => (state.operacaoState[item.indicador] = '0'));
+    this.setState({ ...state });
   }
 
   areaIsComplete = area => {
-    const values = Object.values(area);
-    return !values.includes('0');
+    return !Object.values(area).includes('0');
   };
 
   fillArea = () => {

@@ -1,27 +1,32 @@
 import React from 'react';
-import Popup from 'reactjs-popup'
+import Popup from 'reactjs-popup';
 
-const PopupIndicador =  (props) => (
-  <Popup trigger={<button>{props.indicador}</button>} position="right center" on='hover'>
+const PopupIndicador = props => (
+  <Popup trigger={<button>{props.indicador}</button>} position="right center" on="hover">
     <div>{props.textoIndicador}</div>
   </Popup>
 );
 
-
 export default class AreaForm extends React.Component {
   state = {
-    actualIndex: 0
+    actualIndex: 0,
+    clicked: []
   };
 
-  // TODO: ARUUMAR CALLBACK PARA ORDEM RUIM
-  // TODO: ADICIONAR DESCRIÇÃO PARA ITEM
   radioCallback = e => {
-    {
-      this.state.actualIndex < this.props.area.item.length &&
-        e.target.name.split('_')[1] === this.props.area.item[this.state.actualIndex].indicador &&
-        this.setState({ actualIndex: this.state.actualIndex + 1 });
+    const name = e.target.name.split('_')[1];
+    var actualIndex = this.state.actualIndex;
+    var clicked = this.state.clicked;
+
+    if (actualIndex < this.props.area.item.length && name === this.props.area.item[actualIndex].indicador) {
+      actualIndex++;
+      while (actualIndex < this.props.area.item.length && clicked.includes(this.props.area.item[actualIndex].indicador)) {
+        actualIndex++;
+      }
     }
 
+    clicked.push(name);
+    this.setState({ ...this.state, actualIndex, clicked });
     this.props.onChange(this.props.state, e);
   };
 
@@ -43,7 +48,9 @@ export default class AreaForm extends React.Component {
               this.props.area.item.map((item, index) => (
                 <>
                   <tr key={item.indicador}>
-                    <td><PopupIndicador indicador={item.indicador} textoIndicador={item.textoIndicador} />:</td>
+                    <td>
+                      <PopupIndicador indicador={item.indicador} textoIndicador={item.textoIndicador} />:
+                    </td>
                     <td>
                       <input type="radio" name={`${this.props.state}_${item.indicador}`} value="1" onChange={this.radioCallback} />
                     </td>
