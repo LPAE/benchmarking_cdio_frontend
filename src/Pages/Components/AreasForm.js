@@ -7,10 +7,27 @@ export default class AreasForm extends React.Component {
   state = { concepcaoState: {}, designState: {}, implementacaoState: {}, operacaoState: {} };
   componentDidMount() {
     var state = this.state;
-    areaConcepcao.item.map(item => (state.concepcaoState[item.indicador] = '0'));
-    areaDesign.item.map(item => (state.designState[item.indicador] = '0'));
-    areaImplementacao.item.map(item => (state.implementacaoState[item.indicador] = '0'));
-    areaOperacao.item.map(item => (state.operacaoState[item.indicador] = '0'));
+    if (this.props.concepcao) {
+      state.concepcaoState = this.props.concepcao;
+    } else {
+      areaConcepcao.item.map(item => (state.concepcaoState[item.indicador] = '0'));
+    }
+    if (this.props.design) {
+      state.designState = this.props.design;
+    } else {
+      areaDesign.item.map(item => (state.designState[item.indicador] = '0'));
+    }
+    if (this.props.implementacao) {
+      state.implementacaoState = this.props.implementacao;
+    } else {
+      areaImplementacao.item.map(item => (state.implementacaoState[item.indicador] = '0'));
+    }
+    if (this.props.operacao) {
+      state.operacaoState = this.props.operacao;
+    } else {
+      areaOperacao.item.map(item => (state.operacaoState[item.indicador] = '0'));
+    }
+
     this.setState({ ...state });
   }
 
@@ -58,34 +75,43 @@ export default class AreasForm extends React.Component {
       <div className="AreasForm">
         {this.props.children}
 
-        <AreaForm
-          area={areaConcepcao}
-          onChange={this.handleAreaChange}
-          state={this.state.concepcaoState}
-          stateName="concepcaoState"
-          mostrarDescricao={this.props.mostrarDescricao}
-        />
-        <AreaForm
-          area={areaDesign}
-          onChange={this.handleAreaChange}
-          state={this.state.designState}
-          stateName="designState"
-          mostrarDescricao={this.props.mostrarDescricao}
-        />
-        <AreaForm
-          area={areaImplementacao}
-          onChange={this.handleAreaChange}
-          state={this.state.implementacaoState}
-          stateName="implementacaoState"
-          mostrarDescricao={this.props.mostrarDescricao}
-        />
-        <AreaForm
-          area={areaOperacao}
-          onChange={this.handleAreaChange}
-          state={this.state.operacaoState}
-          stateName="operacaoState"
-          mostrarDescricao={this.props.mostrarDescricao}
-        />
+        {!this.props.hideConcepcao && (
+          <AreaForm
+            area={areaConcepcao}
+            onChange={this.handleAreaChange}
+            state={this.state.concepcaoState}
+            stateName="concepcaoState"
+            mostrarDescricao={this.props.mostrarDescricao}
+          />
+        )}
+
+        {!this.props.hideDesign && (
+          <AreaForm
+            area={areaDesign}
+            onChange={this.handleAreaChange}
+            state={this.state.designState}
+            stateName="designState"
+            mostrarDescricao={this.props.mostrarDescricao}
+          />
+        )}
+        {!this.props.hideImplementacao && (
+          <AreaForm
+            area={areaImplementacao}
+            onChange={this.handleAreaChange}
+            state={this.state.implementacaoState}
+            stateName="implementacaoState"
+            mostrarDescricao={this.props.mostrarDescricao}
+          />
+        )}
+        {!this.props.hideOperacao && (
+          <AreaForm
+            area={areaOperacao}
+            onChange={this.handleAreaChange}
+            state={this.state.operacaoState}
+            stateName="operacaoState"
+            mostrarDescricao={this.props.mostrarDescricao}
+          />
+        )}
 
         <button type="submit" onClick={this.buttonSubmit}>
           Confirmar

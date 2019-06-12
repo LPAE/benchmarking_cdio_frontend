@@ -26,9 +26,22 @@ export default class Equipe extends React.Component {
         <div className="VoltarButton">
           <button onClick={e => this.props.history.go(-1)}>Voltar</button>
         </div>
-          {this.state.turma.equipes && (
-            <GraficosAreas equipe={this.state.turma.equipes[this.state.equipeIndex]} expectativa={this.state.turma.expectativa} />
-          )}
+        <div className="AdicionarAreaButton">
+          <button
+            onClick={e =>
+              this.props.history.push(
+                `/turma/${this.state.turma.curso}/${this.state.turma.projeto}/${this.state.turma.semestre}/${
+                  this.state.turma.equipes[this.state.equipeIndex].nome
+                }/edit/`
+              )
+            }
+          >
+            Adicionar Área
+          </button>
+        </div>
+        {this.state.turma.equipes && (
+          <GraficosAreas equipe={this.state.turma.equipes[this.state.equipeIndex]} expectativa={this.state.turma.expectativa} />
+        )}
       </div>
     );
   }

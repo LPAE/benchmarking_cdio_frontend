@@ -58,7 +58,6 @@ const colors = {
   
 };
 export default class GraficosAreas extends React.Component {
-  // TODO: FORÇAR ORDEM DAS LABELS
   mountAreaChartData = (equipeName, area, expectativa, colors) => {
     const labels = Object.keys(area);
     const areaData = Object.values(area);

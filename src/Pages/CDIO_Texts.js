@@ -158,28 +158,28 @@ export const areaImplementacao = {
       descricao3: 'desc3'
     },
     {
-      indicador: 'Implementar Ideias',
+      indicador: 'Implementar ideias',
       textoIndicador: 'texto',
       descricao1: 'desc1',
       descricao2: 'desc2',
       descricao3: 'desc3'
     },
     {
-      indicador: 'Testar e Verificar',
+      indicador: 'Testar e verificar',
       textoIndicador: 'texto',
       descricao1: 'desc1',
       descricao2: 'desc2',
       descricao3: 'desc3'
     },
     {
-      indicador: 'Solucionar e Recomendar',
+      indicador: 'Solucionar e recomendar',
       textoIndicador: 'texto',
       descricao1: 'desc1',
       descricao2: 'desc2',
       descricao3: 'desc3'
     },
     {
-      indicador: 'Integrar Recursos',
+      indicador: 'Integrar recursos',
       textoIndicador: 'texto',
       descricao1: 'desc1',
       descricao2: 'desc2',
@@ -193,7 +193,7 @@ export const areaImplementacao = {
       descricao3: 'desc3'
     },
     {
-      indicador: 'Capacidade de Síntese',
+      indicador: 'Capacidade de síntese',
       textoIndicador: 'texto',
       descricao1: 'desc1',
       descricao2: 'desc2',
@@ -213,49 +213,49 @@ export const areaOperacao = {
   titulo: 'Operação',
   item: [
     {
-      indicador: 'Apresentação Oral e Comunicação',
+      indicador: 'Apresentação oral e comunicação',
       textoIndicador: 'texto',
       descricao1: 'desc1',
       descricao2: 'desc2',
       descricao3: 'desc3'
     },
     {
-      indicador: 'Operação de Processos',
+      indicador: 'Operação de processos',
       textoIndicador: 'texto',
       descricao1: 'desc1',
       descricao2: 'desc2',
       descricao3: 'desc3'
     },
     {
-      indicador: 'Controle de Performance',
+      indicador: 'Controle de performance',
       textoIndicador: 'texto',
       descricao1: 'desc1',
       descricao2: 'desc2',
       descricao3: 'desc3'
     },
     {
-      indicador: 'Teste de Aceite',
+      indicador: 'Teste de aceite',
       textoIndicador: 'texto',
       descricao1: 'desc1',
       descricao2: 'desc2',
       descricao3: 'desc3'
     },
     {
-      indicador: 'Reflexão Sobre Projeto',
+      indicador: 'Reflexão sobre projeto',
       textoIndicador: 'texto',
       descricao1: 'desc1',
       descricao2: 'desc2',
       descricao3: 'desc3'
     },
     {
-      indicador: 'Documento Sobre Projeto',
+      indicador: 'Documento sobre projeto',
       textoIndicador: 'texto',
       descricao1: 'desc1',
       descricao2: 'desc2',
       descricao3: 'desc3'
     },
     {
-      indicador: 'Conhecimento Novo',
+      indicador: 'Conhecimento novo',
       textoIndicador: 'texto',
       descricao1: 'desc1',
       descricao2: 'desc2',

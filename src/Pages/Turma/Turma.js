@@ -24,6 +24,10 @@ export default class Turma extends React.Component {
     this.props.history.push(`/turma/${this.state.turma.curso}/${this.state.turma.projeto}/${this.state.turma.semestre}/add`);
   };
 
+  editExpectativaButton = () => {
+    this.props.history.push(`/turma/${this.state.turma.curso}/${this.state.turma.projeto}/${this.state.turma.semestre}/edit`);
+  };
+
   render() {
     return (
       <div className="Turma">
@@ -53,7 +57,7 @@ export default class Turma extends React.Component {
             </li>
           </ul>
         </div>
-        <div className="EditarExpectativaButton">
+        <div className="EditarExpectativaButton" onClick={this.editExpectativaButton}>
           <button>Editar Expectativa</button>
         </div>
         <div className="GerarGraficosButton">

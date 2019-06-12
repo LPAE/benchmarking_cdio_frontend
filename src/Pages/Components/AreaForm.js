@@ -48,7 +48,6 @@ export default class AreaForm extends React.Component {
     clicked.push(name);
     this.setState({ ...this.state, actualIndex, clicked });
     this.props.onChange(this.props.stateName, e);
-    console.log(this.props.state);
   };
 
   render() {

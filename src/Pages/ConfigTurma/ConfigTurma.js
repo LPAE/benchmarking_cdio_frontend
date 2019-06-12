@@ -2,6 +2,8 @@ import React from 'react';
 import api from '../../Services/api';
 import AreasForm from '../Components/AreasForm';
 
+
+
 export default class ConfigTurma extends React.Component {
   state = {
     curso: 'None',
