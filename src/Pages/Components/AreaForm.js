@@ -77,7 +77,7 @@ export default class AreaForm extends React.Component {
                       onChange={this.radioCallback}
                     />
                   </tr>
-                  {this.props.mostrarDescricao === '1' && index === this.state.actualIndex && (
+                  {this.props.mostrarDescricao === true && index === this.state.actualIndex && (
                     <tr>
                       <td />
                       <td>{item.descricao1}</td>

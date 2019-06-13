@@ -36,7 +36,7 @@ export default class EditExpectativa extends React.Component {
       curso: this.props.match.params.curso,
       projeto: this.props.match.params.projeto,
       semestre: this.props.match.params.semestre,
-      expecatativa: { ...areas }
+      expectativa: { ...areas }
     };
     console.log(dataToSend);
     await api.post('/turma/equipe/expectativa', dataToSend);
@@ -54,7 +54,7 @@ export default class EditExpectativa extends React.Component {
         {this.state.finishedSetState && (
           <AreasForm
             callback={this.submitAreasFormCallback}
-            mostrarDescricao={true}
+            mostrarDescricao={false}
             concepcao={this.state.concepcao}
             design={this.state.design}
             implementacao={this.state.implementacao}
