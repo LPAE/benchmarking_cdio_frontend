@@ -1,5 +1,6 @@
 import React from 'react';
 import Popup from 'reactjs-popup';
+import { Grid, Box, Typography, Paper, Radio } from '@material-ui/core';
 
 const PopupIndicador = props => (
   <Popup trigger={<button>{props.indicador}</button>} position="right center" on="hover">
@@ -10,19 +11,19 @@ const PopupIndicador = props => (
 const RadioGroup = props => (
   <>
     <td>
-      <input type="radio" name={props.name} checked={props.checked === '1'} value="1" onChange={props.onChange} />
+      <Radio name={props.name} checked={props.checked === '1'} value="1" onChange={props.onChange} />
     </td>
     <td>
-      <input type="radio" name={props.name} checked={props.checked === '2'} value="2" onChange={props.onChange} />
+      <Radio name={props.name} checked={props.checked === '2'} value="2" onChange={props.onChange} />
     </td>
     <td>
-      <input type="radio" name={props.name} checked={props.checked === '3'} value="3" onChange={props.onChange} />
+      <Radio name={props.name} checked={props.checked === '3'} value="3" onChange={props.onChange} />
     </td>
     <td>
-      <input type="radio" name={props.name} checked={props.checked === '4'} value="4" onChange={props.onChange} />
+      <Radio name={props.name} checked={props.checked === '4'} value="4" onChange={props.onChange} />
     </td>
     <td>
-      <input type="radio" name={props.name} checked={props.checked === '5'} value="5" onChange={props.onChange} />
+      <Radio name={props.name} checked={props.checked === '5'} value="5" onChange={props.onChange} />
     </td>
   </>
 );

@@ -1,4 +1,6 @@
 import React from 'react';
+import { Grid, Box, Typography, Paper, Button } from '@material-ui/core';
+import { Group, GroupAdd } from '@material-ui/icons';
 
 import './Turma.sass';
 import api from '../../Services/api';
@@ -17,7 +19,7 @@ export default class Turma extends React.Component {
   }
 
   enterEquipeButton = e => {
-    this.props.history.push(`/turma/${this.state.turma.curso}/${this.state.turma.projeto}/${this.state.turma.semestre}/${e.target.name}`);
+    this.props.history.push(`/turma/${this.state.turma.curso}/${this.state.turma.projeto}/${this.state.turma.semestre}/${e.target.textContent}`);
   };
 
   addEquipeButton = () => {
@@ -37,7 +39,9 @@ export default class Turma extends React.Component {
       <div className="Turma">
         <header>
           <div className="VoltarButton">
-            <button onClick={e => this.props.history.push('/')}>Inicio</button>
+            <Button variant="contained" onClick={e => this.props.history.push('/')}>
+              Início
+            </Button>
           </div>
           <div>
             <h1 className="Curso">Curso: {this.state.turma.curso}</h1>
@@ -51,21 +55,25 @@ export default class Turma extends React.Component {
             {this.state.turma.equipes &&
               this.state.turma.equipes.map((equipe, index) => (
                 <li key={index}>
-                  <button name={equipe.nome} onClick={this.enterEquipeButton}>
+                  <Button variant="contained" name={equipe.nome} onClick={this.enterEquipeButton}>
+                    <Group />
                     {equipe.nome}
-                  </button>
+                  </Button>
                 </li>
               ))}
             <li key="0">
-              <button onClick={this.addEquipeButton}>Adicionar Equipe</button>
+              <Button variant="contained" onClick={this.addEquipeButton}>
+                <GroupAdd />
+                Adicionar Equipe
+              </Button>
             </li>
           </ul>
         </div>
         <div className="EditarExpectativaButton" onClick={this.editExpectativaButton}>
-          <button>Editar Expectativa</button>
+          <Button variant="contained">Editar Expectativa</Button>
         </div>
         <div className="GerarGraficosButton" onClick={this.gerarGraficosButton}>
-          <button>Gerar Graficos</button>
+          <Button variant="contained">Gerar Graficos</Button>
         </div>
       </div>
     );

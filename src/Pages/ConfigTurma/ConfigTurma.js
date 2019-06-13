@@ -2,17 +2,17 @@ import React from 'react';
 import api from '../../Services/api';
 import AreasForm from '../Components/AreasForm';
 
-
+import { Grid, Select, MenuItem, InputLabel, FormControl } from '@material-ui/core';
 
 export default class ConfigTurma extends React.Component {
   state = {
-    curso: 'None',
-    projeto: 'None',
+    curso: '',
+    projeto: '',
     semestre: '19-1'
   };
 
   submitAreasFormCallback = async areas => {
-    if (this.state.curso !== 'None' && this.state.curso !== 'None') {
+    if (this.state.curso !== '' && this.state.curso !== '') {
       const turma = {
         curso: this.state.curso,
         projeto: this.state.projeto,
@@ -33,40 +33,44 @@ export default class ConfigTurma extends React.Component {
       <div className="ConfigTurma">
         <form>
           <AreasForm callback={this.submitAreasFormCallback} mostrarDescricao="0">
-            <p>Curso:</p>
-            <select name="curso" value={this.state.curso} onChange={e => this.setState({ curso: e.target.value })}>
-              <option disabled value="None">
-                {' -- Escolha uma Opção -- '}
-              </option>
-              <option value="Técnico">Técnico</option>
-              <option value="Tecnologia">Tecnologia</option>
-              <option value="Engenharia">Engenharia</option>
-              <option value="Especialização">Especialização</option>
-            </select>
+            <Grid item>
+              <FormControl style={{minWidth: 170}}>
+                <InputLabel>Curso</InputLabel>
+                <Select name="curso" value={this.state.curso} onChange={e => this.setState({ curso: e.target.value })}>
+                  <MenuItem value="Técnico">Técnico</MenuItem>
+                  <MenuItem value="Tecnologia">Tecnologia</MenuItem>
+                  <MenuItem value="Engenharia">Engenharia</MenuItem>
+                  <MenuItem value="Especialização">Especialização</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
 
-            <p>Projeto:</p>
-            <select name="projeto" value={this.state.projeto} onChange={e => this.setState({ projeto: e.target.value })}>
-              <option disabled value="None">
-                {' -- Escolha uma Opção -- '}
-              </option>
-              <option value="Projeto Integrador 1">Projeto Integrador 1</option>
-              <option value="Projeto Integrador 2">Projeto Integrador 2</option>
-              {this.state.curso === 'Engenharia' && (
-                <>
-                  <option value="Projeto Integrador 3">Projeto Integrador 3</option>
-                </>
-              )}
-              <option value="Trabalho de Conclusão de Curso">Trabalho de Conclusão de Curso</option>
-              <option value="Outro">Outro</option>
-            </select>
+            <Grid item>
+              <FormControl style={{minWidth: 170}}>
+                <InputLabel>Projeto</InputLabel>
+                <Select name="projeto" value={this.state.projeto} onChange={e => this.setState({ projeto: e.target.value })}>
+                  <MenuItem value="Projeto Integrador 1">Projeto Integrador 1</MenuItem>
+                  <MenuItem value="Projeto Integrador 2">Projeto Integrador 2</MenuItem>
+                  {this.state.curso === 'Engenharia' && (
+                    <>
+                      <MenuItem value="Projeto Integrador 3">Projeto Integrador 3</MenuItem>
+                    </>
+                  )}
+                  <MenuItem value="Trabalho de Conclusão de Curso">Trabalho de Conclusão de Curso</MenuItem>
+                  <MenuItem value="Outro">Outro</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
 
-            <p>Semestre:</p>
-            <select name="semestre" value={this.state.semestre} onChange={e => this.setState({ semestre: e.target.value })}>
-              <option value="18-2">18/2</option>
-              <option value="19-1">19/1</option>
-              <option value="19-2">19/2</option>
-              <option value="20-1">20/1</option>
-            </select>
+            <Grid item>
+              <InputLabel>Semestre</InputLabel>
+              <Select name="semestre" value={this.state.semestre} onChange={e => this.setState({ semestre: e.target.value })}>
+                <MenuItem value="18-2">18/2</MenuItem>
+                <MenuItem value="19-1">19/1</MenuItem>
+                <MenuItem value="19-2">19/2</MenuItem>
+                <MenuItem value="20-1">20/1</MenuItem>
+              </Select>
+            </Grid>
           </AreasForm>
         </form>
       </div>

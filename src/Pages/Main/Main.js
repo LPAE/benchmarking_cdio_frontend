@@ -32,7 +32,7 @@ export default class Main extends React.Component {
             <Grid container direction="column" justify="center" alignItems="center">
               <Grid item>
                 <div className="MainHeader">
-                  <Typography align="center" variant="h2">
+                  <Typography align="center" variant="h3">
                     Benchmarking CDIO
                   </Typography>
                 </div>

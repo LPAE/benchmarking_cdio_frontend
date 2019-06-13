@@ -1,5 +1,6 @@
 import React from 'react';
 import AreaForm from './AreaForm';
+import { Grid, Button } from '@material-ui/core';
 
 import { areaConcepcao, areaDesign, areaImplementacao, areaOperacao } from '../CDIO_Texts';
 
@@ -113,9 +114,9 @@ export default class AreasForm extends React.Component {
           />
         )}
 
-        <button type="submit" onClick={this.buttonSubmit}>
+        <Button color="secondary" variant="contained" onClick={this.buttonSubmit}>
           Confirmar
-        </button>
+        </Button>
       </div>
     );
   }
