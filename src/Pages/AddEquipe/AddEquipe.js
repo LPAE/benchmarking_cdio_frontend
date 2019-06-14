@@ -40,7 +40,7 @@ export default class AddEquipe extends React.Component {
         </header>
 
         <div className="AddEquipeForm">
-          <AreasForm callback={this.submitAreasFormCallback} mostrarDescricao={true} >
+          <AreasForm callback={this.submitAreasFormCallback} mostrarDescricao>
             <span className="">Nome da Equipe:</span>
             <input type="text" value={this.state.nomeDaEquipe} onChange={e => this.setState({ nomeDaEquipe: e.target.value })} />
           </AreasForm>
