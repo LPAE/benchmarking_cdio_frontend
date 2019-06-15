@@ -2,6 +2,7 @@ import React from 'react';
 import api from '../../Services/api';
 import AreasForm from '../Components/AreasForm';
 import { Button } from '@material-ui/core';
+import TopBar from '../Components/TopBar';
 
 export default class EditEquipe extends React.Component {
   state = {
@@ -44,9 +45,7 @@ export default class EditEquipe extends React.Component {
   render() {
     return (
       <div className="EditExpectativa">
-        <div className="VoltarButton">
-          <Button variant="contained" color="primary" onClick={e => this.props.history.go(-1)}>Voltar</Button>
-        </div>
+        <TopBar voltar title={this.state.turma.equipes && `Adicionar Área na Equipe: ${this.state.turma.equipes[this.state.equipeIndex].nome}`} {...this.props} />
         <AreasForm
           callback={this.submitAreasFormCallback}
           mostrarDescricao={true}
@@ -55,7 +54,6 @@ export default class EditEquipe extends React.Component {
           hideImplementacao={this.state.hideImplementacao}
           hideOperacao={this.state.hideOperacao}
         >
-          {this.state.turma.equipes && <span className="">Nome da Equipe: {this.state.turma.equipes[this.state.equipeIndex].nome}</span>}
         </AreasForm>
       </div>
     );

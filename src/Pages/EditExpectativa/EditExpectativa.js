@@ -1,6 +1,7 @@
 import React from 'react';
 import api from '../../Services/api';
 import AreasForm from '../Components/AreasForm';
+import TopBar from '../Components/TopBar';
 
 export default class EditExpectativa extends React.Component {
   state = {
@@ -48,9 +49,7 @@ export default class EditExpectativa extends React.Component {
   render() {
     return (
       <div className="EditExpectativa">
-        <div className="VoltarButton">
-          <button onClick={e => this.props.history.go(-1)}>Voltar</button>
-        </div>
+        <TopBar voltar title="Editar Expectativa" {...this.props} />
         {this.state.finishedSetState && (
           <AreasForm
             callback={this.submitAreasFormCallback}

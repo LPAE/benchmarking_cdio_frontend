@@ -3,6 +3,7 @@ import api from '../../Services/api';
 import AreasForm from '../Components/AreasForm';
 
 import { Grid, Select, MenuItem, InputLabel, FormControl } from '@material-ui/core';
+import TopBar from '../Components/TopBar';
 
 //Esta variável define quais são os Cursos e Projetos disponíveis para serem selecionados no Formulário.
 const cursos = {
@@ -39,13 +40,19 @@ export default class ConfigTurma extends React.Component {
   render() {
     return (
       <div className="ConfigTurma">
+        <TopBar voltar title="Configurar Turma" {...this.props} />
         <form>
           <AreasForm callback={this.submitAreasFormCallback}>
             <Grid item>
               <FormControl style={{ minWidth: 170 }}>
                 <InputLabel>Curso</InputLabel>
                 <Select name="curso" value={this.state.curso} onChange={e => this.setState({ curso: e.target.value })}>
-                  {cursos && Object.keys(cursos).map(curso => <MenuItem key={curso} value={curso}>{curso}</MenuItem>)}
+                  {cursos &&
+                    Object.keys(cursos).map(curso => (
+                      <MenuItem key={curso} value={curso}>
+                        {curso}
+                      </MenuItem>
+                    ))}
                 </Select>
               </FormControl>
             </Grid>
@@ -55,7 +62,11 @@ export default class ConfigTurma extends React.Component {
                 <InputLabel>Projeto</InputLabel>
                 <Select name="projeto" value={this.state.projeto} onChange={e => this.setState({ projeto: e.target.value })}>
                   {cursos[this.state.curso] ? (
-                    cursos[this.state.curso].map(projeto => <MenuItem key={projeto} value={projeto}>{projeto}</MenuItem>)
+                    cursos[this.state.curso].map(projeto => (
+                      <MenuItem key={projeto} value={projeto}>
+                        {projeto}
+                      </MenuItem>
+                    ))
                   ) : (
                     <MenuItem disabled value="">
                       Escolha um Curso Primeiro

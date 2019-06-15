@@ -4,6 +4,8 @@ import './AddEquipe.sass';
 import api from '../../Services/api';
 
 import AreasForm from '../Components/AreasForm';
+import { FormControl, TextField } from '@material-ui/core';
+import TopBar from '../Components/TopBar';
 
 export default class AddEquipe extends React.Component {
   state = {
@@ -25,24 +27,26 @@ export default class AddEquipe extends React.Component {
         `/turma/${this.props.match.params.curso}/${this.props.match.params.projeto}/${this.props.match.params.semestre}`
       );
     } else {
-      alert('Preencha o Nome da Equipe')
+      alert('Preencha o Nome da Equipe');
     }
   };
 
   render() {
     return (
       <div className="AddEquipe">
-        <header>
-          <div className="VoltarButton">
-            <button onClick={e => this.props.history.go(-1)}>Voltar</button>
-          </div>
-          <h1 className="Titulo">Adicionar Equipe</h1>
-        </header>
+        <TopBar voltar title="Adicionar Equipe" {...this.props} />
 
         <div className="AddEquipeForm">
           <AreasForm callback={this.submitAreasFormCallback} mostrarDescricao>
-            <span className="">Nome da Equipe:</span>
-            <input type="text" value={this.state.nomeDaEquipe} onChange={e => this.setState({ nomeDaEquipe: e.target.value })} />
+            <FormControl style={{ minWidth: 170 }}>
+              <TextField
+                label="Nome da Equipe"
+                value={this.state.nomeDaEquipe}
+                onChange={e => this.setState({ nomeDaEquipe: e.target.value })}
+                margin="normal"
+                variant="outlined"
+              />
+            </FormControl>
           </AreasForm>
         </div>
       </div>

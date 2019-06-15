@@ -1,7 +1,7 @@
 import React from 'react';
 import { withStyles } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
-import { Grid, Box, Typography, Paper } from '@material-ui/core';
+import { Grid, Box, Typography, Paper, AppBar, Toolbar } from '@material-ui/core';
 
 import './Main.sass';
 
@@ -40,7 +40,7 @@ export default class Main extends React.Component {
                 </Grid>
                 <Box mt={4}>
                   <Grid item>
-                    <Typography variant="body1" align="justify">
+                    <Typography variant="body1" color="textSecondary" align="justify">
                       A Ferramenta Benchmarking está constituída por Notas Explicativas e Questionário, referentes à algumas áreas e seus
                       correspondentes indicadores relacionados com a “Abordagem CDIO”. Cada questão da Ferramenta Benchmarking exige que o
                       avaliador se posicione para uma escolha numa escala entre 1 e 5 em relação aos indicadores apresentados e descritos em

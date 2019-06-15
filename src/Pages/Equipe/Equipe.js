@@ -4,6 +4,7 @@ import GraficosAreas from '../Components/GraficosAreas';
 
 import './Equipe.sass';
 import { Button } from '@material-ui/core';
+import TopBar from '../Components/TopBar';
 
 export default class Equipe extends React.Component {
   state = {
@@ -24,9 +25,7 @@ export default class Equipe extends React.Component {
   render() {
     return (
       <div className="Equipe">
-        <div className="VoltarButton">
-          <Button variant="contained" color="primary" onClick={e => this.props.history.go(-1)}>Voltar</Button>
-        </div>
+        <TopBar voltar title={this.state.turma.equipes && `Equipe: ${this.state.turma.equipes[this.state.equipeIndex].nome}`} {...this.props} />
         <div className="AdicionarAreaButton">
           <Button variant="contained" color="primary"
             onClick={e =>

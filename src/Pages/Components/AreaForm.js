@@ -53,7 +53,7 @@ export default class AreaForm extends React.Component {
           <Table size="small">
             <TableHead>
               <TableRow>
-                {['', '1', '2', '3', '4', '5'].map(item => (
+                {['Indicador', '1', '2', '3', '4', '5'].map(item => (
                   <TableCell key={item} align="center">
                     {item}
                   </TableCell>

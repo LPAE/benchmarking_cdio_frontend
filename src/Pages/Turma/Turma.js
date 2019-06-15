@@ -1,9 +1,13 @@
 import React from 'react';
-import { Grid, Box, Typography, Paper, Button } from '@material-ui/core';
+import { Grid, Box, Typography, Paper, Button, AppBar, Toolbar } from '@material-ui/core';
+import { Home, ArrowBack } from '@material-ui/icons';
 import { Group, GroupAdd } from '@material-ui/icons';
 
 import './Turma.sass';
 import api from '../../Services/api';
+import TopBar from '../Components/TopBar';
+
+
 
 export default class Turma extends React.Component {
   state = {
@@ -19,7 +23,9 @@ export default class Turma extends React.Component {
   }
 
   enterEquipeButton = e => {
-    this.props.history.push(`/turma/${this.state.turma.curso}/${this.state.turma.projeto}/${this.state.turma.semestre}/${e.target.textContent}`);
+    this.props.history.push(
+      `/turma/${this.state.turma.curso}/${this.state.turma.projeto}/${this.state.turma.semestre}/${e.target.textContent}`
+    );
   };
 
   addEquipeButton = () => {
@@ -37,12 +43,8 @@ export default class Turma extends React.Component {
   render() {
     return (
       <div className="Turma">
+        <TopBar inicio title="Turma" {...this.props} />
         <header>
-          <div className="VoltarButton">
-            <Button variant="contained" color="primary" onClick={e => this.props.history.push('/')}>
-              Início
-            </Button>
-          </div>
           <div>
             <h1 className="Curso">Curso: {this.state.turma.curso}</h1>
             <h1 className="Curso">Projeto: {this.state.turma.projeto}</h1>
@@ -70,10 +72,14 @@ export default class Turma extends React.Component {
           </ul>
         </div>
         <div className="EditarExpectativaButton" onClick={this.editExpectativaButton}>
-          <Button variant="contained" color="primary">Editar Expectativa</Button>
+          <Button variant="contained" color="primary">
+            Editar Expectativa
+          </Button>
         </div>
         <div className="GerarGraficosButton" onClick={this.gerarGraficosButton}>
-          <Button variant="contained" color="primary">Gerar Graficos</Button>
+          <Button variant="contained" color="primary">
+            Gerar Graficos
+          </Button>
         </div>
       </div>
     );
