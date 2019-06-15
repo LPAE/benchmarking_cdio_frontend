@@ -1,17 +1,22 @@
 import React from 'react';
-import { Grid, Box, Typography, Radio, Collapse, Popover, Divider, Paper } from '@material-ui/core';
+import { Grid, Box, Typography, Radio, Collapse, Popover, Paper } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 
-const styles = {
+const styles = theme => ({
   root: {},
   textoDescricao: {
     fontSize: '0.7rem'
   },
   popover: {
     pointerEvents: 'none',
-    width: '60%'
+    width: '80%'
+  },
+  popoverTexto: {
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(3)
   }
-};
+});
 
 const RadioGroup = props => (
   <>
@@ -51,8 +56,6 @@ export default withStyles(styles)(
       this.props.onChange(this.props.stateName, e);
     };
     handlePopoverOpen = event => {
-      console.log(event.target);
-      console.log(event.currentTarget);
       this.setState({ ...this.state, popoverOpen: event.target.id, anchorEl: event.currentTarget });
     };
 
@@ -73,7 +76,7 @@ export default withStyles(styles)(
           <Grid container>
             <Grid item xs={12}>
               <Box mt={1} mx={2} px={1}>
-                <Grid xs container>
+                <Grid container>
                   {['Indicador', '1', '2', '3', '4', '5'].map(item => (
                     <Grid item xs={2} key={item}>
                       <Typography color="textSecondary" align="center" variant="h6">
@@ -92,7 +95,7 @@ export default withStyles(styles)(
                 this.props.area.item.map((item, index) => (
                   <Box clone mt={1} mb={2} mx={2} px={1} pb={2}>
                     <Paper elevation={3}>
-                      <Grid container xs justify="center" alignItems="center" key={item.indicador}>
+                      <Grid container justify="center" alignItems="center" key={item.indicador}>
                         <Grid item xs={2} key={item} justify="center">
                           <Typography
                             id={`${this.props.stateName}_${item.indicador}`}
@@ -116,7 +119,7 @@ export default withStyles(styles)(
                             onClose={this.handlePopoverClose}
                             disableRestoreFocus
                           >
-                            <Typography>{item.textoIndicador}</Typography>
+                            <Typography className={classes.popoverTexto}>{item.textoIndicador}</Typography>
                           </Popover>
                         </Grid>
                         <RadioGroup
@@ -126,7 +129,7 @@ export default withStyles(styles)(
                         />
                       </Grid>
 
-                      <Grid container xs spacing={3} justify="center" alignItems="flex-start">
+                      <Grid container spacing={3} justify="center" alignItems="flex-start">
                         {this.props.mostrarDescricao &&
                           ['', item.descricao1, item.descricao2, item.descricao3].map((item, i) => (
                             <Grid item xs={i === 0 ? 2 : i === 1 || i === 3 ? 3 : 4} key={i} alignItems="center">
