@@ -39,7 +39,7 @@ export default class Turma extends React.Component {
       <div className="Turma">
         <header>
           <div className="VoltarButton">
-            <Button variant="contained" onClick={e => this.props.history.push('/')}>
+            <Button variant="contained" color="primary" onClick={e => this.props.history.push('/')}>
               Início
             </Button>
           </div>
@@ -55,14 +55,14 @@ export default class Turma extends React.Component {
             {this.state.turma.equipes &&
               this.state.turma.equipes.map((equipe, index) => (
                 <li key={index}>
-                  <Button variant="contained" name={equipe.nome} onClick={this.enterEquipeButton}>
+                  <Button variant="contained" color="primary" name={equipe.nome} onClick={this.enterEquipeButton}>
                     <Group />
                     {equipe.nome}
                   </Button>
                 </li>
               ))}
             <li key="0">
-              <Button variant="contained" onClick={this.addEquipeButton}>
+              <Button variant="contained" color="primary" onClick={this.addEquipeButton}>
                 <GroupAdd />
                 Adicionar Equipe
               </Button>
@@ -70,10 +70,10 @@ export default class Turma extends React.Component {
           </ul>
         </div>
         <div className="EditarExpectativaButton" onClick={this.editExpectativaButton}>
-          <Button variant="contained">Editar Expectativa</Button>
+          <Button variant="contained" color="primary">Editar Expectativa</Button>
         </div>
         <div className="GerarGraficosButton" onClick={this.gerarGraficosButton}>
-          <Button variant="contained">Gerar Graficos</Button>
+          <Button variant="contained" color="primary">Gerar Graficos</Button>
         </div>
       </div>
     );

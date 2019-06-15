@@ -1,6 +1,6 @@
 import React from 'react';
 import Popup from 'reactjs-popup';
-import { Grid, Box, Typography, Paper, Radio } from '@material-ui/core';
+import { Grid, Box, Typography, Paper, Radio, TableCell, TableBody, TableRow, Table, TableHead } from '@material-ui/core';
 
 const PopupIndicador = props => (
   <Popup trigger={<button>{props.indicador}</button>} position="right center" on="hover">
@@ -10,21 +10,11 @@ const PopupIndicador = props => (
 
 const RadioGroup = props => (
   <>
-    <td>
-      <Radio name={props.name} checked={props.checked === '1'} value="1" onChange={props.onChange} />
-    </td>
-    <td>
-      <Radio name={props.name} checked={props.checked === '2'} value="2" onChange={props.onChange} />
-    </td>
-    <td>
-      <Radio name={props.name} checked={props.checked === '3'} value="3" onChange={props.onChange} />
-    </td>
-    <td>
-      <Radio name={props.name} checked={props.checked === '4'} value="4" onChange={props.onChange} />
-    </td>
-    <td>
-      <Radio name={props.name} checked={props.checked === '5'} value="5" onChange={props.onChange} />
-    </td>
+    {['1', '2', '3', '4', '5'].map(numero => (
+      <TableCell align="center" key={numero}>
+        <Radio name={props.name} checked={props.checked === numero} value={numero} onChange={props.onChange} />
+      </TableCell>
+    ))}
   </>
 );
 
@@ -53,46 +43,54 @@ export default class AreaForm extends React.Component {
 
   render() {
     return (
-      <div className="AreaForm">
-        <span className="AreaTitle">Área: {this.props.area.titulo}</span>
-        <table>
-          <tbody>
-            <tr>
-              <th />
-              <th>1</th>
-              <th>2</th>
-              <th>3</th>
-              <th>4</th>
-              <th>5</th>
-            </tr>
-            {this.props.area.item &&
-              this.props.area.item.map((item, index) => (
-                <>
-                  <tr key={item.indicador}>
-                    <td>
-                      <PopupIndicador indicador={item.indicador} textoIndicador={item.textoIndicador} />:
-                    </td>
-                    <RadioGroup
-                      name={`${this.props.stateName}_${item.indicador}`}
-                      checked={this.props.state[item.indicador]}
-                      onChange={this.radioCallback}
-                    />
-                  </tr>
-                  {this.props.mostrarDescricao === true && index === this.state.actualIndex && (
-                    <tr>
-                      <td />
-                      <td>{item.descricao1}</td>
-                      <td />
-                      <td>{item.descricao2}</td>
-                      <td />
-                      <td>{item.descricao3}</td>
-                    </tr>
-                  )}
-                </>
-              ))}
-          </tbody>
-        </table>
-      </div>
+      <Grid container alignContent="center" className="AreaForm">
+        <Grid item>
+          <Typography justify="center" variant="h3">
+            Área: {this.props.area.titulo}
+          </Typography>
+        </Grid>
+        <Grid item>
+          <Table size="small">
+            <TableHead>
+              <TableRow>
+                {['', '1', '2', '3', '4', '5'].map(item => (
+                  <TableCell key={item} align="center">
+                    {item}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {this.props.area.item &&
+                this.props.area.item.map((item, index) => (
+                  <>
+                    <TableRow key={item.indicador}>
+                      <TableCell align="center">
+                        <PopupIndicador indicador={item.indicador} textoIndicador={item.textoIndicador} />:
+                      </TableCell>
+                      <RadioGroup
+                        name={`${this.props.stateName}_${item.indicador}`}
+                        checked={this.props.state[item.indicador]}
+                        onChange={this.radioCallback}
+                      />
+                    </TableRow>
+                    {this.props.mostrarDescricao && index === this.state.actualIndex && (
+                      <TableRow>
+                        {['', item.descricao1, '', item.descricao2, '', item.descricao3].map(item => (
+                          <TableCell key={item} align="center">
+                            <Typography variant="body2">
+                              {item}
+                            </Typography>
+                          </TableCell>
+                        ))}
+                      </TableRow>
+                    )}
+                  </>
+                ))}
+            </TableBody>
+          </Table>
+        </Grid>
+      </Grid>
     );
   }
 }

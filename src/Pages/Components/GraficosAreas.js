@@ -1,5 +1,6 @@
 import React from 'react';
 import { Radar } from 'react-chartjs-2';
+import { Grid, Typography } from '@material-ui/core';
 
 var options = {
   scale: {
@@ -38,24 +39,23 @@ const colors = {
   concepcao: {
     backgroundColor: concepcaoColor,
     borderColor: concepcaoBorderColor,
-    pointBackgroundColor: concepcaoBorderColor,
+    pointBackgroundColor: concepcaoBorderColor
   },
   design: {
     backgroundColor: designColor,
     borderColor: designBorderColor,
-    pointBackgroundColor: designBorderColor,
+    pointBackgroundColor: designBorderColor
   },
   implementacao: {
     backgroundColor: implementacaoColor,
     borderColor: implementacaoBorderColor,
-    pointBackgroundColor: implementacaoBorderColor,
+    pointBackgroundColor: implementacaoBorderColor
   },
   operacao: {
     backgroundColor: operacaoColor,
     borderColor: operacaoBorderColor,
-    pointBackgroundColor: operacaoBorderColor,
-  },
-  
+    pointBackgroundColor: operacaoBorderColor
+  }
 };
 export default class GraficosAreas extends React.Component {
   mountAreaChartData = (equipeName, area, expectativa, colors) => {
@@ -92,35 +92,51 @@ export default class GraficosAreas extends React.Component {
     const dataImplementacao = this.props.equipe.area.implementacao;
     const dataOperacao = this.props.equipe.area.operacao;
     return (
-      <div className="GraficosAreas">
-        {dataConcepcao && expectativa.concepcao && (
-          <>
-            <h2>Concepção</h2>
-            <Radar data={this.mountAreaChartData(nomeEquipe, dataConcepcao, expectativa.concepcao, colors.concepcao)} options={options} />
-          </>
-        )}
-        {dataDesign && expectativa.design && (
-          <>
-            <h2>Design</h2>
-            <Radar data={this.mountAreaChartData(nomeEquipe, dataDesign, expectativa.design, colors.design)} options={options} />
-          </>
-        )}
-        {dataImplementacao && expectativa.implementacao && (
-          <>
-            <h2>Implementação</h2>
-            <Radar
-              data={this.mountAreaChartData(nomeEquipe, dataImplementacao, expectativa.implementacao, colors.implementacao)}
-              options={options}
-            />
-          </>
-        )}
-        {dataOperacao && expectativa.operacao && (
-          <>
-            <h2>Operação</h2>
-            <Radar data={this.mountAreaChartData(nomeEquipe, dataOperacao, expectativa.operacao, colors.operacao)} options={options} />
-          </>
-        )}
-      </div>
+      <Grid xs={12} sm={10} direction="column" alignItems="center" container className="GraficosAreas">
+        <Grid container justify="center">
+          {dataConcepcao && expectativa.concepcao && (
+            <>
+              <Grid item>
+                <Typography>Concepção</Typography>
+              </Grid>
+              <Radar data={this.mountAreaChartData(nomeEquipe, dataConcepcao, expectativa.concepcao, colors.concepcao)} options={options} />
+            </>
+          )}
+        </Grid>
+        <Grid container justify="center">
+          {dataDesign && expectativa.design && (
+            <>
+              <Grid item>
+                <Typography>Design</Typography>
+              </Grid>
+              <Radar data={this.mountAreaChartData(nomeEquipe, dataDesign, expectativa.design, colors.design)} options={options} />
+            </>
+          )}
+        </Grid>
+        <Grid container justify="center">
+          {dataImplementacao && expectativa.implementacao && (
+            <>
+              <Grid item>
+                <Typography>Implementação</Typography>
+              </Grid>
+              <Radar
+                data={this.mountAreaChartData(nomeEquipe, dataImplementacao, expectativa.implementacao, colors.implementacao)}
+                options={options}
+              />
+            </>
+          )}
+        </Grid>
+        <Grid container justify="center">
+          {dataOperacao && expectativa.operacao && (
+            <>
+              <Grid item>
+                <Typography>Operação</Typography>
+              </Grid>
+              <Radar data={this.mountAreaChartData(nomeEquipe, dataOperacao, expectativa.operacao, colors.operacao)} options={options} />
+            </>
+          )}
+        </Grid>
+      </Grid>
     );
   }
 }

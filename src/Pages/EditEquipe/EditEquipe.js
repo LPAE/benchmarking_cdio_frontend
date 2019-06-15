@@ -1,6 +1,7 @@
 import React from 'react';
 import api from '../../Services/api';
 import AreasForm from '../Components/AreasForm';
+import { Button } from '@material-ui/core';
 
 export default class EditEquipe extends React.Component {
   state = {
@@ -44,7 +45,7 @@ export default class EditEquipe extends React.Component {
     return (
       <div className="EditExpectativa">
         <div className="VoltarButton">
-          <button onClick={e => this.props.history.go(-1)}>Voltar</button>
+          <Button variant="contained" color="primary" onClick={e => this.props.history.go(-1)}>Voltar</Button>
         </div>
         <AreasForm
           callback={this.submitAreasFormCallback}

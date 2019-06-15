@@ -3,6 +3,7 @@ import api from '../../Services/api';
 import GraficosAreas from '../Components/GraficosAreas';
 
 import './Equipe.sass';
+import { Button } from '@material-ui/core';
 
 export default class Equipe extends React.Component {
   state = {
@@ -24,10 +25,10 @@ export default class Equipe extends React.Component {
     return (
       <div className="Equipe">
         <div className="VoltarButton">
-          <button onClick={e => this.props.history.go(-1)}>Voltar</button>
+          <Button variant="contained" color="primary" onClick={e => this.props.history.go(-1)}>Voltar</Button>
         </div>
         <div className="AdicionarAreaButton">
-          <button
+          <Button variant="contained" color="primary"
             onClick={e =>
               this.props.history.push(
                 `/turma/${this.state.turma.curso}/${this.state.turma.projeto}/${this.state.turma.semestre}/${
@@ -37,7 +38,7 @@ export default class Equipe extends React.Component {
             }
           >
             Adicionar Área
-          </button>
+          </Button>
         </div>
         {this.state.turma.equipes && (
           <GraficosAreas equipe={this.state.turma.equipes[this.state.equipeIndex]} expectativa={this.state.turma.expectativa} />

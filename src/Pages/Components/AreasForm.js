@@ -73,7 +73,7 @@ export default class AreasForm extends React.Component {
 
   render() {
     return (
-      <div className="AreasForm">
+      <Grid container className="AreasForm">
         {this.props.children}
 
         {!this.props.hideConcepcao && (
@@ -117,7 +117,7 @@ export default class AreasForm extends React.Component {
         <Button color="secondary" variant="contained" onClick={this.buttonSubmit}>
           Confirmar
         </Button>
-      </div>
+      </Grid>
     );
   }
 }
