@@ -3,7 +3,7 @@ import api from '../../Services/api';
 import GraficosAreas from '../Components/GraficosAreas';
 
 import './Equipe.sass';
-import { Button } from '@material-ui/core';
+import { Button, Grid } from '@material-ui/core';
 import TopBar from '../Components/TopBar';
 
 export default class Equipe extends React.Component {
@@ -24,25 +24,33 @@ export default class Equipe extends React.Component {
 
   render() {
     return (
-      <div className="Equipe">
-        <TopBar voltar title={this.state.turma.equipes && `Equipe: ${this.state.turma.equipes[this.state.equipeIndex].nome}`} {...this.props} />
-        <div className="AdicionarAreaButton">
-          <Button variant="contained" color="primary"
-            onClick={e =>
-              this.props.history.push(
-                `/turma/${this.state.turma.curso}/${this.state.turma.projeto}/${this.state.turma.semestre}/${
-                  this.state.turma.equipes[this.state.equipeIndex].nome
-                }/edit/`
-              )
-            }
-          >
-            Adicionar Área
-          </Button>
-        </div>
+      <Grid container className="Equipe">
+        <TopBar
+          voltar
+          title={this.state.turma.equipes && `Equipe: ${this.state.turma.equipes[this.state.equipeIndex].nome}`}
+          {...this.props}
+        />
+        <Grid container justify="flex-end">
+          <Grid item className="AdicionarAreaButton">
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={e =>
+                this.props.history.push(
+                  `/turma/${this.state.turma.curso}/${this.state.turma.projeto}/${this.state.turma.semestre}/${
+                    this.state.turma.equipes[this.state.equipeIndex].nome
+                  }/edit/`
+                )
+              }
+            >
+              Adicionar Área
+            </Button>
+          </Grid>
+        </Grid>
         {this.state.turma.equipes && (
           <GraficosAreas equipe={this.state.turma.equipes[this.state.equipeIndex]} expectativa={this.state.turma.expectativa} />
         )}
-      </div>
+      </Grid>
     );
   }
 }

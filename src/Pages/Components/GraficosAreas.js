@@ -2,6 +2,8 @@ import React from 'react';
 import { Radar } from 'react-chartjs-2';
 import { Grid, Typography } from '@material-ui/core';
 
+// TODO: TAMANHO DINÂMICO E PADDING DO TÍTULO
+
 var options = {
   scale: {
     ticks: {

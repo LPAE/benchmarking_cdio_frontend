@@ -44,7 +44,7 @@ export default class ConfigTurma extends React.Component {
         <form>
           <AreasForm callback={this.submitAreasFormCallback}>
             <Grid item>
-              <FormControl style={{ minWidth: 170 }}>
+              <FormControl style={{ minWidth: 400 }}>
                 <InputLabel>Curso</InputLabel>
                 <Select name="curso" value={this.state.curso} onChange={e => this.setState({ curso: e.target.value })}>
                   {cursos &&
@@ -58,7 +58,7 @@ export default class ConfigTurma extends React.Component {
             </Grid>
 
             <Grid item>
-              <FormControl style={{ minWidth: 170 }}>
+              <FormControl style={{ minWidth: 400 }}>
                 <InputLabel>Projeto</InputLabel>
                 <Select name="projeto" value={this.state.projeto} onChange={e => this.setState({ projeto: e.target.value })}>
                   {cursos[this.state.curso] ? (
@@ -77,7 +77,7 @@ export default class ConfigTurma extends React.Component {
             </Grid>
 
             <Grid item>
-              <FormControl style={{ minWidth: 170 }}>
+              <FormControl style={{ minWidth: 130 }}>
                 <InputLabel>Semestre</InputLabel>
                 <Select name="semestre" value={this.state.semestre} onChange={e => this.setState({ semestre: e.target.value })}>
                   <MenuItem value="18-2">18/2</MenuItem>

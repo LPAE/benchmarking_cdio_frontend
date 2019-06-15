@@ -73,7 +73,7 @@ export default class AreasForm extends React.Component {
 
   render() {
     return (
-      <Grid container className="AreasForm">
+      <Grid container direction='column' alignItems='center' className="AreasForm">
         {this.props.children}
 
         {!this.props.hideConcepcao && (

@@ -1,9 +1,11 @@
 import React from 'react';
-import { Grid, Box, Typography, Radio, Collapse, Popover, Paper } from '@material-ui/core';
+import { Grid, Box, Typography, Radio, Collapse, Popover, Paper, Hidden } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 
 const styles = theme => ({
-  root: {},
+  titulo: {
+    paddingTop: '16px'
+  },
   textoDescricao: {
     fontSize: '0.7rem'
   },
@@ -67,7 +69,7 @@ export default withStyles(styles)(
       const { classes } = this.props;
       return (
         <Grid container direction="column" alignItems="center" className="AreaForm">
-          <Grid item>
+          <Grid item className={classes.titulo}>
             <Typography justify="center" variant="h5">
               Área: {this.props.area.titulo}
             </Typography>
@@ -76,9 +78,9 @@ export default withStyles(styles)(
           <Grid container>
             <Grid item xs={12}>
               <Box mt={1} mx={2} px={1}>
-                <Grid container>
+                <Grid container justify="center" alignItems="center">
                   {['Indicador', '1', '2', '3', '4', '5'].map(item => (
-                    <Grid item xs={2} key={item}>
+                    <Grid item xs={item === 'Indicador' ? 12 : 2} sm={2} key={item}>
                       <Typography color="textSecondary" align="center" variant="h6">
                         {item}
                       </Typography>
@@ -93,14 +95,15 @@ export default withStyles(styles)(
             <Grid item xs={12}>
               {this.props.area.item &&
                 this.props.area.item.map((item, index) => (
-                  <Box clone mt={1} mb={2} mx={2} px={1} pb={2}>
+                  <Box clone mt={1} mb={2} mx={2} px={1} pb={3}>
                     <Paper elevation={3}>
                       <Grid container justify="center" alignItems="center" key={item.indicador}>
-                        <Grid item xs={2} key={item} justify="center">
+                        <Grid item xs={12} sm={2} key={item} justify="center">
                           <Typography
                             id={`${this.props.stateName}_${item.indicador}`}
                             onMouseEnter={this.handlePopoverOpen}
                             onMouseLeave={this.handlePopoverClose}
+                            align="center"
                           >
                             {item.indicador}
                           </Typography>
@@ -129,22 +132,24 @@ export default withStyles(styles)(
                         />
                       </Grid>
 
-                      <Grid container spacing={3} justify="center" alignItems="flex-start">
-                        {this.props.mostrarDescricao &&
-                          ['', item.descricao1, item.descricao2, item.descricao3].map((item, i) => (
-                            <Grid item xs={i === 0 ? 2 : i === 1 || i === 3 ? 3 : 4} key={i} alignItems="center">
-                              <Collapse component={Grid} in={index === this.state.actualIndex}>
-                                <Typography
-                                  variant="body2"
-                                  align={i === 1 ? 'left' : i === 2 ? 'center' : 'right'}
-                                  className={classes.textoDescricao}
-                                >
-                                  {item}
-                                </Typography>
-                              </Collapse>
-                            </Grid>
-                          ))}
-                      </Grid>
+                      <Hidden xsDown>
+                        <Grid container spacing={3} justify="center" alignItems="flex-start">
+                          {this.props.mostrarDescricao &&
+                            ['', item.descricao1, item.descricao2, item.descricao3].map((item, i) => (
+                              <Grid item xs={i === 0 ? 2 : i === 1 || i === 3 ? 3 : 4} key={i} alignItems="center">
+                                <Collapse component={Grid} in={index === this.state.actualIndex}>
+                                  <Typography
+                                    variant="body2"
+                                    align={i === 1 ? 'left' : i === 2 ? 'center' : 'right'}
+                                    className={classes.textoDescricao}
+                                  >
+                                    {item}
+                                  </Typography>
+                                </Collapse>
+                              </Grid>
+                            ))}
+                        </Grid>
+                      </Hidden>
                     </Paper>
                   </Box>
                 ))}
