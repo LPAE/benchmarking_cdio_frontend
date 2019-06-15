@@ -1,20 +1,17 @@
 import React from 'react';
-import Popup from 'reactjs-popup';
-import { Grid, Box, Typography, Radio, Collapse } from '@material-ui/core';
+import { Grid, Box, Typography, Radio, Collapse, Popover, Divider, Paper } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 
 const styles = {
   root: {},
   textoDescricao: {
-    fontSize: '0.65rem'
+    fontSize: '0.7rem'
+  },
+  popover: {
+    pointerEvents: 'none',
+    width: '60%'
   }
 };
-
-const PopupIndicador = props => (
-  <Popup trigger={<button>{props.indicador}</button>} position="right center" on="hover">
-    <div>{props.textoIndicador}</div>
-  </Popup>
-);
 
 const RadioGroup = props => (
   <>
@@ -32,7 +29,9 @@ export default withStyles(styles)(
   class AreaForm extends React.Component {
     state = {
       actualIndex: 0,
-      clicked: []
+      clicked: [],
+      popoverOpen: null,
+      anchorEl: null
     };
 
     radioCallback = e => {
@@ -51,6 +50,15 @@ export default withStyles(styles)(
       this.setState({ ...this.state, actualIndex, clicked });
       this.props.onChange(this.props.stateName, e);
     };
+    handlePopoverOpen = event => {
+      console.log(event.target);
+      console.log(event.currentTarget);
+      this.setState({ ...this.state, popoverOpen: event.target.id, anchorEl: event.currentTarget });
+    };
+
+    handlePopoverClose = () => {
+      this.setState({ ...this.state, popoverOpen: null, anchorEl: null });
+    };
 
     render() {
       const { classes } = this.props;
@@ -63,46 +71,79 @@ export default withStyles(styles)(
           </Grid>
 
           <Grid container>
-            {['Indicador', '1', '2', '3', '4', '5'].map(item => (
-              <Grid item xs={2} key={item}>
-                <Typography align="center" variant="h6">
-                  {item}
-                </Typography>
-              </Grid>
-            ))}
+            <Grid item xs={12}>
+              <Box mt={1} mx={2} px={1}>
+                <Grid xs container>
+                  {['Indicador', '1', '2', '3', '4', '5'].map(item => (
+                    <Grid item xs={2} key={item}>
+                      <Typography color="textSecondary" align="center" variant="h6">
+                        {item}
+                      </Typography>
+                    </Grid>
+                  ))}
+                </Grid>
+              </Box>
+            </Grid>
+          </Grid>
 
-            <Grid container justify="center" alignItems="center">
+          <Grid container>
+            <Grid item xs={12}>
               {this.props.area.item &&
                 this.props.area.item.map((item, index) => (
-                  <>
-                    <Grid container justify="center" alignItems="center" key={item.indicador}>
-                      <Grid item xs={2} key={item} justify="center">
-                        <PopupIndicador indicador={item.indicador} textoIndicador={item.textoIndicador} />
+                  <Box clone mt={1} mb={2} mx={2} px={1} pb={2}>
+                    <Paper elevation={3}>
+                      <Grid container xs justify="center" alignItems="center" key={item.indicador}>
+                        <Grid item xs={2} key={item} justify="center">
+                          <Typography
+                            id={`${this.props.stateName}_${item.indicador}`}
+                            onMouseEnter={this.handlePopoverOpen}
+                            onMouseLeave={this.handlePopoverClose}
+                          >
+                            {item.indicador}
+                          </Typography>
+                          <Popover
+                            className={classes.popover}
+                            open={this.state.popoverOpen === `${this.props.stateName}_${item.indicador}`}
+                            anchorEl={this.state.anchorEl}
+                            anchorOrigin={{
+                              vertical: 'center',
+                              horizontal: 'right'
+                            }}
+                            transformOrigin={{
+                              vertical: 'center',
+                              horizontal: 'left'
+                            }}
+                            onClose={this.handlePopoverClose}
+                            disableRestoreFocus
+                          >
+                            <Typography>{item.textoIndicador}</Typography>
+                          </Popover>
+                        </Grid>
+                        <RadioGroup
+                          name={`${this.props.stateName}_${item.indicador}`}
+                          checked={this.props.state[item.indicador]}
+                          onChange={this.radioCallback}
+                        />
                       </Grid>
-                      <RadioGroup
-                        name={`${this.props.stateName}_${item.indicador}`}
-                        checked={this.props.state[item.indicador]}
-                        onChange={this.radioCallback}
-                      />
-                    </Grid>
 
-                    <Grid container spacing={2} justify="center" alignItems="flex-start">
-                      {this.props.mostrarDescricao &&
-                        ['', item.descricao1, item.descricao2, item.descricao3].map((item, i) => (
-                          <Grid item xs={12} md={i === 0 ? 2 : i === 1 || i === 3 ? 3 : 4} key={i} alignItems="center">
-                            <Collapse component={Grid} in={index === this.state.actualIndex}>
-                              <Typography
-                                variant="body2"
-                                align={i === 1 ? 'left' : i === 2 ? 'center' : 'right'}
-                                className={classes.textoDescricao}
-                              >
-                                {item}
-                              </Typography>
-                            </Collapse>
-                          </Grid>
-                        ))}
-                    </Grid>
-                  </>
+                      <Grid container xs spacing={3} justify="center" alignItems="flex-start">
+                        {this.props.mostrarDescricao &&
+                          ['', item.descricao1, item.descricao2, item.descricao3].map((item, i) => (
+                            <Grid item xs={i === 0 ? 2 : i === 1 || i === 3 ? 3 : 4} key={i} alignItems="center">
+                              <Collapse component={Grid} in={index === this.state.actualIndex}>
+                                <Typography
+                                  variant="body2"
+                                  align={i === 1 ? 'left' : i === 2 ? 'center' : 'right'}
+                                  className={classes.textoDescricao}
+                                >
+                                  {item}
+                                </Typography>
+                              </Collapse>
+                            </Grid>
+                          ))}
+                      </Grid>
+                    </Paper>
+                  </Box>
                 ))}
             </Grid>
           </Grid>
