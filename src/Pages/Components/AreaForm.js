@@ -76,11 +76,9 @@ export default class AreaForm extends React.Component {
                     </TableRow>
                     {this.props.mostrarDescricao && index === this.state.actualIndex && (
                       <TableRow>
-                        {['', item.descricao1, '', item.descricao2, '', item.descricao3].map(item => (
-                          <TableCell key={item} align="center">
-                            <Typography variant="body2">
-                              {item}
-                            </Typography>
+                        {['', item.descricao1, '', item.descricao2, '', item.descricao3].map((item, index) => (
+                          <TableCell key={index} align="center">
+                            <Typography variant="body2">{item}</Typography>
                           </TableCell>
                         ))}
                       </TableRow>

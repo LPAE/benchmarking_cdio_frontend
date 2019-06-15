@@ -10,8 +10,7 @@ import EditEquipe from './Pages/EditEquipe/EditEquipe';
 import EditExpectativa from './Pages/EditExpectativa/EditExpectativa';
 import GraficosTurma from './Pages/GraficosTurma/GraficosTurma';
 
-import { createMuiTheme } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
   palette: {
@@ -28,7 +27,7 @@ const theme = createMuiTheme({
 });
 
 const Routes = () => (
-  <ThemeProvider theme={theme}>
+  <MuiThemeProvider theme={theme}>
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Main} />
@@ -41,7 +40,7 @@ const Routes = () => (
         <Route path="/turma/:curso/:projeto/:semestre" component={Turma} />
       </Switch>
     </BrowserRouter>
-  </ThemeProvider>
+  </MuiThemeProvider>
 );
 
 export default Routes;
