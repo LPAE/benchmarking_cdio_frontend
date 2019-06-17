@@ -13,6 +13,7 @@ export default class Equipe extends React.Component {
   };
 
   //  TODO: NÃO DAR REQUEST PRO BANCO DE DADOS NOVAMENTE
+
   async componentDidMount() {
     const curso = this.props.match.params.curso;
     const projeto = this.props.match.params.projeto;

@@ -13,6 +13,8 @@ const AccessButton = props => (
   </div>
 );
 
+// TODO: ADICIONAR TOOLTIP NOS BOTOES
+
 export default class Main extends React.Component {
   acessarFerramenta = e => {
     e.preventDefault();

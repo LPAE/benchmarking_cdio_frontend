@@ -4,6 +4,8 @@ import { Grid, Button } from '@material-ui/core';
 
 import { areaConcepcao, areaDesign, areaImplementacao, areaOperacao } from '../CDIO_Texts';
 
+// TODO: TIRAR ALERT() E COLOCAR DIALOG
+
 export default class AreasForm extends React.Component {
   state = { concepcaoState: {}, designState: {}, implementacaoState: {}, operacaoState: {} };
   componentDidMount() {

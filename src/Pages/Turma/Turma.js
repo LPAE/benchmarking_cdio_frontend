@@ -1,12 +1,11 @@
 import React from 'react';
 import { Grid, Box, Typography, Paper, Button, List, ListItem, ListItemText, ListItemIcon, Divider } from '@material-ui/core';
-import { Home, ArrowBack } from '@material-ui/icons';
 import { Group, GroupAdd } from '@material-ui/icons';
 import TopBar from '../Components/TopBar';
 import api from '../../Services/api';
 
 import './Turma.sass';
-import { makeStyles, withStyles } from '@material-ui/styles';
+import { withStyles } from '@material-ui/styles';
 
 const styles = theme => ({
   descricao: { paddingTop: theme.spacing(2) },

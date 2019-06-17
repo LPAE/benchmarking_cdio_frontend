@@ -9,6 +9,7 @@ import Equipe from './Pages/Equipe/Equipe';
 import EditEquipe from './Pages/EditEquipe/EditEquipe';
 import EditExpectativa from './Pages/EditExpectativa/EditExpectativa';
 import GraficosTurma from './Pages/GraficosTurma/GraficosTurma';
+import Access from './Pages/Access/Access';
 
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
@@ -32,6 +33,7 @@ const Routes = () => (
       <Switch>
         <Route exact path="/" component={Main} />
         <Route path="/config" component={ConfigTurma} />
+        <Route path="/access" component={Access} />
         <Route path="/turma/:curso/:projeto/:semestre/add" component={AddEquipe} />
         <Route path="/turma/:curso/:projeto/:semestre/edit" component={EditExpectativa} />
         <Route path="/turma/:curso/:projeto/:semestre/graficos" component={GraficosTurma} />
