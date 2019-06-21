@@ -1,7 +1,9 @@
 import React from 'react';
 import { Grid, Box, Typography, Paper, Button, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails } from '@material-ui/core';
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { groupBy } from 'lodash';
 import TopBar from '../Components/TopBar';
+import cursos from '../Cursos';
 import api from '../../Services/api';
 
 import { withStyles } from '@material-ui/styles';
@@ -13,43 +15,79 @@ const styles = theme => ({
   gerarGraficos: { paddingTop: theme.spacing(2) }
 });
 
+const ExpandItens = props => (
+  <>
+      {props.itens &&
+        Object.keys(props.itens).map((item, index) => (
+          <ExpansionPanel key={index}>
+            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography>{item}</Typography>
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+              <Grid container direction="column" justify="flex-start" alignItems="flex-start">
+                <props.child turmas={props.itens[item]} history={props.history} />
+              </Grid>
+            </ExpansionPanelDetails>
+          </ExpansionPanel>
+        ))}
+    </>
+)
+
+const AccessSemestres = props => {
+  return (
+    <>
+      {props.turmas &&
+        props.turmas.map((turma, index) => (
+          <Button onClick={e => props.history.push(`/turma/${turma.curso}/${turma.projeto}/${turma.semestre}`)}>{turma.semestre}</Button>
+        ))}
+    </>
+  );
+};
+
+const AccessProjetos = props => {
+  const projetos = groupBy(props.turmas, 'projeto');
+  return (
+    <ExpandItens itens={projetos} child={AccessSemestres} history={props.history} />
+  );
+};
+
+const AccessCursos = props => {
+  const cursosPadroes = groupBy(props.turmas.filter(turma => (turma.curso in cursos)), 'curso');
+  const outrosCursos = groupBy(props.turmas.filter(turma => !(turma.curso in cursos)), 'curso');
+  return (
+    <>
+      <ExpandItens itens={cursosPadroes} child={AccessProjetos} history={props.history} />
+      <ExpansionPanel>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography>Outro</Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+          <Grid container direction="column">
+            <ExpandItens itens={outrosCursos} child={AccessProjetos} history={props.history} />
+          </Grid>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
+    </>
+  );
+};
+
 export default withStyles(styles)(
-  class Turma extends React.Component {
+  class Access extends React.Component {
     state = {
-      turma: {}
+      turmas: []
     };
 
     async componentDidMount() {
-      const curso = this.props.match.params.curso;
-      const projeto = this.props.match.params.projeto;
-      const semestre = this.props.match.params.semestre;
-      const turma = await api.get(`/turma/${curso}/${projeto}/${semestre}`);
-      this.setState({ turma: turma.data });
+      const turmas = await api.get(`/turma/`);
+      this.setState({ turmas: turmas.data });
     }
 
     render() {
       const { classes } = this.props;
       return (
-        <div className="Turma">
-          <TopBar inicio title="Turma" {...this.props} />
-          <ExpansionPanel>
-            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
-              <Typography className={classes.heading}>Expansion Panel 1</Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-              <ExpansionPanel>
-                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
-                  <Typography className={classes.heading}>Expansion Panel 1</Typography>
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                  <Typography>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                    eget.
-                  </Typography>
-                </ExpansionPanelDetails>
-              </ExpansionPanel>
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
+        <div className="Access">
+          <TopBar voltar title="Acesso" {...this.props} />
+          {this.state.turmas && <AccessCursos turmas={this.state.turmas} history={this.props.history} />}
         </div>
       );
     }

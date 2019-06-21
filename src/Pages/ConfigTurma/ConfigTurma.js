@@ -4,14 +4,7 @@ import AreasForm from '../Components/AreasForm';
 
 import { Grid, Select, MenuItem, InputLabel, FormControl } from '@material-ui/core';
 import TopBar from '../Components/TopBar';
-
-//Esta variável define quais são os Cursos e Projetos disponíveis para serem selecionados no Formulário.
-const cursos = {
-  Técnico: ['Projeto Integrador 1', 'Projeto Integrador 2', 'Tabalho de Conclusão de Curso', 'Outro'],
-  Tecnologia: ['Projeto Integrador 1', 'Projeto Integrador 2', 'Tabalho de Conclusão de Curso', 'Outro'],
-  Engenharia: ['Projeto Integrador 1', 'Projeto Integrador 2', 'Projeto Integrador 3', 'Tabalho de Conclusão de Curso', 'Outro'],
-  Especialização: ['Tabalho de Conclusão de Curso', 'Outro']
-};
+import cursos from '../Cursos';
 
 export default class ConfigTurma extends React.Component {
   state = {
@@ -44,7 +37,7 @@ export default class ConfigTurma extends React.Component {
         <form>
           <AreasForm callback={this.submitAreasFormCallback}>
             <Grid item>
-              <FormControl style={{ minWidth: 400 }}>
+              <FormControl style={{ minWidth: 200 }}>
                 <InputLabel>Curso</InputLabel>
                 <Select name="curso" value={this.state.curso} onChange={e => this.setState({ curso: e.target.value })}>
                   {cursos &&
@@ -58,7 +51,7 @@ export default class ConfigTurma extends React.Component {
             </Grid>
 
             <Grid item>
-              <FormControl style={{ minWidth: 400 }}>
+              <FormControl style={{ minWidth: 200 }}>
                 <InputLabel>Projeto</InputLabel>
                 <Select name="projeto" value={this.state.projeto} onChange={e => this.setState({ projeto: e.target.value })}>
                   {cursos[this.state.curso] ? (
