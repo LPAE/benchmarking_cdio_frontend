@@ -9,8 +9,11 @@ import api from '../../Services/api';
 import { withStyles } from '@material-ui/styles';
 
 const styles = theme => ({
-  title: {marginTop: theme.spacing(4)},
-  ExpansionPanel: {margin: theme.spacing(4)},
+  title: {margin: theme.spacing(4,0)},
+  accessBox: {
+    'max-width': '1200px', // tamanho fixo para telas grandes
+    margin: 'auto'
+  }
 });
 
 const ExpandItens = props => (
@@ -22,7 +25,7 @@ const ExpandItens = props => (
             <Typography>{item}</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <Grid container direction="column" justify="flex-start" alignItems="flex-start">
+            <Grid container direction="column" justify="flex-start" alignItems="stretch">
               <props.child turmas={props.itens[item]} history={props.history} />
             </Grid>
           </ExpansionPanelDetails>
@@ -84,7 +87,7 @@ export default withStyles(styles)(
         <div className="Access">
           <TopBar voltar title="Acesso" history={this.props.history} />
           <Typography className={classes.title} variant="h5" align="center">Curso:</Typography>
-          <Box m={5}>{this.state.turmas && <AccessCursos turmas={this.state.turmas} history={this.props.history} />}</Box>
+          <Box className={classes.accessBox} m={5}>{this.state.turmas && <AccessCursos turmas={this.state.turmas} history={this.props.history} />}</Box>
         </div>
       );
     }

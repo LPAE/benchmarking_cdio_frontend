@@ -5,7 +5,9 @@ import { withStyles } from '@material-ui/styles';
 
 const styles = theme => ({
   title: {
-    transform: 'translateX(-10%)'
+    
+  },
+  button: {
   }
 });
 
@@ -17,13 +19,13 @@ const TopBar = props => {
         <Grid container>
           <Grid item>
             {props.inicio && (
-              <Button color="inherit" onClick={e => props.history.push('/')}>
+              <Button className={classes.button} color="inherit" onClick={e => props.history.push('/')}>
                 <Home />
                 Início
               </Button>
             )}
             {props.voltar && (
-              <Button color="inherit" onClick={e => props.history.go(-1)}>
+              <Button className={classes.button} color="inherit" onClick={e => props.history.go(-1)}>
                 <ArrowBack />
                 Voltar
               </Button>
