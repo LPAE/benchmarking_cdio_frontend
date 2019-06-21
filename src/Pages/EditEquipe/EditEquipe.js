@@ -45,7 +45,7 @@ export default class EditEquipe extends React.Component {
   render() {
     return (
       <div className="EditExpectativa">
-        <TopBar voltar title={this.state.turma.equipes && `Adicionar Área na Equipe: ${this.state.turma.equipes[this.state.equipeIndex].nome}`} {...this.props} />
+        <TopBar voltar title={this.state.turma.equipes && `Adicionar Área na Equipe: ${this.state.turma.equipes[this.state.equipeIndex].nome}`} history={this.props.history} />
         <AreasForm
           callback={this.submitAreasFormCallback}
           mostrarDescricao={true}

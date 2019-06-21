@@ -9,36 +9,34 @@ import api from '../../Services/api';
 import { withStyles } from '@material-ui/styles';
 
 const styles = theme => ({
-  descricao: { paddingTop: theme.spacing(2) },
-  list: { paddingTop: theme.spacing(2) },
-  editarExpectativa: { paddingTop: theme.spacing(2) },
-  gerarGraficos: { paddingTop: theme.spacing(2) }
+  title: {marginTop: theme.spacing(4)},
+  ExpansionPanel: {margin: theme.spacing(4)},
 });
 
 const ExpandItens = props => (
   <>
-      {props.itens &&
-        Object.keys(props.itens).map((item, index) => (
-          <ExpansionPanel key={index}>
-            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography>{item}</Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-              <Grid container direction="column" justify="flex-start" alignItems="flex-start">
-                <props.child turmas={props.itens[item]} history={props.history} />
-              </Grid>
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
-        ))}
-    </>
-)
+    {props.itens &&
+      Object.keys(props.itens).map((item, index) => (
+        <ExpansionPanel key={index}>
+          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+            <Typography>{item}</Typography>
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails>
+            <Grid container direction="column" justify="flex-start" alignItems="flex-start">
+              <props.child turmas={props.itens[item]} history={props.history} />
+            </Grid>
+          </ExpansionPanelDetails>
+        </ExpansionPanel>
+      ))}
+  </>
+);
 
 const AccessSemestres = props => {
   return (
     <>
       {props.turmas &&
         props.turmas.map((turma, index) => (
-          <Button onClick={e => props.history.push(`/turma/${turma.curso}/${turma.projeto}/${turma.semestre}`)}>{turma.semestre}</Button>
+          <Button key={index} onClick={e => props.history.push(`/turma/${turma.curso}/${turma.projeto}/${turma.semestre}`)}>{turma.semestre}</Button>
         ))}
     </>
   );
@@ -46,18 +44,16 @@ const AccessSemestres = props => {
 
 const AccessProjetos = props => {
   const projetos = groupBy(props.turmas, 'projeto');
-  return (
-    <ExpandItens itens={projetos} child={AccessSemestres} history={props.history} />
-  );
+  return <ExpandItens itens={projetos} child={AccessSemestres} history={props.history} />;
 };
 
 const AccessCursos = props => {
-  const cursosPadroes = groupBy(props.turmas.filter(turma => (turma.curso in cursos)), 'curso');
+  const cursosPadroes = groupBy(props.turmas.filter(turma => turma.curso in cursos), 'curso');
   const outrosCursos = groupBy(props.turmas.filter(turma => !(turma.curso in cursos)), 'curso');
   return (
     <>
       <ExpandItens itens={cursosPadroes} child={AccessProjetos} history={props.history} />
-      <ExpansionPanel>
+      <ExpansionPanel >
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <Typography>Outro</Typography>
         </ExpansionPanelSummary>
@@ -86,8 +82,9 @@ export default withStyles(styles)(
       const { classes } = this.props;
       return (
         <div className="Access">
-          <TopBar voltar title="Acesso" {...this.props} />
-          {this.state.turmas && <AccessCursos turmas={this.state.turmas} history={this.props.history} />}
+          <TopBar voltar title="Acesso" history={this.props.history} />
+          <Typography className={classes.title} variant="h5" align="center">Curso:</Typography>
+          <Box m={5}>{this.state.turmas && <AccessCursos turmas={this.state.turmas} history={this.props.history} />}</Box>
         </div>
       );
     }

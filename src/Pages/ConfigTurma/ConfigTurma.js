@@ -33,7 +33,7 @@ export default class ConfigTurma extends React.Component {
   render() {
     return (
       <div className="ConfigTurma">
-        <TopBar voltar title="Configurar Turma" {...this.props} />
+        <TopBar voltar title="Configurar Turma" history={this.props.history} />
         <form>
           <AreasForm callback={this.submitAreasFormCallback}>
             <Grid item>

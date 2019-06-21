@@ -49,7 +49,7 @@ export default class EditExpectativa extends React.Component {
   render() {
     return (
       <div className="EditExpectativa">
-        <TopBar voltar title="Editar Expectativa" {...this.props} />
+        <TopBar voltar title="Editar Expectativa" history={this.props.history} />
         {this.state.finishedSetState && (
           <AreasForm
             callback={this.submitAreasFormCallback}

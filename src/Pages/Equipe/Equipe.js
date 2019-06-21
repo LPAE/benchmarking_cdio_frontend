@@ -29,7 +29,7 @@ export default class Equipe extends React.Component {
         <TopBar
           voltar
           title={this.state.turma.equipes && `Equipe: ${this.state.turma.equipes[this.state.equipeIndex].nome}`}
-          {...this.props}
+          history={this.props.history}
         />
         <Grid container justify="flex-end">
           <Grid item className="AdicionarAreaButton">

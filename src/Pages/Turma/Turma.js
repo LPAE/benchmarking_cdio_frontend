@@ -50,7 +50,7 @@ export default withStyles(styles)(
       const { classes } = this.props;
       return (
         <div className="Turma">
-          <TopBar inicio title="Turma" {...this.props} />
+          <TopBar inicio title="Turma" history={this.props.history} />
           <Grid container direction="column" justify="flex-start" alignItems="center" className={classes.descricao}>
             <Grid item xs>
               <Box p={2} clone>

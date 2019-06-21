@@ -34,7 +34,7 @@ export default class AddEquipe extends React.Component {
   render() {
     return (
       <div className="AddEquipe">
-        <TopBar voltar title="Adicionar Equipe" {...this.props} />
+        <TopBar voltar title="Adicionar Equipe" history={this.props.history} />
 
         <div className="AddEquipeForm">
           <AreasForm callback={this.submitAreasFormCallback} mostrarDescricao>
