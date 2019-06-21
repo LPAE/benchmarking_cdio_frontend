@@ -5,6 +5,7 @@ import { Grid, Button } from '@material-ui/core';
 import { areaConcepcao, areaDesign, areaImplementacao, areaOperacao } from '../CDIO_Texts';
 
 // TODO: TIRAR ALERT() E COLOCAR DIALOG
+// TODO: LIMITAR TAMANHO MÁXIMO DO FORM
 
 export default class AreasForm extends React.Component {
   state = { concepcaoState: {}, designState: {}, implementacaoState: {}, operacaoState: {} };
@@ -75,7 +76,7 @@ export default class AreasForm extends React.Component {
 
   render() {
     return (
-      <Grid container direction='column' alignItems='center' className="AreasForm">
+      <Grid container direction="column" alignItems="center" className="AreasForm">
         {this.props.children}
 
         {!this.props.hideConcepcao && (
