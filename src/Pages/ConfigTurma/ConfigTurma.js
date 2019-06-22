@@ -5,6 +5,7 @@ import AreasForm from '../Components/AreasForm';
 import { Grid, Select, MenuItem, InputLabel, FormControl, TextField } from '@material-ui/core';
 import TopBar from '../Components/TopBar';
 import cursos from '../Cursos';
+import Alert from '../Components/Alert';
 
 export default class ConfigTurma extends React.Component {
   state = {
@@ -12,7 +13,8 @@ export default class ConfigTurma extends React.Component {
     cursoOutro: '',
     projeto: '',
     projetoOutro: '',
-    semestre: '19-1'
+    semestre: '19-1',
+    alert: false
   };
 
   formIsCompleted = () => {
@@ -35,7 +37,7 @@ export default class ConfigTurma extends React.Component {
       await api.post('/turma', turma);
       this.props.history.push(`/turma/${cursoToSend}/${projetoToSend}/${this.state.semestre}`);
     } else {
-      alert('Preencha todos os campos primeiro');
+      this.setState({ alert: true })
     }
   };
 
@@ -109,6 +111,12 @@ export default class ConfigTurma extends React.Component {
                 <MenuItem value="20-1">20/1</MenuItem>
               </Select>
             </FormControl>
+
+            <Alert
+            text="Preencha todos os campos primeiro"
+            open={this.state.alert}
+            handleClose={e => this.setState({ alert: false })}
+          />
           </AreasForm>
         </form>
       </div>

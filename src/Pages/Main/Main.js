@@ -41,14 +41,12 @@ export default class Main extends React.Component {
                   </Box>
                 </Grid>
                 <Box mt={4}>
-                  <Grid item>
                     <Typography variant="body1" color="textSecondary" align="justify">
                       A Ferramenta Benchmarking está constituída por Notas Explicativas e Questionário, referentes à algumas áreas e seus
                       correspondentes indicadores relacionados com a “Abordagem CDIO”. Cada questão da Ferramenta Benchmarking exige que o
                       avaliador se posicione para uma escolha numa escala entre 1 e 5 em relação aos indicadores apresentados e descritos em
                       cada área, para serem avaliados/medidos.
                     </Typography>
-                  </Grid>
                 </Box>
                 <Box mt={4} clone>
                   <Grid container justify="space-around" alignItems="center">

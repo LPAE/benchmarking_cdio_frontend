@@ -6,10 +6,12 @@ import api from '../../Services/api';
 import AreasForm from '../Components/AreasForm';
 import { FormControl, TextField } from '@material-ui/core';
 import TopBar from '../Components/TopBar';
+import Alert from '../Components/Alert';
 
 export default class AddEquipe extends React.Component {
   state = {
-    nomeDaEquipe: ''
+    nomeDaEquipe: '',
+    alert: false,
   };
 
   submitAreasFormCallback = async areas => {
@@ -27,7 +29,7 @@ export default class AddEquipe extends React.Component {
         `/turma/${this.props.match.params.curso}/${this.props.match.params.projeto}/${this.props.match.params.semestre}`
       );
     } else {
-      alert('Preencha o Nome da Equipe');
+      this.setState({ alert: true });
     }
   };
 
@@ -47,6 +49,13 @@ export default class AddEquipe extends React.Component {
                 variant="outlined"
               />
             </FormControl>
+
+            <Alert
+            text="Preencha o Nome da Equipe"
+            open={this.state.alert}
+            handleClose={e => this.setState({ alert: false })}
+          />
+
           </AreasForm>
         </div>
       </div>

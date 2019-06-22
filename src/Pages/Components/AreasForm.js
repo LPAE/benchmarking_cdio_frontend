@@ -3,6 +3,7 @@ import AreaForm from './AreaForm';
 import { Grid, Button, withStyles } from '@material-ui/core';
 
 import { areaConcepcao, areaDesign, areaImplementacao, areaOperacao } from '../CDIO_Texts';
+import Alert from './Alert';
 
 // TODO: TIRAR ALERT() E COLOCAR DIALOG
 // TODO: LIMITAR TAMANHO MÁXIMO DO FORM
@@ -10,13 +11,13 @@ import { areaConcepcao, areaDesign, areaImplementacao, areaOperacao } from '../C
 const styles = theme => ({
   root: {
     'max-width': '1200px', // tamanho fixo para telas grandes
-    margin: 'auto',
-  },
+    margin: 'auto'
+  }
 });
 
 export default withStyles(styles)(
   class AreasForm extends React.Component {
-    state = { concepcaoState: {}, designState: {}, implementacaoState: {}, operacaoState: {} };
+    state = { concepcaoState: {}, designState: {}, implementacaoState: {}, operacaoState: {}, alert: false };
     componentDidMount() {
       var state = this.state;
       if (this.props.concepcao) {
@@ -70,7 +71,7 @@ export default withStyles(styles)(
       if (Object.keys(areas).length !== 0) {
         this.props.callback(areas);
       } else {
-        alert('Preencha todos os itens de pelo menos uma Área');
+        this.setState({ alert: true });
       }
     };
 
@@ -129,6 +130,11 @@ export default withStyles(styles)(
           <Button color="secondary" variant="contained" onClick={this.buttonSubmit}>
             Confirmar
           </Button>
+          <Alert
+            text="Preencha todos os itens de pelo menos uma Área"
+            open={this.state.alert}
+            handleClose={e => this.setState({ alert: false })}
+          />
         </Grid>
       );
     }
