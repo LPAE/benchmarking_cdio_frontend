@@ -5,9 +5,6 @@ import { Grid, Button, withStyles } from '@material-ui/core';
 import { areaConcepcao, areaDesign, areaImplementacao, areaOperacao } from '../CDIO_Texts';
 import Alert from './Alert';
 
-// TODO: TIRAR ALERT() E COLOCAR DIALOG
-// TODO: LIMITAR TAMANHO MÁXIMO DO FORM
-
 const styles = theme => ({
   root: {
     'max-width': '1200px', // tamanho fixo para telas grandes
