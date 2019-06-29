@@ -17,6 +17,9 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing(3)
+  },
+  textoIndicador: {
+    "line-height": "1.1",
   }
 });
 
@@ -104,6 +107,7 @@ export default withStyles(styles)(
                             onMouseEnter={this.handlePopoverOpen}
                             onMouseLeave={this.handlePopoverClose}
                             align="center"
+                            className={classes.textoIndicador}
                           >
                             {item.indicador}
                           </Typography>
