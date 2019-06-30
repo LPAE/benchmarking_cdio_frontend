@@ -10,8 +10,9 @@ import Alert from '../Components/Alert';
 const styles = theme => ({
   root: {},
   formConfigTurmaPaper: {
-    margin: theme.spacing(5, 0),
-    paddingBottom: theme.spacing(4)
+    margin: theme.spacing(3, 0),
+    paddingBottom: theme.spacing(4),
+    borderRadius: '15px'
   },
   formConfigTurmaItem: {
     margin: theme.spacing(1, 5)
@@ -26,7 +27,8 @@ export default withStyles(styles)(
       projeto: '',
       projetoOutro: '',
       semestre: '19-1',
-      alert: false
+      alertMissingData: false,
+      alertAlreadyRegistered: false
     };
 
     formIsCompleted = () => {
@@ -47,10 +49,20 @@ export default withStyles(styles)(
           semestre: this.state.semestre,
           expectativa: { ...areas }
         };
-        await api.post('/turma', turma);
-        this.props.history.push(`/turma/${cursoToSend}/${projetoToSend}/${this.state.semestre}`);
+        await api
+          .post('/turma', turma)
+          .then(response => this.props.history.push(`/turma/${cursoToSend}/${projetoToSend}/${this.state.semestre}`))
+          .catch(error => {
+            if (error.response) {
+              if (error.response.status === 400) {
+                this.setState({ alertAlreadyRegistered: true });
+              }
+            } else {
+              alert('Problema ao enviar dados ao servidor.');
+            }
+          });
       } else {
-        this.setState({ alert: true });
+        this.setState({ alertMissingData: true });
       }
     };
 
@@ -62,10 +74,10 @@ export default withStyles(styles)(
         <div className="ConfigTurma">
           <TopBar voltar title="Configurar Turma" history={this.props.history} />
           <AreasForm callback={this.submitAreasFormCallback}>
-            <Grid container direction="row" justify="center" alignItens="center">
+            <Grid container direction="row" justify="center">
               <Grid item xs={10} sm={6}>
-                <Paper elevation="4" className={classes.formConfigTurmaPaper}>
-                  <Grid container direction="column" alignItems="left">
+                <Paper elevation={4} className={classes.formConfigTurmaPaper}>
+                  <Grid container direction="column">
                     <FormControl className={classes.formConfigTurmaItem}>
                       <InputLabel>Curso</InputLabel>
                       <Select name="curso" value={this.state.curso} onChange={e => this.setState({ curso: e.target.value })}>
@@ -132,7 +144,16 @@ export default withStyles(styles)(
                 </Paper>
               </Grid>
             </Grid>
-            <Alert text="Preencha todos os campos primeiro" open={this.state.alert} handleClose={e => this.setState({ alert: false })} />
+            <Alert
+              text="Preencha todos os campos primeiro"
+              open={this.state.alertMissingData}
+              handleClose={e => this.setState({ alertMissingData: false })}
+            />
+            <Alert
+              text="Projeto já cadastrado no banco de dados"
+              open={this.state.alertAlreadyRegistered}
+              handleClose={e => this.setState({ alertAlreadyRegistered: false })}
+            />
           </AreasForm>
         </div>
       );

@@ -14,7 +14,17 @@ const styles = theme => ({
 
 export default withStyles(styles)(
   class AreasForm extends React.Component {
-    state = { concepcaoState: {}, designState: {}, implementacaoState: {}, operacaoState: {}, alert: false };
+    state = {
+      concepcaoState: {},
+      designState: {},
+      implementacaoState: {},
+      operacaoState: {},
+      concepcaoMetrica: {},
+      designMetrica: {},
+      implementacaoMetrica: {},
+      operacaoMetrica: {},
+      alert: false
+    };
     componentDidMount() {
       var state = this.state;
       if (this.props.concepcao) {
@@ -36,6 +46,19 @@ export default withStyles(styles)(
         state.operacaoState = this.props.operacao;
       } else {
         areaOperacao.item.map(item => (state.operacaoState[item.indicador] = '0'));
+      }
+
+      if (this.props.concepcaoMetrica) {
+        state.concepcaoMetrica = this.props.concepcaoMetrica;
+      }
+      if (this.props.designMetrica) {
+        state.designMetrica = this.props.designMetrica;
+      }
+      if (this.props.implementacaoMetrica) {
+        state.implementacaoMetrica = this.props.implementacaoMetrica;
+      }
+      if (this.props.operacaoMetrica) {
+        state.operacaoMetrica = this.props.operacaoMetrica;
       }
 
       this.setState({ ...state });
@@ -72,12 +95,12 @@ export default withStyles(styles)(
       }
     };
 
-    handleAreaChange = (state, e) => {
+    handleAreaChange = (stateName, e) => {
       const { name, value } = e.target;
       this.setState({
-        ...this.state,
-        [state]: { ...this.state[state], [name.split('_')[1]]: value }
+        [stateName]: { ...this.state[stateName], [name.split('_')[1]]: value }
       });
+      console.log(this.state)
     };
 
     render() {
@@ -92,6 +115,8 @@ export default withStyles(styles)(
               onChange={this.handleAreaChange}
               state={this.state.concepcaoState}
               stateName="concepcaoState"
+              stateMetrica={this.state.concepcaoMetrica}
+              stateNameMetrica="concepcaoMetrica"
               mostrarDescricao={this.props.mostrarDescricao}
             />
           )}
@@ -102,6 +127,8 @@ export default withStyles(styles)(
               onChange={this.handleAreaChange}
               state={this.state.designState}
               stateName="designState"
+              stateMetrica={this.state.designMetrica}
+              stateNameMetrica="designMetrica"
               mostrarDescricao={this.props.mostrarDescricao}
             />
           )}
@@ -111,6 +138,8 @@ export default withStyles(styles)(
               onChange={this.handleAreaChange}
               state={this.state.implementacaoState}
               stateName="implementacaoState"
+              stateMetrica={this.state.implementacaoMetrica}
+              stateNameMetrica="implementacaoMetrica"
               mostrarDescricao={this.props.mostrarDescricao}
             />
           )}
@@ -120,6 +149,8 @@ export default withStyles(styles)(
               onChange={this.handleAreaChange}
               state={this.state.operacaoState}
               stateName="operacaoState"
+              stateMetrica={this.state.operacaoMetrica}
+              stateNameMetrica="operacaoMetrica"
               mostrarDescricao={this.props.mostrarDescricao}
             />
           )}
