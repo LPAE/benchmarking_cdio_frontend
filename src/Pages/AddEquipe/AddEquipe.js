@@ -11,7 +11,7 @@ import Alert from '../Components/Alert';
 export default class AddEquipe extends React.Component {
   state = {
     nomeDaEquipe: '',
-    alert: false,
+    alert: false
   };
 
   submitAreasFormCallback = async areas => {
@@ -50,12 +50,7 @@ export default class AddEquipe extends React.Component {
               />
             </FormControl>
 
-            <Alert
-            text="Preencha o Nome da Equipe"
-            open={this.state.alert}
-            handleClose={e => this.setState({ alert: false })}
-          />
-
+            <Alert text="Preencha o Nome da Equipe" open={this.state.alert} handleClose={e => this.setState({ alert: false })} />
           </AreasForm>
         </div>
       </div>

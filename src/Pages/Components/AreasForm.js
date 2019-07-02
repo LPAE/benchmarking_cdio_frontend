@@ -25,40 +25,61 @@ export default withStyles(styles)(
       operacaoMetrica: {},
       alert: false
     };
+
     componentDidMount() {
-      var state = this.state;
-      if (this.props.concepcao) {
+      const {
+        concepcao,
+        design,
+        implementacao,
+        operacao,
+        concepcaoMetrica,
+        designMetrica,
+        implementacaoMetrica,
+        operacaoMetrica
+      } = this.props;
+
+      let state = this.state;
+
+      if (concepcao) {
         state.concepcaoState = this.props.concepcao;
       } else {
         areaConcepcao.item.map(item => (state.concepcaoState[item.indicador] = '0'));
       }
-      if (this.props.design) {
+      if (design) {
         state.designState = this.props.design;
       } else {
         areaDesign.item.map(item => (state.designState[item.indicador] = '0'));
       }
-      if (this.props.implementacao) {
+      if (implementacao) {
         state.implementacaoState = this.props.implementacao;
       } else {
         areaImplementacao.item.map(item => (state.implementacaoState[item.indicador] = '0'));
       }
-      if (this.props.operacao) {
+      if (operacao) {
         state.operacaoState = this.props.operacao;
       } else {
         areaOperacao.item.map(item => (state.operacaoState[item.indicador] = '0'));
       }
 
-      if (this.props.concepcaoMetrica) {
+      if (concepcaoMetrica) {
         state.concepcaoMetrica = this.props.concepcaoMetrica;
+      } else {
+        areaConcepcao.item.map(item => (state.concepcaoMetrica[item.indicador] = '0'));
       }
-      if (this.props.designMetrica) {
+      if (designMetrica) {
         state.designMetrica = this.props.designMetrica;
+      } else {
+        areaDesign.item.map(item => (state.designMetrica[item.indicador] = '0'));
       }
-      if (this.props.implementacaoMetrica) {
+      if (implementacaoMetrica) {
         state.implementacaoMetrica = this.props.implementacaoMetrica;
+      } else {
+        areaImplementacao.item.map(item => (state.implementacaoMetrica[item.indicador] = '0'));
       }
-      if (this.props.operacaoMetrica) {
+      if (operacaoMetrica) {
         state.operacaoMetrica = this.props.operacaoMetrica;
+      } else {
+        areaOperacao.item.map(item => (state.operacaoMetrica[item.indicador] = '0'));
       }
 
       this.setState({ ...state });
@@ -69,27 +90,50 @@ export default withStyles(styles)(
     };
 
     fillArea = () => {
-      var areas = {};
+      let areas = {};
+
       if (this.areaIsComplete(this.state.concepcaoState)) {
-        areas = { ...areas, concepcao: this.state.concepcaoState };
+        areas['concepcao'] = this.state.concepcaoState;
       }
       if (this.areaIsComplete(this.state.designState)) {
-        areas = { ...areas, design: this.state.designState };
+        areas['design'] = this.state.designState;
       }
       if (this.areaIsComplete(this.state.implementacaoState)) {
-        areas = { ...areas, implementacao: this.state.implementacaoState };
+        areas['implementacao'] = this.state.implementacaoState;
       }
       if (this.areaIsComplete(this.state.operacaoState)) {
-        areas = { ...areas, operacao: this.state.operacaoState };
+        areas['operacao'] = this.state.operacaoState;
       }
       return areas;
+    };
+
+    fillMetrica = () => {
+      let metrica = {};
+
+      if (this.areaIsComplete(this.state.concepcaoMetrica)) {
+        metrica['concepcao'] = this.state.concepcaoMetrica;
+      }
+      if (this.areaIsComplete(this.state.designMetrica)) {
+        metrica['design'] = this.state.designMetrica;
+      }
+      if (this.areaIsComplete(this.state.implementacaoMetrica)) {
+        metrica['implementacao'] = this.state.implementacaoMetrica;
+      }
+      if (this.areaIsComplete(this.state.operacaoMetrica)) {
+        metrica['operacao'] = this.state.operacaoMetrica;
+      }
+      return metrica;
     };
 
     buttonSubmit = async e => {
       e.preventDefault();
       const areas = this.fillArea();
-      if (Object.keys(areas).length !== 0) {
-        this.props.callback(areas);
+      const metricas = this.fillMetrica();
+      if (
+        (this.props.mostrarMetrica && Object.keys(metricas).length !== 0 && Object.keys(areas).length !== 0) ||
+        (!this.props.mostrarMetricas && Object.keys(areas).length !== 0)
+      ) {
+        this.props.callback(areas, metricas);
       } else {
         this.setState({ alert: true });
       }
@@ -100,7 +144,7 @@ export default withStyles(styles)(
       this.setState({
         [stateName]: { ...this.state[stateName], [name.split('_')[1]]: value }
       });
-      console.log(this.state)
+      console.log(this.state);
     };
 
     render() {
@@ -170,5 +214,10 @@ export default withStyles(styles)(
         </Grid>
       );
     }
+
+    static defaultProps = {
+      mostrarDescricao: false,
+      mostrarMetrica: false
+    };
   }
 );

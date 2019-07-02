@@ -39,7 +39,7 @@ export default withStyles(styles)(
       );
     };
 
-    submitAreasFormCallback = async areas => {
+    submitAreasFormCallback = async (areas, metricas) => {
       if (this.formIsCompleted()) {
         const cursoToSend = this.state.curso === 'Outro' ? this.state.cursoOutro : this.state.curso;
         const projetoToSend = this.state.projeto === 'Outro' ? this.state.projetoOutro : this.state.projeto;
@@ -47,7 +47,8 @@ export default withStyles(styles)(
           curso: cursoToSend,
           projeto: projetoToSend,
           semestre: this.state.semestre,
-          expectativa: { ...areas }
+          expectativa: { ...areas },
+          metrica: { ...metricas }
         };
         await api
           .post('/turma', turma)
