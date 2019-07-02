@@ -73,7 +73,7 @@ export default withStyles(styles)(
       return (
         <div className="ConfigTurma">
           <TopBar voltar title="Configurar Turma" history={this.props.history} />
-          <AreasForm callback={this.submitAreasFormCallback}>
+          <AreasForm callback={this.submitAreasFormCallback} mostrarMetrica>
             <Grid container direction="row" justify="center">
               <Grid item xs={10} sm={6}>
                 <Paper elevation={4} className={classes.formConfigTurmaPaper}>

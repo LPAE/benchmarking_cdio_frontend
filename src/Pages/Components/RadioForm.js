@@ -167,7 +167,7 @@ export default withStyles(styles)(
                     </Grid>
 
                     {mostrarDescricao && (
-                      <RadioFormDescricao descricao={descricao} index={index} actualIndex={this.state.actualIndex} classes={classes} />
+                      <RadioFormDescricao descricao={descricao[index]} index={index} actualIndex={this.state.actualIndex} classes={classes} />
                     )}
                   </Paper>
                 </Box>

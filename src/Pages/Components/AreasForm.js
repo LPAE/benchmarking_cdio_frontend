@@ -118,6 +118,7 @@ export default withStyles(styles)(
               stateMetrica={this.state.concepcaoMetrica}
               stateNameMetrica="concepcaoMetrica"
               mostrarDescricao={this.props.mostrarDescricao}
+              mostrarMetrica={this.props.mostrarMetrica}
             />
           )}
 
@@ -130,6 +131,7 @@ export default withStyles(styles)(
               stateMetrica={this.state.designMetrica}
               stateNameMetrica="designMetrica"
               mostrarDescricao={this.props.mostrarDescricao}
+              mostrarMetrica={this.props.mostrarMetrica}
             />
           )}
           {!this.props.hideImplementacao && (
@@ -141,6 +143,7 @@ export default withStyles(styles)(
               stateMetrica={this.state.implementacaoMetrica}
               stateNameMetrica="implementacaoMetrica"
               mostrarDescricao={this.props.mostrarDescricao}
+              mostrarMetrica={this.props.mostrarMetrica}
             />
           )}
           {!this.props.hideOperacao && (
@@ -152,6 +155,7 @@ export default withStyles(styles)(
               stateMetrica={this.state.operacaoMetrica}
               stateNameMetrica="operacaoMetrica"
               mostrarDescricao={this.props.mostrarDescricao}
+              mostrarMetrica={this.props.mostrarMetrica}
             />
           )}
 
