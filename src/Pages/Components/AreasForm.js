@@ -150,7 +150,7 @@ export default withStyles(styles)(
     render() {
       const { classes } = this.props;
       return (
-        <Grid container direction="column" alignItems="center" className={classes.root}>
+        <Grid container direction="column" className={classes.root}>
           {this.props.children}
 
           {!this.props.hideConcepcao && (

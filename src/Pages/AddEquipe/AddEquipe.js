@@ -40,7 +40,7 @@ export default class AddEquipe extends React.Component {
 
         <div className="AddEquipeForm">
           <AreasForm callback={this.submitAreasFormCallback} mostrarDescricao>
-            <FormControl style={{ minWidth: 170 }}>
+            <FormControl style={{ maxWidth: 500, margin: 'auto' }}>
               <TextField
                 label="Nome da Equipe"
                 value={this.state.nomeDaEquipe}

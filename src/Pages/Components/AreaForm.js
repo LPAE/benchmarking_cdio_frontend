@@ -3,7 +3,11 @@ import { Grid, Box, Typography, Radio, Collapse, Popover, Paper, Hidden } from '
 import { withStyles } from '@material-ui/styles';
 import RadioForm from './RadioForm';
 
-const styles = theme => ({});
+const styles = theme => ({
+  titulo: {
+    margin: 'auto'
+  }
+});
 
 export default withStyles(styles)(
   class AreaForm extends React.Component {
@@ -36,35 +40,39 @@ export default withStyles(styles)(
       const { classes, area, state, stateName, mostrarDescricao, onChange, stateMetrica, stateNameMetrica, mostrarMetrica } = this.props;
 
       return (
-        <Grid container direction="column" alignItems="center" className="AreaForm">
+        <Grid container direction="column" alignItems="stretch" className="AreaForm">
           <Grid item className={classes.titulo}>
             <Typography justify="center" variant="h5">
               Área: {area.titulo}
             </Typography>
           </Grid>
 
-          <RadioForm
-            row={this.getIndicador(area.item)}
-            header={['Indicador', '1', '2', '3', '4', '5']}
-            mostrarDescricao={mostrarDescricao}
-            descricao={this.getDescricao(area.item)}
-            textoIndicador={this.getTextoIndicador(area.item)}
-            state={state}
-            stateName={stateName}
-            onChangeCallback={onChange}
-          />
-
-          {mostrarMetrica && (
+          <Grid item>
             <RadioForm
               row={this.getIndicador(area.item)}
-              header={['Indicador', 'Prática', 'Performance']}
+              header={['Indicador', '1', '2', '3', '4', '5']}
+              mostrarDescricao={mostrarDescricao}
               descricao={this.getDescricao(area.item)}
               textoIndicador={this.getTextoIndicador(area.item)}
-              state={stateMetrica}
-              stateName={stateNameMetrica}
+              state={state}
+              stateName={stateName}
               onChangeCallback={onChange}
             />
-          )}
+          </Grid>
+
+          <Grid item>
+            {mostrarMetrica && (
+              <RadioForm
+                row={this.getIndicador(area.item)}
+                header={['Indicador', 'Prática', 'Performance']}
+                descricao={this.getDescricao(area.item)}
+                textoIndicador={this.getTextoIndicador(area.item)}
+                state={stateMetrica}
+                stateName={stateNameMetrica}
+                onChangeCallback={onChange}
+              />
+            )}
+          </Grid>
         </Grid>
       );
     }

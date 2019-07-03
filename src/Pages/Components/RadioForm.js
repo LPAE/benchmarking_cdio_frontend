@@ -7,7 +7,7 @@ const styles = theme => ({
     paddingTop: '16px'
   },
   textoDescricao: {
-    fontSize: '0.7rem'
+    fontSize: '0.55rem'
   },
   popover: {
     pointerEvents: 'none',
@@ -24,6 +24,12 @@ const styles = theme => ({
   AreaFormItemPaper: {
     borderRadius: '15px'
     //height: theme.spacing(8)
+  },
+  rowBox: {
+    borderBottom: '3px solid rgba(0,0,0,0.2)',
+  },
+  headerRowBox: {
+    borderBottom: '3px solid rgba(0,0,0,0.4)',
   }
 });
 
@@ -42,7 +48,7 @@ const RadioGroup = props => (
 const RadioFormHeader = props => (
   <Grid container>
     <Grid item xs={12}>
-      <Box mt={1} mx={2} px={1}>
+      <Box mt={1} mx={2} px={1} className={props.classes.headerRowBox}>
         <Grid container justify="center" alignItems="center">
           {props.header.map((item, index) => (
             <Grid
@@ -52,7 +58,7 @@ const RadioFormHeader = props => (
               key={item}
               style={props.hideIndex && index === 0 ? { visibility: 'collapse' } : {}}
             >
-              <Typography color="textSecondary" align="center" variant="h6">
+              <Typography color="textSecondary" align="center" variant="body1">
                 {item}
               </Typography>
             </Grid>
@@ -117,63 +123,75 @@ export default withStyles(styles)(
     };
 
     render() {
-      const { classes, row, header, state, stateName, hideIndex, mostrarDescricao, descricao, textoIndicador, onChangeCallback } = this.props;
+      const {
+        classes,
+        row,
+        header,
+        state,
+        stateName,
+        hideIndex,
+        mostrarDescricao,
+        descricao,
+        textoIndicador,
+        onChangeCallback
+      } = this.props;
       const [, ...column] = header;
 
       return (
-        <>
-          <RadioFormHeader header={header} gridSize={12 / header.length} hideIndex={hideIndex}/>
+        <Paper elevation={3}>
+          <RadioFormHeader header={header} gridSize={12 / header.length} hideIndex={hideIndex} classes={classes} />
           <Grid container direction="column" wrap="nowrap">
             {row &&
               row.map((item, index) => (
-                <Box clone mb={1} mx={2} p={1} key={index}>
-                  <Paper elevation={3} className={classes.AreaFormItemPaper}>
-                    <Grid container justify="center" alignItems="center">
-                      <Grid item xs={12} sm={12 / header.length} style={hideIndex ? { visibility: 'collapse' } : {}}>
-                        <Typography
-                          id={`${stateName}_${item}`}
-                          onMouseEnter={this.handlePopoverOpen}
-                          onMouseLeave={this.handlePopoverClose}
-                          align="center"
-                          className={classes.textoIndicador}
-                        >
-                          {item}
+                <Box mb={0} mx={2} p={1} key={index} className={classes.rowBox}>
+                  <Grid container justify="center" alignItems="center">
+                    <Grid item xs={12} sm={12 / header.length} style={hideIndex ? { visibility: 'collapse' } : {}}>
+                      <Typography
+                        variant="body2"
+                        id={`${stateName}_${item}`}
+                        onMouseEnter={this.handlePopoverOpen}
+                        onMouseLeave={this.handlePopoverClose}
+                        align="center"
+                        className={classes.textoIndicador}
+                      >
+                        {item}
+                      </Typography>
+                      <Popover
+                        className={classes.popover}
+                        open={this.state.popoverOpen === `${stateName}_${item}`}
+                        anchorEl={this.state.anchorEl}
+                        anchorOrigin={{
+                          vertical: 'center',
+                          horizontal: 'right'
+                        }}
+                        transformOrigin={{
+                          vertical: 'center',
+                          horizontal: 'left'
+                        }}
+                        onClose={this.handlePopoverClose}
+                        disableRestoreFocus
+                      >
+                        <Typography variant="body2" className={classes.popoverTexto}>
+                          {textoIndicador[index]}
                         </Typography>
-                        <Popover
-                          className={classes.popover}
-                          open={this.state.popoverOpen === `${stateName}_${item}`}
-                          anchorEl={this.state.anchorEl}
-                          anchorOrigin={{
-                            vertical: 'center',
-                            horizontal: 'right'
-                          }}
-                          transformOrigin={{
-                            vertical: 'center',
-                            horizontal: 'left'
-                          }}
-                          onClose={this.handlePopoverClose}
-                          disableRestoreFocus
-                        >
-                          <Typography className={classes.popoverTexto}>{textoIndicador[index]}</Typography>
-                        </Popover>
-                      </Grid>
-                      <RadioGroup
-                        column={column}
-                        name={`${stateName}_${item}`}
-                        checked={state[item]}
-                        gridSize={12 / header.length}
-                        onChange={e => this.radioCallback(onChangeCallback, row, stateName, e)}
-                      />
+                      </Popover>
                     </Grid>
+                    <RadioGroup
+                      column={column}
+                      name={`${stateName}_${item}`}
+                      checked={state[item]}
+                      gridSize={12 / header.length}
+                      onChange={e => this.radioCallback(onChangeCallback, row, stateName, e)}
+                    />
+                  </Grid>
 
-                    {mostrarDescricao && (
-                      <RadioFormDescricao descricao={descricao[index]} index={index} actualIndex={this.state.actualIndex} classes={classes} />
-                    )}
-                  </Paper>
+                  {mostrarDescricao && (
+                    <RadioFormDescricao descricao={descricao[index]} index={index} actualIndex={this.state.actualIndex} classes={classes} />
+                  )}
                 </Box>
               ))}
           </Grid>
-        </>
+        </Paper>
       );
     }
   }
