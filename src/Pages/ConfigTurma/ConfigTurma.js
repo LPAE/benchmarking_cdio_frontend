@@ -8,7 +8,9 @@ import cursos from '../Cursos';
 import Alert from '../Components/Alert';
 
 const styles = theme => ({
-  root: {},
+  root: {
+    background: theme.palette.lightPrimary.main
+  },
   formConfigTurmaPaper: {
     margin: theme.spacing(3, 0),
     paddingBottom: theme.spacing(4),
@@ -72,7 +74,7 @@ export default withStyles(styles)(
     render() {
       const { classes } = this.props;
       return (
-        <div className="ConfigTurma">
+        <div className={classes.root}>
           <TopBar voltar title="Configurar Turma" history={this.props.history} />
           <AreasForm callback={this.submitAreasFormCallback} mostrarMetrica>
             <Grid container direction="row" justify="center">

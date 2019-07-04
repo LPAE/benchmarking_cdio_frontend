@@ -30,6 +30,9 @@ const styles = theme => ({
   },
   headerRowBox: {
     borderBottom: '3px solid rgba(0,0,0,0.4)',
+  },
+  radio: {
+    padding: '4px'
   }
 });
 
@@ -38,7 +41,7 @@ const RadioGroup = props => (
     {props.column.map(numero => (
       <Grid item xs={props.gridSize} key={numero}>
         <Grid container justify="center">
-          <Radio name={props.name} checked={props.checked === numero} value={numero} onChange={props.onChange} />
+          <Radio name={props.name} checked={props.checked === numero} value={numero} onChange={props.onChange} className={props.classes.radio} />
         </Grid>
       </Grid>
     ))}
@@ -73,7 +76,7 @@ const RadioFormDescricao = props => {
   const { index, actualIndex, descricao, classes } = props;
   return (
     <Hidden xsDown>
-      <Grid container spacing={3} justify="center" alignItems="flex-start">
+      <Grid container spacing={2} justify="center" alignItems="flex-start">
         {descricao.map((item, i) => (
           <Grid item xs={[2, 3, 4, 3][i]} key={i}>
             <Collapse component={Grid} in={index === actualIndex}>
@@ -182,6 +185,7 @@ export default withStyles(styles)(
                       checked={state[item]}
                       gridSize={12 / header.length}
                       onChange={e => this.radioCallback(onChangeCallback, row, stateName, e)}
+                      classes={classes}
                     />
                   </Grid>
 

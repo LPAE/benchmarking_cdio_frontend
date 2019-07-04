@@ -20,6 +20,15 @@ const theme = createMuiTheme({
     },
     secondary: {
       main: '#64dd17'
+    },
+    lightPrimary: {
+      main: '#B9D0FF'
+    },
+    darkPrimary: {
+      main: '#174491'
+    },
+    lightSecondary: {
+      main: '#3DF090'
     }
   },
   status: {
