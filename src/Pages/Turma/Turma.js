@@ -8,7 +8,17 @@ import './Turma.sass';
 import { withStyles } from '@material-ui/styles';
 
 const styles = theme => ({
-  descricao: { paddingTop: theme.spacing(2) },
+  root: {
+    background: theme.palette.lightPrimary.main,
+    minHeight: '100vh'
+  },
+  turmaContainer: {
+    marginTop: theme.spacing(10)
+  },
+  descricao: {
+    paddingTop: theme.spacing(2),
+    color: theme.palette.text.secondary
+  },
   list: { paddingTop: theme.spacing(2) },
   editarExpectativa: { paddingTop: theme.spacing(2) },
   gerarGraficos: { paddingTop: theme.spacing(2) }
@@ -49,12 +59,22 @@ export default withStyles(styles)(
     render() {
       const { classes } = this.props;
       return (
-        <div className="Turma">
+        <div className={classes.root}>
           <TopBar inicio title="Turma" history={this.props.history} />
-          <Grid container direction="column" justify="flex-start" alignItems="center" className={classes.descricao}>
-            <Grid item xs>
-              <Box p={2} clone>
-                <Paper elevation={3}>
+          <Grid container className={classes.turmaContainer} justify="space-around">
+            <Grid
+              item
+              container
+              spacing={4}
+              xs={12}
+              sm={4}
+              direction="column"
+              justify="flex-start"
+              alignItems="center"
+              className={classes.descricao}
+            >
+              <Grid item xs>
+                <Box>
                   <Typography variant="body1" className="Curso">
                     Curso: {this.state.turma.curso}
                   </Typography>
@@ -64,39 +84,42 @@ export default withStyles(styles)(
                   <Typography variant="body1" className="Curso">
                     Semestre: {this.state.turma.semestre}
                   </Typography>
-                </Paper>
-              </Box>
+                </Box>
+              </Grid>
+              <Grid item className={classes.editarExpectativa} onClick={this.editExpectativaButton}>
+                <Button variant="contained" color="primary">
+                  Editar Expectativa
+                </Button>
+              </Grid>
+              <Grid item className={classes.gerarGraficos} onClick={this.gerarGraficosButton}>
+                <Button variant="contained" color="primary">
+                  Gerar Graficos
+                </Button>
+              </Grid>
             </Grid>
-            <Grid item xs className={classes.list}>
-              <List>
-                {this.state.turma.equipes &&
-                  this.state.turma.equipes.map((equipe, index) => (
-                    <ListItem key={index} button onClick={this.enterEquipeButton}>
-                      <ListItemIcon>
-                        <Group />
-                      </ListItemIcon>
-                      <ListItemText primary={equipe.nome} />
-                    </ListItem>
-                  ))}
-                <Divider />
-                <ListItem button onClick={this.addEquipeButton}>
-                  <ListItemIcon>
-                    <GroupAdd />
-                  </ListItemIcon>
-                  <ListItemText primary="Adicionar Equipe" />
-                </ListItem>
-              </List>
+
+            <Grid item xs={12} sm={4} className={classes.list}>
+              <Paper elevation={3}>
+                <List>
+                  {this.state.turma.equipes &&
+                    this.state.turma.equipes.map((equipe, index) => (
+                      <ListItem key={index} button onClick={this.enterEquipeButton}>
+                        <ListItemIcon>
+                          <Group />
+                        </ListItemIcon>
+                        <ListItemText primary={equipe.nome} />
+                      </ListItem>
+                    ))}
+                  <Divider />
+                  <ListItem button onClick={this.addEquipeButton}>
+                    <ListItemIcon>
+                      <GroupAdd />
+                    </ListItemIcon>
+                    <ListItemText primary="Adicionar Equipe" />
+                  </ListItem>
+                </List>
+              </Paper>
             </Grid>
-            <div className={classes.editarExpectativa} onClick={this.editExpectativaButton}>
-              <Button variant="contained" color="primary">
-                Editar Expectativa
-              </Button>
-            </div>
-            <div className={classes.gerarGraficos} onClick={this.gerarGraficosButton}>
-              <Button variant="contained" color="primary">
-                Gerar Graficos
-              </Button>
-            </div>
           </Grid>
         </div>
       );

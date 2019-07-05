@@ -7,7 +7,8 @@ import './Main.sass';
 
 const styles = theme => ({
   root: {
-    background: theme.palette.primary.main
+    background: theme.palette.primary.main,
+    minHeight: '100vh'
   },
   mainTitle: {
     color: theme.palette.primary.contrastText,

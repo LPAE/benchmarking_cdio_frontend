@@ -11,7 +11,8 @@ import { withStyles } from '@material-ui/styles';
 
 const styles = theme => ({
   root: {
-    background: theme.palette.lightPrimary.main
+    background: theme.palette.lightPrimary.main,
+    minHeight: '100vh'
   },
   addEquipeForm: { maxWidth: 500, margin: 'auto', marginBottom: theme.spacing(3) },
   addEquipeFormControl: {

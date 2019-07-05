@@ -9,7 +9,8 @@ import Alert from '../Components/Alert';
 
 const styles = theme => ({
   root: {
-    background: theme.palette.lightPrimary.main
+    background: theme.palette.lightPrimary.main,
+    minHeight: '100vh'
   },
   formConfigTurmaPaper: {
     margin: theme.spacing(3, 0),
