@@ -7,8 +7,11 @@ import Alert from './Alert';
 
 const styles = theme => ({
   root: {
-    'max-width': '1200px', // tamanho fixo para telas grandes
+    maxWidth: '1200px', // tamanho fixo para telas grandes
     margin: 'auto'
+  },
+  submitButton: {
+    margin: theme.spacing(4)
   }
 });
 
@@ -150,7 +153,7 @@ export default withStyles(styles)(
     render() {
       const { classes } = this.props;
       return (
-        <Grid container direction="column" className={classes.root}>
+        <Grid container direction="column" wrap='nowrap' className={classes.root}>
           {this.props.children}
 
           {!this.props.hideConcepcao && (
@@ -203,7 +206,7 @@ export default withStyles(styles)(
             />
           )}
 
-          <Button color="secondary" variant="contained" onClick={this.buttonSubmit}>
+          <Button className={classes.submitButton} color="secondary" variant="contained" onClick={this.buttonSubmit}>
             Confirmar
           </Button>
           <Alert
