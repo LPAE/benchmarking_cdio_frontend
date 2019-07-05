@@ -26,7 +26,7 @@ const styles = theme => ({
     //height: theme.spacing(8)
   },
   rowBox: {
-    borderBottom: '3px solid rgba(0,0,0,0.2)',
+    borderBottom: '1px solid rgba(0,0,0,0.15)',
   },
   headerRowBox: {
     borderBottom: '3px solid rgba(0,0,0,0.4)',
