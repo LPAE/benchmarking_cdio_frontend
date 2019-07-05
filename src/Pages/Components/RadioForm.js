@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Box, Typography, Radio, Collapse, Popover, Paper, Hidden } from '@material-ui/core';
+import { Grid, Box, Typography, Radio, Collapse, Popover, Paper, Hidden, Tooltip } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 
 const styles = theme => ({
@@ -26,10 +26,10 @@ const styles = theme => ({
     //height: theme.spacing(8)
   },
   rowBox: {
-    borderBottom: '1px solid rgba(0,0,0,0.15)',
+    borderBottom: '1px solid rgba(0,0,0,0.15)'
   },
   headerRowBox: {
-    borderBottom: '3px solid rgba(0,0,0,0.4)',
+    borderBottom: '3px solid rgba(0,0,0,0.4)'
   },
   radio: {
     padding: '4px'
@@ -41,7 +41,13 @@ const RadioGroup = props => (
     {props.column.map(numero => (
       <Grid item xs={props.gridSize} key={numero}>
         <Grid container justify="center">
-          <Radio name={props.name} checked={props.checked === numero} value={numero} onChange={props.onChange} className={props.classes.radio} />
+          <Radio
+            name={props.name}
+            checked={props.checked === numero}
+            value={numero}
+            onChange={props.onChange}
+            className={props.classes.radio}
+          />
         </Grid>
       </Grid>
     ))}
@@ -149,16 +155,11 @@ export default withStyles(styles)(
                 <Box mb={0} mx={2} p={1} key={index} className={classes.rowBox}>
                   <Grid container justify="center" alignItems="center">
                     <Grid item xs={12} sm={12 / header.length} style={hideIndex ? { visibility: 'collapse' } : {}}>
-                      <Typography
-                        variant="body2"
-                        id={`${stateName}_${item}`}
-                        onMouseEnter={this.handlePopoverOpen}
-                        onMouseLeave={this.handlePopoverClose}
-                        align="center"
-                        className={classes.textoIndicador}
-                      >
-                        {item}
-                      </Typography>
+                      <Tooltip placement="right" title={textoIndicador[index]}>
+                        <Typography variant="body2" id={`${stateName}_${item}`} align="center" className={classes.textoIndicador}>
+                          {item}
+                        </Typography>
+                      </Tooltip>
                       <Popover
                         className={classes.popover}
                         open={this.state.popoverOpen === `${stateName}_${item}`}

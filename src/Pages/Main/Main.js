@@ -15,7 +15,7 @@ const styles = theme => ({
     [theme.breakpoints.down('sm')]: {
       fontSize: '3rem'
     },
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       letterSpacing: '15px'
     }
   }
@@ -57,7 +57,7 @@ export default withStyles(styles)(
               </Typography>
             </Box>
 
-            <Grid item xs={12} sm={8}>
+            <Grid item xs={12} sm={10} xl={8}>
               <Box my={16} clone>
                 <Grid container justify="space-around" alignItems="center">
                   <Grid item >
