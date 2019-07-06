@@ -13,15 +13,17 @@ const styles = theme => ({
     minHeight: '100vh'
   },
   turmaContainer: {
-    marginTop: theme.spacing(10)
+    marginTop: theme.spacing(10),
+    [theme.breakpoints.down('xs')]: {
+      marginTop: theme.spacing(2)
+    }
   },
   descricao: {
-    paddingTop: theme.spacing(2),
     color: theme.palette.text.secondary
   },
-  list: { paddingTop: theme.spacing(2) },
-  editarExpectativa: { paddingTop: theme.spacing(2) },
-  gerarGraficos: { paddingTop: theme.spacing(2) }
+  list: { margin: theme.spacing(2) },
+  editarExpectativa: {},
+  gerarGraficos: {}
 });
 
 export default withStyles(styles)(
@@ -61,7 +63,7 @@ export default withStyles(styles)(
       return (
         <div className={classes.root}>
           <TopBar inicio title="Turma" history={this.props.history} />
-          <Grid container className={classes.turmaContainer} justify="space-around">
+          <Grid container className={classes.turmaContainer} justify="space-evenly">
             <Grid
               item
               container
@@ -73,7 +75,7 @@ export default withStyles(styles)(
               alignItems="center"
               className={classes.descricao}
             >
-              <Grid item xs>
+              <Grid item>
                 <Box>
                   <Typography variant="body1" className="Curso">
                     Curso: {this.state.turma.curso}

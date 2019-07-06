@@ -1,8 +1,18 @@
 import React from 'react';
 import { Radar } from 'react-chartjs-2';
-import { Grid, Typography } from '@material-ui/core';
+import { Grid, Typography, Paper, withStyles } from '@material-ui/core';
 
 // TODO: TAMANHO DINÂMICO E PADDING DO TÍTULO
+
+const styles = theme => ({
+  RadarPaper: {
+    margin: theme.spacing(2),
+    padding: theme.spacing(2)
+    // position: 'relative',
+    // width: '900px',
+    // height: '900px'
+  }
+});
 
 var options = {
   scale: {
@@ -13,7 +23,7 @@ var options = {
       showLabelBackdrop: false
     },
     pointLabels: {
-      fontSize: 16
+      fontSize: 14
     },
     angleLines: {
       lineWidth: 2
@@ -59,86 +69,102 @@ const colors = {
     pointBackgroundColor: operacaoBorderColor
   }
 };
-export default class GraficosAreas extends React.Component {
-  mountAreaChartData = (equipeName, area, expectativa, colors) => {
-    const labels = Object.keys(area);
-    const areaData = Object.values(area);
-    const expectativaData = Object.values(expectativa);
-    return {
-      labels,
-      datasets: [
-        {
-          label: equipeName,
-          data: areaData,
-          ...colors
-        },
-        {
-          label: 'Expectativa',
-          data: expectativaData,
-          backgroundColor: 'rgba(179,181,198,0.2)',
-          borderColor: 'rgba(179,181,198,1)',
-          pointBackgroundColor: 'rgba(179,181,198,1)',
-          pointBorderColor: '#fff',
-          pointHoverBackgroundColor: '#fff',
-          pointHoverBorderColor: 'rgba(179,181,198,1)'
-        }
-      ]
-    };
-  };
 
-  render() {
-    const nomeEquipe = this.props.equipe.nome;
-    const expectativa = this.props.expectativa;
-    const dataConcepcao = this.props.equipe.area.concepcao;
-    const dataDesign = this.props.equipe.area.design;
-    const dataImplementacao = this.props.equipe.area.implementacao;
-    const dataOperacao = this.props.equipe.area.operacao;
-    return (
-      <Grid xs={12} sm={10} direction="column" alignItems="center" container className="GraficosAreas">
-        <Grid container justify="center">
-          {dataConcepcao && expectativa.concepcao && (
-            <>
-              <Grid item>
-                <Typography>Concepção</Typography>
-              </Grid>
-              <Radar data={this.mountAreaChartData(nomeEquipe, dataConcepcao, expectativa.concepcao, colors.concepcao)} options={options} />
-            </>
-          )}
+const mountAreaChartData = (equipeName, area, expectativa, colors) => {
+  const labels = Object.keys(area);
+  const areaData = Object.values(area);
+  const expectativaData = Object.values(expectativa);
+  return {
+    labels,
+    datasets: [
+      {
+        label: equipeName,
+        data: areaData,
+        ...colors
+      },
+      {
+        label: 'Expectativa',
+        data: expectativaData,
+        backgroundColor: 'rgba(179,181,198,0.2)',
+        borderColor: 'rgba(179,181,198,1)',
+        pointBackgroundColor: 'rgba(179,181,198,1)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgba(179,181,198,1)'
+      }
+    ]
+  };
+};
+
+const RadarPlot = props => {
+  const { classes, title, data, expectativa, nomeEquipe, colors } = props;
+  return (
+    <>
+      {data && expectativa && (
+        <Paper className={classes.RadarPaper}>
+          <Grid container direction="column" justify="center" alignItems="stretch">
+            <Grid item>
+              <Typography align="center">{title}</Typography>
+            </Grid>
+            <Grid item>
+              <Radar data={mountAreaChartData(nomeEquipe, data, expectativa, colors)} options={options} />
+            </Grid>
+          </Grid>
+        </Paper>
+      )}
+    </>
+  );
+};
+
+export default withStyles(styles)(
+  class GraficosAreas extends React.Component {
+    render() {
+      const nomeEquipe = this.props.equipe.nome;
+      const expectativa = this.props.expectativa;
+      const dataConcepcao = this.props.equipe.area.concepcao;
+      const dataDesign = this.props.equipe.area.design;
+      const dataImplementacao = this.props.equipe.area.implementacao;
+      const dataOperacao = this.props.equipe.area.operacao;
+      const { classes } = this.props;
+      return (
+        <Grid container item xs={12} sm={10} lg={8} direction="column" alignItems="stretch" className="GraficosAreas">
+          <RadarPlot
+            title="Concepção"
+            data={dataConcepcao}
+            expectativa={expectativa.concepcao}
+            nomeEquipe={nomeEquipe}
+            colors={colors.concepcao}
+            classes={classes}
+          />
+
+          <RadarPlot
+            title="Design"
+            data={dataDesign}
+            expectativa={expectativa.design}
+            nomeEquipe={nomeEquipe}
+            colors={colors.design}
+            classes={classes}
+          />
+
+          <RadarPlot
+            title="Implementação"
+            data={dataImplementacao}
+            expectativa={expectativa.implementacao}
+            nomeEquipe={nomeEquipe}
+            colors={colors.implementacao}
+            classes={classes}
+          />
+
+          <RadarPlot
+            title="Operação"
+            data={dataOperacao}
+            expectativa={expectativa.operacao}
+            nomeEquipe={nomeEquipe}
+            colors={colors.operacao}
+            classes={classes}
+          />
         </Grid>
-        <Grid container justify="center">
-          {dataDesign && expectativa.design && (
-            <>
-              <Grid item>
-                <Typography>Design</Typography>
-              </Grid>
-              <Radar data={this.mountAreaChartData(nomeEquipe, dataDesign, expectativa.design, colors.design)} options={options} />
-            </>
-          )}
-        </Grid>
-        <Grid container justify="center">
-          {dataImplementacao && expectativa.implementacao && (
-            <>
-              <Grid item>
-                <Typography>Implementação</Typography>
-              </Grid>
-              <Radar
-                data={this.mountAreaChartData(nomeEquipe, dataImplementacao, expectativa.implementacao, colors.implementacao)}
-                options={options}
-              />
-            </>
-          )}
-        </Grid>
-        <Grid container justify="center">
-          {dataOperacao && expectativa.operacao && (
-            <>
-              <Grid item>
-                <Typography>Operação</Typography>
-              </Grid>
-              <Radar data={this.mountAreaChartData(nomeEquipe, dataOperacao, expectativa.operacao, colors.operacao)} options={options} />
-            </>
-          )}
-        </Grid>
-      </Grid>
-    );
+      );
+    }
   }
-}
+);
