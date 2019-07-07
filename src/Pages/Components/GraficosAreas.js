@@ -1,6 +1,6 @@
 import React from 'react';
 import { Radar } from 'react-chartjs-2';
-import { Grid, Typography, Paper, withStyles } from '@material-ui/core';
+import { Grid, Typography, Paper, withStyles, withWidth } from '@material-ui/core';
 
 // TODO: TAMANHO DINÂMICO E PADDING DO TÍTULO
 
@@ -9,8 +9,15 @@ const styles = theme => ({
     margin: theme.spacing(2),
     padding: theme.spacing(2)
     // position: 'relative',
-    // width: '900px',
-    // height: '900px'
+  },
+  RadarGrid: {
+    position: 'relative',
+    margin: 'auto',
+    width: '100%',
+    height: '500px',
+    [theme.breakpoints.down('xs')]: {
+      height: '300px'
+    }
   }
 });
 
@@ -23,7 +30,7 @@ var options = {
       showLabelBackdrop: false
     },
     pointLabels: {
-      fontSize: 14
+      fontSize: 8
     },
     angleLines: {
       lineWidth: 2
@@ -35,7 +42,8 @@ var options = {
     scaleLabel: {
       display: false
     }
-  }
+  },
+  maintainAspectRatio: false
 };
 
 const concepcaoColor = 'rgba(255,99,132,0.2)';
@@ -106,7 +114,7 @@ const RadarPlot = props => {
             <Grid item>
               <Typography align="center">{title}</Typography>
             </Grid>
-            <Grid item>
+            <Grid item className={classes.RadarGrid}>
               <Radar data={mountAreaChartData(nomeEquipe, data, expectativa, colors)} options={options} />
             </Grid>
           </Grid>
@@ -117,54 +125,62 @@ const RadarPlot = props => {
 };
 
 export default withStyles(styles)(
-  class GraficosAreas extends React.Component {
-    render() {
-      const nomeEquipe = this.props.equipe.nome;
-      const expectativa = this.props.expectativa;
-      const dataConcepcao = this.props.equipe.area.concepcao;
-      const dataDesign = this.props.equipe.area.design;
-      const dataImplementacao = this.props.equipe.area.implementacao;
-      const dataOperacao = this.props.equipe.area.operacao;
-      const { classes } = this.props;
-      return (
-        <Grid container item xs={12} sm={10} lg={8} direction="column" alignItems="stretch" className="GraficosAreas">
-          <RadarPlot
-            title="Concepção"
-            data={dataConcepcao}
-            expectativa={expectativa.concepcao}
-            nomeEquipe={nomeEquipe}
-            colors={colors.concepcao}
-            classes={classes}
-          />
+  withWidth()(
+    class GraficosAreas extends React.Component {
+      render() {
+        const nomeEquipe = this.props.equipe.nome;
+        const expectativa = this.props.expectativa;
+        const dataConcepcao = this.props.equipe.area.concepcao;
+        const dataDesign = this.props.equipe.area.design;
+        const dataImplementacao = this.props.equipe.area.implementacao;
+        const dataOperacao = this.props.equipe.area.operacao;
+        const { classes, width } = this.props;
 
-          <RadarPlot
-            title="Design"
-            data={dataDesign}
-            expectativa={expectativa.design}
-            nomeEquipe={nomeEquipe}
-            colors={colors.design}
-            classes={classes}
-          />
 
-          <RadarPlot
-            title="Implementação"
-            data={dataImplementacao}
-            expectativa={expectativa.implementacao}
-            nomeEquipe={nomeEquipe}
-            colors={colors.implementacao}
-            classes={classes}
-          />
+        // Para deixar a fonte menor em tela pequena.
+        // TODO: Achar um jeito melhor de se fazer isso
+        options.scale.pointLabels.fontSize = width === 'xs' ? 8 : 14;
 
-          <RadarPlot
-            title="Operação"
-            data={dataOperacao}
-            expectativa={expectativa.operacao}
-            nomeEquipe={nomeEquipe}
-            colors={colors.operacao}
-            classes={classes}
-          />
-        </Grid>
-      );
+        return (
+          <Grid container item xs={12} sm={10} lg={8} direction="column" alignItems="stretch" className="GraficosAreas">
+            <RadarPlot
+              title="Concepção"
+              data={dataConcepcao}
+              expectativa={expectativa.concepcao}
+              nomeEquipe={nomeEquipe}
+              colors={colors.concepcao}
+              classes={classes}
+            />
+
+            <RadarPlot
+              title="Design"
+              data={dataDesign}
+              expectativa={expectativa.design}
+              nomeEquipe={nomeEquipe}
+              colors={colors.design}
+              classes={classes}
+            />
+
+            <RadarPlot
+              title="Implementação"
+              data={dataImplementacao}
+              expectativa={expectativa.implementacao}
+              nomeEquipe={nomeEquipe}
+              colors={colors.implementacao}
+              classes={classes}
+            />
+
+            <RadarPlot
+              title="Operação"
+              data={dataOperacao}
+              expectativa={expectativa.operacao}
+              nomeEquipe={nomeEquipe}
+              colors={colors.operacao}
+              classes={classes}
+            />
+          </Grid>
+        );
+      }
     }
-  }
+  )
 );

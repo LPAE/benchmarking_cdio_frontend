@@ -9,9 +9,13 @@ import api from '../../Services/api';
 import { withStyles } from '@material-ui/styles';
 
 const styles = theme => ({
-  title: {margin: theme.spacing(4,0)},
+  root: {
+    background: theme.palette.lightPrimary.main,
+    minHeight: '100vh'
+  },
+  title: { margin: theme.spacing(4, 0) },
   accessBox: {
-    'max-width': '1200px', // tamanho fixo para telas grandes
+    maxWidth: '1200px', // tamanho fixo para telas grandes
     margin: 'auto'
   }
 });
@@ -39,7 +43,9 @@ const AccessSemestres = props => {
     <>
       {props.turmas &&
         props.turmas.map((turma, index) => (
-          <Button key={index} onClick={e => props.history.push(`/turma/${turma.curso}/${turma.projeto}/${turma.semestre}`)}>{turma.semestre}</Button>
+          <Button key={index} onClick={e => props.history.push(`/turma/${turma.curso}/${turma.projeto}/${turma.semestre}`)}>
+            {turma.semestre}
+          </Button>
         ))}
     </>
   );
@@ -56,7 +62,7 @@ const AccessCursos = props => {
   return (
     <>
       <ExpandItens itens={cursosPadroes} child={AccessProjetos} history={props.history} />
-      <ExpansionPanel >
+      <ExpansionPanel>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <Typography>Outro</Typography>
         </ExpansionPanelSummary>
@@ -84,10 +90,14 @@ export default withStyles(styles)(
     render() {
       const { classes } = this.props;
       return (
-        <div className="Access">
+        <div className={classes.root}>
           <TopBar voltar title="Acesso" history={this.props.history} />
-          <Typography className={classes.title} variant="h5" align="center">Curso:</Typography>
-          <Box className={classes.accessBox} m={5}>{this.state.turmas && <AccessCursos turmas={this.state.turmas} history={this.props.history} />}</Box>
+          <Typography className={classes.title} variant="h5" align="center">
+            Curso:
+          </Typography>
+          <Box className={classes.accessBox} m={15}>
+            {this.state.turmas && <AccessCursos turmas={this.state.turmas} history={this.props.history} />}
+          </Box>
         </div>
       );
     }
