@@ -1,51 +1,61 @@
 import React from 'react';
 import api from '../../Services/api';
 import GraficosAreas from '../Components/GraficosAreas';
+import { withStyles } from '@material-ui/core';
+import { withLoadingTurma } from '../Components/withLoading';
+import TopBar from '../Components/TopBar';
 
-export default class GraficosTurma extends React.Component {
-  state = {
-    turma: {},
-    media: {}
-  };
+const styles = theme => ({
+  root: {
+    background: theme.palette.lightPrimary.main,
+    minHeight: '100vh'
+  }
+});
 
-  addArea = (area1, area2) => {
-    var soma = area1;
-    for (const area in area2) {
-      for (const key in area2[area]) {
-          soma[area][key] += area[key];
-          console.log(key);
-        
+export default withStyles(styles)(
+  withLoadingTurma(
+    class GraficosTurma extends React.Component {
+      state = {
+        turma: {},
+        media: {},
+        equipeIndex: 0,
+      };
+
+      constructor(props) {
+        super(props);
+        const { turma } = props;
+        this.state = { turma: turma, equipeIndex: 0 };
+        console.log(this.state)
+      }
+
+      addArea = (area1, area2) => {
+        var soma = area1;
+        for (const area in area2) {
+          for (const key in area2[area]) {
+            soma[area][key] += area[key];
+            console.log(key);
+          }
+        }
+
+        console.log(soma);
+      };
+
+      calcularMedia = equipes => {
+        var soma = {};
+      };
+
+      render() {
+        const { classes } = this.props;
+        return (
+          <div className={classes.root}>
+            <TopBar voltar title="Gráficos" history={this.props.history} />
+
+            {this.state.turma.equipes && (
+              <GraficosAreas equipe={this.state.turma.equipes[this.state.equipeIndex]} expectativa={this.state.turma.expectativa} />
+            )}
+          </div>
+        );
       }
     }
-    
-    console.log(soma);
-  };
-
-  calcularMedia = equipes => {
-    var soma = {};
-  };
-
-  async componentDidMount() {
-    const curso = this.props.match.params.curso;
-    const projeto = this.props.match.params.projeto;
-    const semestre = this.props.match.params.semestre;
-    const turma = await api.get(`/turma/${curso}/${projeto}/${semestre}`);
-    this.addArea(turma.data.equipes[0].area,turma.data.equipes[1].area)
-    const media = this.calcularMedia(turma.data.equipes);
-    this.setState({ turma: turma.data, media });
-  }
-
-  render() {
-    return (
-      <div className="GraficosTurma">
-        <div className="VoltarButton">
-          <button onClick={e => this.props.history.go(-1)}>Voltar</button>
-        </div>
-
-        {this.state.turma.equipes && (
-          <GraficosAreas equipe={this.state.turma.equipes[this.state.equipeIndex]} expectativa={this.state.turma.expectativa} />
-        )}
-      </div>
-    );
-  }
-}
+  )
+);

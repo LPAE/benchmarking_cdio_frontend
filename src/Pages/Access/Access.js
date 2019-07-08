@@ -15,9 +15,10 @@ const styles = theme => ({
   },
   title: { margin: theme.spacing(4, 0) },
   accessBox: {
-    maxWidth: '1200px', // tamanho fixo para telas grandes
-    margin: 'auto'
-  }
+    maxWidth: '1000px', // tamanho fixo para telas grandes
+    margin: theme.spacing(2,4)
+  },
+  buttonSemestre: {}
 });
 
 const ExpandItens = props => (
@@ -30,7 +31,7 @@ const ExpandItens = props => (
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <Grid container direction="column" justify="flex-start" alignItems="stretch">
-              <props.child turmas={props.itens[item]} history={props.history} />
+              <props.child turmas={props.itens[item]} history={props.history} classes={props.classes} />
             </Grid>
           </ExpansionPanelDetails>
         </ExpansionPanel>
@@ -40,35 +41,36 @@ const ExpandItens = props => (
 
 const AccessSemestres = props => {
   return (
-    <>
+    <Grid container direction="column" justify="flex-start" alignItems="flex-start">
       {props.turmas &&
         props.turmas.map((turma, index) => (
           <Button key={index} onClick={e => props.history.push(`/turma/${turma.curso}/${turma.projeto}/${turma.semestre}`)}>
             {turma.semestre}
           </Button>
         ))}
-    </>
+    </Grid>
   );
 };
 
 const AccessProjetos = props => {
   const projetos = groupBy(props.turmas, 'projeto');
-  return <ExpandItens itens={projetos} child={AccessSemestres} history={props.history} />;
+  return <ExpandItens itens={projetos} child={AccessSemestres} history={props.history} classes={props.classes} />;
 };
 
 const AccessCursos = props => {
+  const { classes } = props;
   const cursosPadroes = groupBy(props.turmas.filter(turma => turma.curso in cursos), 'curso');
   const outrosCursos = groupBy(props.turmas.filter(turma => !(turma.curso in cursos)), 'curso');
   return (
     <>
-      <ExpandItens itens={cursosPadroes} child={AccessProjetos} history={props.history} />
+      <ExpandItens itens={cursosPadroes} child={AccessProjetos} history={props.history} classes={classes} />
       <ExpansionPanel>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <Typography>Outro</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Grid container direction="column">
-            <ExpandItens itens={outrosCursos} child={AccessProjetos} history={props.history} />
+            <ExpandItens itens={outrosCursos} child={AccessProjetos} history={props.history} classes={classes} />
           </Grid>
         </ExpansionPanelDetails>
       </ExpansionPanel>
@@ -95,9 +97,11 @@ export default withStyles(styles)(
           <Typography className={classes.title} variant="h5" align="center">
             Curso:
           </Typography>
-          <Box className={classes.accessBox} m={15}>
-            {this.state.turmas && <AccessCursos turmas={this.state.turmas} history={this.props.history} />}
-          </Box>
+          <Grid container justify="center">
+            <Box className={classes.accessBox} m={15}>
+              {this.state.turmas && <AccessCursos turmas={this.state.turmas} history={this.props.history} classes={classes} />}
+            </Box>
+          </Grid>
         </div>
       );
     }
