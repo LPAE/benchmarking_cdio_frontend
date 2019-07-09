@@ -1,5 +1,4 @@
 import React from 'react';
-import api from '../../Services/api';
 import GraficosAreas from '../Components/GraficosAreas';
 import { withStyles } from '@material-ui/core';
 import { withLoadingTurma } from '../Components/withLoading';

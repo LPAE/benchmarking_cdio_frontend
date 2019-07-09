@@ -3,6 +3,7 @@ import api from '../../Services/api';
 import AreasForm from '../Components/AreasForm';
 import TopBar from '../Components/TopBar';
 import { withStyles } from '@material-ui/core';
+import { withLoadingTurma } from '../Components/withLoading';
 
 const styles = theme => ({
   root: {
@@ -12,69 +13,56 @@ const styles = theme => ({
 });
 
 export default withStyles(styles)(
-  class EditExpectativa extends React.Component {
-    state = {
-      turma: {},
+  withLoadingTurma(
+    class EditExpectativa extends React.Component {
+      state = {
+        turma: {},
 
-      concepcao: {},
-      design: {},
-      implementacao: {},
-      operacao: {},
+        concepcao: {},
+        design: {},
+        implementacao: {},
+        operacao: {},
 
-      concepcaoMetrica: {},
-      designMetrica: {},
-      implementacaoMetrica: {},
-      operacaoMetrica: {},
-
-      finishedSetState: false
-    };
-
-    async componentDidMount() {
-      const curso = this.props.match.params.curso;
-      const projeto = this.props.match.params.projeto;
-      const semestre = this.props.match.params.semestre;
-      const turma = await api.get(`/turma/${curso}/${projeto}/${semestre}`);
-
-      if (Object.keys(turma.data.expectativa).includes('concepcao'))
-        this.setState({ ...this.state, concepcao: turma.data.expectativa.concepcao });
-      if (Object.keys(turma.data.expectativa).includes('design')) this.setState({ ...this.state, design: turma.data.expectativa.design });
-      if (Object.keys(turma.data.expectativa).includes('implementacao'))
-        this.setState({ ...this.state, implementacao: turma.data.expectativa.implementacao });
-      if (Object.keys(turma.data.expectativa).includes('operacao'))
-        this.setState({ ...this.state, operacao: turma.data.expectativa.operacao });
-
-      if (Object.keys(turma.data.metrica).includes('concepcao'))
-        this.setState({ ...this.state, concepcaoMetrica: turma.data.metrica.concepcao });
-      if (Object.keys(turma.data.metrica).includes('design')) this.setState({ ...this.state, designMetrica: turma.data.metrica.design });
-      if (Object.keys(turma.data.metrica).includes('implementacao'))
-        this.setState({ ...this.state, implementacaoMetrica: turma.data.metrica.implementacao });
-      if (Object.keys(turma.data.metrica).includes('operacao'))
-        this.setState({ ...this.state, operacaoMetrica: turma.data.metrica.operacao });
-
-      this.setState({ ...this.state, turma: turma.data, finishedSetState: true });
-    }
-
-    submitAreasFormCallback = async (areas, metricas) => {
-      const dataToSend = {
-        curso: this.props.match.params.curso,
-        projeto: this.props.match.params.projeto,
-        semestre: this.props.match.params.semestre,
-        expectativa: { ...areas },
-        metrica: { ...metricas }
+        concepcaoMetrica: {},
+        designMetrica: {},
+        implementacaoMetrica: {},
+        operacaoMetrica: {},
       };
-      console.log(dataToSend);
-      await api.post('/turma/config', dataToSend);
-      this.props.history.push(
-        `/turma/${this.props.match.params.curso}/${this.props.match.params.projeto}/${this.props.match.params.semestre}`
-      );
-    };
 
-    render() {
-      const { classes } = this.props;
-      return (
-        <div className={classes.root}>
-          <TopBar voltar title="Editar Expectativa" history={this.props.history} />
-          {this.state.finishedSetState && (
+      constructor(props) {
+        super(props);
+        const { turma } = props;
+        this.state.turma = turma;
+        ['concepcao', 'design', 'implementacao', 'operacao'].forEach(
+          item => (this.state[item] = Object.keys(turma.expectativa).includes(item) ? turma.expectativa[item] : null)
+        );
+        ['concepcao', 'design', 'implementacao', 'operacao'].forEach(
+          item => (this.state[item + 'Metrica'] = Object.keys(turma.metrica).includes(item) ? turma.metrica[item] : null)
+        );
+        console.log(this.state);
+      }
+
+      submitAreasFormCallback = async (areas, metricas) => {
+        const dataToSend = {
+          curso: this.props.match.params.curso,
+          projeto: this.props.match.params.projeto,
+          semestre: this.props.match.params.semestre,
+          expectativa: { ...areas },
+          metrica: { ...metricas }
+        };
+        console.log(dataToSend);
+        await api.post('/turma/config', dataToSend);
+        this.props.history.push(
+          `/turma/${this.props.match.params.curso}/${this.props.match.params.projeto}/${this.props.match.params.semestre}`
+        );
+      };
+
+      render() {
+        const { classes } = this.props;
+        return (
+          <div className={classes.root}>
+            <TopBar voltar title="Editar Expectativa" history={this.props.history} />
+
             <AreasForm
               callback={this.submitAreasFormCallback}
               concepcao={this.state.concepcao}
@@ -87,9 +75,9 @@ export default withStyles(styles)(
               implementacaoMetrica={this.state.implementacaoMetrica}
               operacaoMetrica={this.state.operacaoMetrica}
             />
-          )}
-        </div>
-      );
+          </div>
+        );
+      }
     }
-  }
+  )
 );

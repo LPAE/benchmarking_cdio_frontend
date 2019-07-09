@@ -4,7 +4,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { groupBy } from 'lodash';
 import TopBar from '../Components/TopBar';
 import cursos from '../Cursos';
-import api from '../../Services/api';
+import { withLoadingTurmas } from '../Components/withLoading';
 
 import { withStyles } from '@material-ui/styles';
 
@@ -16,7 +16,7 @@ const styles = theme => ({
   title: { margin: theme.spacing(4, 0) },
   accessBox: {
     maxWidth: '1000px', // tamanho fixo para telas grandes
-    margin: theme.spacing(2,4)
+    margin: theme.spacing(2, 4)
   },
   buttonSemestre: {}
 });
@@ -79,31 +79,34 @@ const AccessCursos = props => {
 };
 
 export default withStyles(styles)(
-  class Access extends React.Component {
-    state = {
-      turmas: []
-    };
+  withLoadingTurmas(
+    class Access extends React.Component {
+      state = {
+        turmas: []
+      };
 
-    async componentDidMount() {
-      const turmas = await api.get(`/turma/`);
-      this.setState({ turmas: turmas.data });
-    }
+      constructor(props) {
+        super(props);
+        const { turmas } = props;
+        this.state = { turmas };
+      }
 
-    render() {
-      const { classes } = this.props;
-      return (
-        <div className={classes.root}>
-          <TopBar voltar title="Acesso" history={this.props.history} />
-          <Typography className={classes.title} variant="h5" align="center">
-            Curso:
-          </Typography>
-          <Grid container justify="center">
-            <Box className={classes.accessBox} m={15}>
-              {this.state.turmas && <AccessCursos turmas={this.state.turmas} history={this.props.history} classes={classes} />}
-            </Box>
-          </Grid>
-        </div>
-      );
+      render() {
+        const { classes } = this.props;
+        return (
+          <div className={classes.root}>
+            <TopBar voltar title="Acesso" history={this.props.history} />
+            <Typography className={classes.title} variant="h5" align="center">
+              Curso:
+            </Typography>
+            <Grid container justify="center">
+              <Box className={classes.accessBox} m={15}>
+                {this.state.turmas && <AccessCursos turmas={this.state.turmas} history={this.props.history} classes={classes} />}
+              </Box>
+            </Grid>
+          </div>
+        );
+      }
     }
-  }
+  )
 );
