@@ -11,30 +11,35 @@ import EditExpectativa from './Pages/EditExpectativa/EditExpectativa';
 import GraficosTurma from './Pages/GraficosTurma/GraficosTurma';
 import Access from './Pages/Access/Access';
 
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme, MuiThemeProvider, responsiveFontSizes } from '@material-ui/core/styles';
 
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: '#2979ff'
+const theme = responsiveFontSizes(
+  createMuiTheme({
+    palette: {
+      primary: {
+        main: '#2979ff'
+      },
+      secondary: {
+        main: '#64dd17'
+      },
+      lightPrimary: {
+        main: '#D1E0FF'
+      },
+      darkPrimary: {
+        main: '#174491'
+      },
+      lightSecondary: {
+        main: '#3DF090'
+      }
     },
-    secondary: {
-      main: '#64dd17'
+    status: {
+      danger: 'orange'
     },
-    lightPrimary: {
-      main: '#D1E0FF'
-    },
-    darkPrimary: {
-      main: '#174491'
-    },
-    lightSecondary: {
-      main: '#3DF090'
+    typography: {
+      fontSize: 16
     }
-  },
-  status: {
-    danger: 'orange'
-  }
-});
+  })
+);
 
 const Routes = () => (
   <MuiThemeProvider theme={theme}>

@@ -67,7 +67,7 @@ const RadioFormHeader = props => (
               key={item}
               style={props.hideIndex && index === 0 ? { visibility: 'collapse' } : {}}
             >
-              <Typography color="textSecondary" align="center" variant="body1">
+              <Typography color="textSecondary" align="center" variant="h5">
                 {item}
               </Typography>
             </Grid>
@@ -86,7 +86,7 @@ const RadioFormDescricao = props => {
         {descricao.map((item, i) => (
           <Grid item xs={[2, 3, 4, 3][i]} key={i}>
             <Collapse component={Grid} in={index === actualIndex}>
-              <Typography variant="body2" align={i === 1 ? 'left' : i === 2 ? 'center' : 'right'} className={classes.textoDescricao}>
+              <Typography variant="body2" align={i === 1 ? 'left' : i === 2 ? 'center' : 'right'}>
                 {item}
               </Typography>
             </Collapse>
@@ -156,7 +156,7 @@ export default withStyles(styles)(
                   <Grid container justify="center" alignItems="center">
                     <Grid item xs={12} sm={12 / header.length} style={hideIndex ? { visibility: 'collapse' } : {}}>
                       <Tooltip placement="right" title={textoIndicador[index]}>
-                        <Typography variant="body2" id={`${stateName}_${item}`} align="center" className={classes.textoIndicador}>
+                        <Typography variant="body1" id={`${stateName}_${item}`} align="center" className={classes.textoIndicador}>
                           {item}
                         </Typography>
                       </Tooltip>
@@ -175,7 +175,7 @@ export default withStyles(styles)(
                         onClose={this.handlePopoverClose}
                         disableRestoreFocus
                       >
-                        <Typography variant="body2" className={classes.popoverTexto}>
+                        <Typography variant="body1" className={classes.popoverTexto}>
                           {textoIndicador[index]}
                         </Typography>
                       </Popover>

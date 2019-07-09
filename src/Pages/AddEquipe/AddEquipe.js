@@ -1,6 +1,5 @@
 import React from 'react';
 
-import './AddEquipe.sass';
 import api from '../../Services/api';
 
 import AreasForm from '../Components/AreasForm';

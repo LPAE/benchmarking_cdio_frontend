@@ -3,8 +3,6 @@ import { withStyles } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
 import { Grid, Box, Typography, Paper, AppBar, Toolbar } from '@material-ui/core';
 
-import './Main.sass';
-
 const styles = theme => ({
   root: {
     background: theme.palette.primary.main,
@@ -25,7 +23,7 @@ const styles = theme => ({
 const AccessButton = props => (
   <div className="accessButton">
     <Button variant="contained" size="large" color={props.color ? props.color : 'primary'} onClick={props.onClick}>
-      {props.text}
+      <Typography variant='h3'>{props.text}</Typography>
     </Button>
   </div>
 );
@@ -50,10 +48,10 @@ export default withStyles(styles)(
         <div className={classes.root}>
           <Grid container direction="column" justify="center" alignItems="center">
             <Box mt={10}>
-              <Typography align="center" variant="h2" className={classes.mainTitle}>
+              <Typography align="center" variant="h1" className={classes.mainTitle}>
                 Benchmarking
               </Typography>
-              <Typography align="center" variant="h2" className={classes.mainTitle}>
+              <Typography align="center" variant="h1" className={classes.mainTitle}>
                 CDIO
               </Typography>
             </Box>
@@ -72,7 +70,7 @@ export default withStyles(styles)(
               <Paper elevation={10}>
                 <Grid container direction="column" justify="center" alignItems="center">
                   <Box m={5}>
-                    <Typography variant="h6" align="center">
+                    <Typography variant="h4" align="center">
                       Como Funciona?
                     </Typography>
                     <Typography variant="body1" align="justify">

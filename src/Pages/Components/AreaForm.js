@@ -52,12 +52,12 @@ export default withStyles(styles)(
         <Paper elevation={4} className={classes.root}>
           <Grid container direction="column" alignItems="stretch" wrap="nowrap">
             <Grid item className={classes.title}>
-              <Typography justify="left" variant="h5">
+              <Typography justify="left" variant="h4">
                 Área: {area.titulo}
               </Typography>
             </Grid>
             <Grid item className={classes.subtitle}>
-              <Typography justify="center" variant="h5">
+              <Typography justify="center" variant="h4">
                 Score
               </Typography>
             </Grid>
@@ -78,7 +78,7 @@ export default withStyles(styles)(
             {mostrarMetrica && (
               <>
                 <Grid item className={classes.subtitle}>
-                  <Typography justify="center" variant="h5">
+                  <Typography justify="center" variant="h4">
                     Métricas
                   </Typography>
                 </Grid>

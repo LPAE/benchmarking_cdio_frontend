@@ -4,7 +4,6 @@ import { Group, GroupAdd } from '@material-ui/icons';
 import TopBar from '../Components/TopBar';
 import { withLoadingTurma } from '../Components/withLoading';
 
-import './Turma.sass';
 import { withStyles } from '@material-ui/styles';
 
 const styles = theme => ({
@@ -75,25 +74,25 @@ export default withStyles(styles)(
               >
                 <Grid item>
                   <Box>
-                    <Typography variant="body1" className="Curso">
+                    <Typography variant="h4" className="Curso">
                       Curso: {this.state.turma.curso}
                     </Typography>
-                    <Typography variant="body1" className="Curso">
+                    <Typography variant="h4" className="Curso">
                       Projeto: {this.state.turma.projeto}
                     </Typography>
-                    <Typography variant="body1" className="Curso">
+                    <Typography variant="h4" className="Curso">
                       Semestre: {this.state.turma.semestre}
                     </Typography>
                   </Box>
                 </Grid>
                 <Grid item className={classes.editarExpectativa} onClick={this.editExpectativaButton}>
                   <Button variant="contained" color="primary">
-                    Editar Expectativa
+                    <Typography variant='h4'>Editar Expectativa</Typography>
                   </Button>
                 </Grid>
                 <Grid item className={classes.gerarGraficos} onClick={this.gerarGraficosButton}>
                   <Button variant="contained" color="primary">
-                    Gerar Graficos
+                  <Typography variant='h4'>Gerar Graficos</Typography>
                   </Button>
                 </Grid>
               </Grid>

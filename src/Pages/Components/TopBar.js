@@ -36,7 +36,7 @@ const TopBar = props => {
         </Grid>
         <Grid xs item zeroMinWidth>
           <Grid container justify="center">
-            <Typography className={classes.title} align="center" variant="h5" color="inherit" noWrap>
+            <Typography className={classes.title} align="center" variant="h4" color="inherit" noWrap>
               {props.title}
             </Typography>
           </Grid>
