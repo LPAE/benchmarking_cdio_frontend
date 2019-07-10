@@ -112,7 +112,7 @@ const RadarPlot = props => {
         <Paper className={classes.RadarPaper}>
           <Grid container direction="column" justify="center" alignItems="stretch">
             <Grid item>
-              <Typography align="center">{title}</Typography>
+              <Typography align="center" variant='h4'>{title}</Typography>
             </Grid>
             <Grid item className={classes.RadarGrid}>
               <Radar data={mountAreaChartData(nomeEquipe, data, expectativa, colors)} options={options} />

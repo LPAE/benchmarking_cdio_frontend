@@ -23,7 +23,7 @@ const styles = theme => ({
 const AccessButton = props => (
   <div className="accessButton">
     <Button variant="contained" size="large" color={props.color ? props.color : 'primary'} onClick={props.onClick}>
-      <Typography variant='h3'>{props.text}</Typography>
+      <Typography variant='h4'>{props.text}</Typography>
     </Button>
   </div>
 );
