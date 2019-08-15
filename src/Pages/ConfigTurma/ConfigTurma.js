@@ -29,7 +29,7 @@ export default withStyles(styles)(
       cursoOutro: '',
       projeto: '',
       projetoOutro: '',
-      semestre: '19-1',
+      semestre: '19-2',
       alertMissingData: false,
       alertAlreadyRegistered: false
     };
@@ -138,10 +138,10 @@ export default withStyles(styles)(
                     <FormControl className={classes.formConfigTurmaItem}>
                       <InputLabel>Semestre</InputLabel>
                       <Select name="semestre" value={this.state.semestre} onChange={e => this.setState({ semestre: e.target.value })}>
-                        <MenuItem value="18-2">18/2</MenuItem>
                         <MenuItem value="19-1">19/1</MenuItem>
                         <MenuItem value="19-2">19/2</MenuItem>
                         <MenuItem value="20-1">20/1</MenuItem>
+                        <MenuItem value="20-2">20/2</MenuItem>
                       </Select>
                     </FormControl>
                   </Grid>

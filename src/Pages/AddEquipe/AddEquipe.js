@@ -23,7 +23,8 @@ export default withStyles(styles)(
   class AddEquipe extends React.Component {
     state = {
       nomeDaEquipe: '',
-      alert: false
+      alertMissingName: false,
+      alertDuplicate: false
     };
 
     submitAreasFormCallback = async areas => {
@@ -34,14 +35,22 @@ export default withStyles(styles)(
           semestre: this.props.match.params.semestre,
           equipe: { nome: this.state.nomeDaEquipe, area: { ...areas } }
         };
-        await api.post('/turma/equipe', dataToSend, err => {
-          if (err) console.log('Erro ao mandar nova Equipe');
-        });
-        this.props.history.push(
-          `/turma/${this.props.match.params.curso}/${this.props.match.params.projeto}/${this.props.match.params.semestre}`
-        );
+        await api
+          .post('/turma/equipe', dataToSend)
+          .then(res => {
+            this.props.history.push(
+              `/turma/${this.props.match.params.curso}/${this.props.match.params.projeto}/${this.props.match.params.semestre}`
+            );
+            console.log(res);
+          })
+          .catch(err => {
+            console.log(err);
+            if (err.response.status === 400) {
+              this.setState({ alertDuplicate: true });
+            }
+          });
       } else {
-        this.setState({ alert: true });
+        this.setState({ alertMissingName: true });
       }
     };
 
@@ -64,7 +73,16 @@ export default withStyles(styles)(
                   />
                 </FormControl>
               </Paper>
-              <Alert text="Preencha o Nome da Equipe" open={this.state.alert} handleClose={e => this.setState({ alert: false })} />
+              <Alert
+                text="Preencha o Nome da Equipe"
+                open={this.state.alertMissingName}
+                handleClose={e => this.setState({ alertMissingName: false })}
+              />
+              <Alert
+                text="Nome da Equipe Já Existe no Banco de Dados"
+                open={this.state.alertDuplicate}
+                handleClose={e => this.setState({ alertDuplicate: false })}
+              />
             </AreasForm>
           </div>
         </div>

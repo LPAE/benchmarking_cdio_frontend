@@ -78,11 +78,13 @@ export default withStyles(styles)(
             {mostrarMetrica && (
               <>
                 <Grid item className={classes.subtitle}>
-                  <Typography justify="center" variant="h4">
-                    Métricas
-                  </Typography>
+                  <Box clone pt={2}>
+                    <Typography justify="center" variant="h4">
+                      Métricas
+                    </Typography>
+                  </Box>
                 </Grid>
-                <Grid style={{margin:'auto'}} container direction="row" item xs={12} sm={8} lg={6}>
+                <Grid style={{ margin: 'auto' }} container direction="row" item xs={12} sm={8} lg={6}>
                   <Grid container direction="column" alignItems="stretch">
                     <RadioForm
                       row={this.getIndicador(area.item)}

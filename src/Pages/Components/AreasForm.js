@@ -11,7 +11,9 @@ const styles = theme => ({
     margin: 'auto'
   },
   submitButton: {
-    margin: theme.spacing(4)
+    margin: 'auto',
+    marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(4),
   }
 });
 
@@ -134,7 +136,7 @@ export default withStyles(styles)(
       const metricas = this.fillMetrica();
       if (
         (this.props.mostrarMetrica && Object.keys(metricas).length !== 0 && Object.keys(areas).length !== 0) ||
-        (!this.props.mostrarMetricas && Object.keys(areas).length !== 0)
+        (!this.props.mostrarMetrica && Object.keys(areas).length !== 0)
       ) {
         this.props.callback(areas, metricas);
       } else {
@@ -206,7 +208,7 @@ export default withStyles(styles)(
             />
           )}
 
-          <Button className={classes.submitButton} color="secondary" variant="contained" onClick={this.buttonSubmit}>
+          <Button className={classes.submitButton} color="secondary" size="large" variant="contained" onClick={this.buttonSubmit}>
             Confirmar
           </Button>
           <Alert
