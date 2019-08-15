@@ -1,7 +1,15 @@
 import React from 'react';
 import api from '../../Services/api';
+import FadeLoader from 'react-spinners/FadeLoader';
+import { Grid } from '@material-ui/core';
 
-const Loading = () => <h1>Loading</h1>;
+const Loading = () => (
+  <Grid container spacing={0} direction="column" alignItems="center" justify="center" style={{ minHeight: '100vh' }}>
+    <Grid item xs={3}>
+      <FadeLoader sizeUnit={'px'} size={1000} color={'#0C39EC'} loading={true} />
+    </Grid>
+  </Grid>
+);
 
 export function withLoadingTurma(Component) {
   return class extends React.Component {
