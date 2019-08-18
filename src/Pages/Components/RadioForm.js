@@ -9,6 +9,9 @@ const styles = theme => ({
   textoDescricao: {
     fontSize: '0.55rem'
   },
+  tooltip: {
+
+  },
   popover: {
     pointerEvents: 'none',
     width: '80%'
@@ -16,7 +19,7 @@ const styles = theme => ({
   popoverTexto: {
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(3)
+    padding: theme.spacing(3),
   },
   textoIndicador: {
     'line-height': '1.1'
@@ -155,7 +158,7 @@ export default withStyles(styles)(
                 <Box mb={0} mx={2} p={1} key={index} className={classes.rowBox}>
                   <Grid container justify="center" alignItems="center">
                     <Grid item xs={12} sm={12 / header.length} style={hideIndex ? { visibility: 'collapse' } : {}}>
-                      <Tooltip placement="right" title={textoIndicador[index]}>
+                      <Tooltip placement="right" title={textoIndicador[index]} className={classes.tooltip}> 
                         <Typography variant="body1" id={`${stateName}_${item}`} align="center" className={classes.textoIndicador}>
                           {item}
                         </Typography>

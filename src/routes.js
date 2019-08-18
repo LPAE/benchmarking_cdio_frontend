@@ -37,6 +37,13 @@ const theme = responsiveFontSizes(
     },
     typography: {
       fontSize: 16
+    },
+    overrides: {
+      MuiTooltip: {
+        tooltip: {
+          fontSize: '1em',
+        }
+      }
     }
   })
 );

@@ -1,15 +1,25 @@
 import React from 'react';
 import api from '../../Services/api';
 import FadeLoader from 'react-spinners/FadeLoader';
-import { Grid } from '@material-ui/core';
+import { makeStyles, Grid } from '@material-ui/core';
 
-const Loading = () => (
-  <Grid container spacing={0} direction="column" alignItems="center" justify="center" style={{ minHeight: '100vh' }}>
-    <Grid item xs={3}>
-      <FadeLoader sizeUnit={'px'} size={1000} color={'#0C39EC'} loading={true} />
+const useStyles = makeStyles(theme => ({
+  root: {
+    background: theme.palette.lightPrimary.main,
+    minHeight: '100vh'
+  }
+}));
+
+const Loading = () => {
+  const classes = useStyles();
+  return (
+    <Grid className={classes.root} container spacing={0} direction="column" alignItems="center" justify="center" style={{ minHeight: '100vh' }}>
+      <Grid item xs={3}>
+        <FadeLoader sizeUnit={'px'} size={1000} color={'#0C39EC'} loading={true} />
+      </Grid>
     </Grid>
-  </Grid>
-);
+  );
+};
 
 export function withLoadingTurma(Component) {
   return class extends React.Component {

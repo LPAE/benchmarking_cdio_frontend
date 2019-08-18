@@ -75,24 +75,24 @@ export default withStyles(styles)(
                 <Grid item>
                   <Box>
                     <Typography variant="h4" className="Curso">
-                      Curso: {this.state.turma.curso}
+                      <b>Curso:</b> {this.state.turma.curso}
                     </Typography>
                     <Typography variant="h4" className="Curso">
-                      Projeto: {this.state.turma.projeto}
+                      <b>Projeto:</b> {this.state.turma.projeto}
                     </Typography>
                     <Typography variant="h4" className="Curso">
-                      Semestre: {this.state.turma.semestre}
+                      <b>Semestre:</b> {this.state.turma.semestre}
                     </Typography>
                   </Box>
                 </Grid>
                 <Grid item className={classes.editarExpectativa} onClick={this.editExpectativaButton}>
                   <Button variant="contained" color="primary">
-                    <Typography variant='h4'>Editar Expectativa</Typography>
+                    <Typography variant="h4">Editar Expectativa</Typography>
                   </Button>
                 </Grid>
                 <Grid item className={classes.gerarGraficos} onClick={this.gerarGraficosButton}>
                   <Button variant="contained" color="primary">
-                  <Typography variant='h4'>Gerar Graficos</Typography>
+                    <Typography variant="h4">Gerar Graficos</Typography>
                   </Button>
                 </Grid>
               </Grid>
