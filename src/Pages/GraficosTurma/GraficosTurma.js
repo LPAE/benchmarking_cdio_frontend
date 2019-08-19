@@ -74,6 +74,25 @@ function calculateMediaArea(areaArg, equipes) {
   } else return 0;
 }
 
+function calculateMediaMetrica(areaArg, equipes) {
+  const equipesWithArea = equipes.filter(equipe => equipe.area.hasOwnProperty(areaArg));
+  if (equipesWithArea.length && equipesWithArea.length !== 0) {
+    const keys = Object.keys(equipesWithArea[0].area[areaArg]);
+    let media = {};
+    if (Object.entries(keys).length !== 0) {
+      const size = equipesWithArea.length;
+      keys.forEach(key => {
+        media[key] =
+          equipesWithArea.reduce((acc, cur) => {
+            if (cur.area.hasOwnProperty(areaArg)) {
+              return acc + parseFloat(cur.area[areaArg][key]);
+            } else return acc;
+          }, 0.0) / size;
+      });
+    }
+    return media;
+  } else return 0;
+}
 const mediaTurmaString = 'Média da Turma';
 
 export default withStyles(styles)(
