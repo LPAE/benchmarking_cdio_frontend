@@ -3,6 +3,4 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Routes from './routes';
 
-const Test = props => (<div>test</div>)
-
-ReactDOM.render(<Test/>, document.getElementById('root'));
+ReactDOM.render(<Routes/>, document.getElementById('root'));
