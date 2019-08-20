@@ -3,4 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Routes from './routes';
 
-ReactDOM.render(<Routes basename={process.env.PUBLIC_URL}/>, document.getElementById('root'));
+const Test = props => (<div>test</div>)
+
+ReactDOM.render(<Test basename={process.env.PUBLIC_URL}/>, document.getElementById('root'));
