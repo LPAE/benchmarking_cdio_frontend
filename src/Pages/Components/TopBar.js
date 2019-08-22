@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Typography, Button, AppBar, Toolbar, Tooltip } from '@material-ui/core';
+import { Grid, Typography, Button, Tooltip } from '@material-ui/core';
 import { Home, ArrowBack, Add } from '@material-ui/icons';
 import { withStyles } from '@material-ui/styles';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import GraficosAreas from '../Components/GraficosAreas';
 
-import { Button, Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import TopBar from '../Components/TopBar';
 import { withStyles } from '@material-ui/styles';
 import { withLoadingTurma } from '../Components/withLoading';

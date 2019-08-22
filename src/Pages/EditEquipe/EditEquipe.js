@@ -1,7 +1,7 @@
 import React from 'react';
 import api from '../../Services/api';
 import AreasForm from '../Components/AreasForm';
-import { Button, withStyles } from '@material-ui/core';
+import { withStyles } from '@material-ui/core';
 import TopBar from '../Components/TopBar';
 import { withLoadingTurma } from '../Components/withLoading';
 

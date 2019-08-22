@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Box, Typography, Paper, Button, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails } from '@material-ui/core';
+import { Grid, Box, Typography, Button, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { groupBy } from 'lodash';
 import TopBar from '../Components/TopBar';

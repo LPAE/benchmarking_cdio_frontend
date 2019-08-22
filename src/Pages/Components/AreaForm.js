@@ -1,6 +1,6 @@
 import React from 'react';
-import { Grid, Box, Typography, Radio, Collapse, Popover, Paper, Hidden } from '@material-ui/core';
-import { withStyles, ThemeProvider } from '@material-ui/styles';
+import { Grid, Box, Typography, Paper } from '@material-ui/core';
+import { withStyles } from '@material-ui/styles';
 import RadioForm from './RadioForm';
 
 const styles = theme => ({

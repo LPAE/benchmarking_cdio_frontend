@@ -82,7 +82,7 @@ const RadioFormHeader = props => (
 );
 
 const RadioFormDescricao = props => {
-  const { index, actualIndex, descricao, classes } = props;
+  const { index, actualIndex, descricao } = props;
   return (
     <Hidden xsDown>
       <Grid container spacing={2} justify="center" alignItems="flex-start">

@@ -1,7 +1,7 @@
 import React from 'react';
 import { withStyles } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
-import { Grid, Box, Typography, Paper, AppBar, Toolbar } from '@material-ui/core';
+import { Grid, Box, Typography, Paper } from '@material-ui/core';
 
 const styles = theme => ({
   root: {
@@ -23,7 +23,7 @@ const styles = theme => ({
 const AccessButton = props => (
   <div className="accessButton">
     <Button variant="contained" size="large" color={props.color ? props.color : 'primary'} onClick={props.onClick}>
-      <Typography variant='h4'>{props.text}</Typography>
+      <Typography variant="h4">{props.text}</Typography>
     </Button>
   </div>
 );
@@ -59,7 +59,7 @@ export default withStyles(styles)(
             <Grid item xs={12} sm={10} xl={8}>
               <Box my={16} clone>
                 <Grid container justify="space-around" alignItems="center">
-                  <Grid item >
+                  <Grid item>
                     <AccessButton color="secondary" text="Acessar" onClick={this.acessarFerramenta} />
                   </Grid>
                   <Grid item>
