@@ -1,26 +1,9 @@
 import React from 'react';
 import GraficosAreas from '../Components/GraficosAreas';
-import {
-  Grid,
-  Box,
-  Typography,
-  Radio,
-  Collapse,
-  Popover,
-  Paper,
-  Hidden,
-  withStyles,
-  Tabs,
-  Tab,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Divider
-} from '@material-ui/core';
+import { Grid, Paper, withStyles, List, ListItem, ListItemIcon, ListItemText, Divider, Typography } from '@material-ui/core';
 import { withLoadingTurma } from '../Components/withLoading';
 import TopBar from '../Components/TopBar';
-import { Group, GroupAdd } from '@material-ui/icons';
+import { Group, InsertChart } from '@material-ui/icons';
 
 const styles = theme => ({
   root: {
@@ -34,13 +17,19 @@ function MostrarGraficos(props) {
   if (itemSelected === mediaTurmaString) {
     const equipeMedia = calculateMediaTurma(turma);
     return (
-      <div>
+      <Grid container direction="column" alignItems="center">
+        <Typography variant="h4">{itemSelected}</Typography>
         <GraficosAreas equipe={equipeMedia} expectativa={props.turma.expectativa} />
-      </div>
+      </Grid>
     );
   } else {
     const equipeIndex = turma.equipes.findIndex(equipe => equipe.nome === itemSelected);
-    return <GraficosAreas equipe={turma.equipes[equipeIndex]} expectativa={props.turma.expectativa} />;
+    return (
+      <Grid container direction="column" alignItems="center">
+        <Typography variant="h4">{itemSelected}</Typography>
+        <GraficosAreas equipe={turma.equipes[equipeIndex]} expectativa={props.turma.expectativa} />
+      </Grid>
+    );
   }
 }
 
@@ -71,7 +60,7 @@ function calculateMediaArea(areaArg, equipes) {
       });
     }
     return media;
-  } else return 0;
+  }
 }
 
 function calculateMediaMetrica(areaArg, equipes) {
@@ -110,22 +99,6 @@ export default withStyles(styles)(
         console.log(this.state);
       }
 
-      addArea = (area1, area2) => {
-        var soma = area1;
-        for (const area in area2) {
-          for (const key in area2[area]) {
-            soma[area][key] += area[key];
-            console.log(key);
-          }
-        }
-
-        console.log(soma);
-      };
-
-      calcularMedia = equipes => {
-        var soma = {};
-      };
-
       handleTabsChange = e => {
         if (e.target.textContent !== undefined) this.setState({ itemSelected: e.target.textContent });
       };
@@ -141,7 +114,7 @@ export default withStyles(styles)(
                   <List>
                     <ListItem button onClick={this.handleTabsChange}>
                       <ListItemIcon>
-                        <GroupAdd />
+                        <InsertChart />
                       </ListItemIcon>
                       <ListItemText primary={mediaTurmaString} />
                     </ListItem>
